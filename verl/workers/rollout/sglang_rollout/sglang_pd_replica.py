@@ -24,10 +24,10 @@ import ray
 from omegaconf import DictConfig
 from ray.actor import ActorHandle
 
-from verl.utils.device import is_torch_npu_available
-from verl.utils.net_utils import get_free_port, is_valid_ipv6_address
-from verl.workers.config import RolloutConfig
-from verl.workers.rollout.sglang_rollout.async_sglang_server import (
+from RL.verl.verl.utils.device import is_torch_npu_available
+from RL.verl.verl.utils.net_utils import get_free_port, is_valid_ipv6_address
+from RL.verl.verl.workers.config import RolloutConfig
+from RL.verl.verl.workers.rollout.sglang_rollout.async_sglang_server import (
     SGLangReplica,
     visible_devices_keyword,
 )

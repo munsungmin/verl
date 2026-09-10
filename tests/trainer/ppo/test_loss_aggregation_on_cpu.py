@@ -17,7 +17,7 @@
 import pytest
 import torch
 
-from verl.trainer.ppo.core_algos import agg_loss
+from RL.verl.verl.trainer.ppo.core_algos import agg_loss
 
 
 def test_token_sum_masks_tokens_and_scales_for_dp():

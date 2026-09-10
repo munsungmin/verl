@@ -16,7 +16,7 @@ import re
 import aiohttp
 from transformers.utils import get_json_schema
 
-from verl.tools.base_tool import BaseTool, OpenAIFunctionToolSchema, ToolResponse
+from RL.verl.verl.tools.base_tool import BaseTool, OpenAIFunctionToolSchema, ToolResponse
 
 
 class SandboxTool(BaseTool):

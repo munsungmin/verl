@@ -31,17 +31,17 @@ from torch.utils.data import DistributedSampler
 from torchdata.stateful_dataloader import StatefulDataLoader
 from tqdm import tqdm
 
-from verl.utils import tensordict_utils as tu
-from verl.utils.checkpoint import CheckpointHandler
-from verl.utils.dataset.dataset_utils import SFTTensorCollator
-from verl.utils.dataset.multiturn_sft_dataset import MultiTurnSFTDataset
-from verl.utils.device import auto_set_device, get_device_name
-from verl.utils.distributed import destroy_global_process_group
-from verl.utils.logger import log_with_rank
-from verl.utils.memory_utils import aggressive_empty_cache
-from verl.utils.profiler import log_gpu_memory_usage
-from verl.utils.tracking import Tracking
-from verl.workers.engine_workers import TrainingWorker
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils.checkpoint import CheckpointHandler
+from RL.verl.verl.utils.dataset.dataset_utils import SFTTensorCollator
+from RL.verl.verl.utils.dataset.multiturn_sft_dataset import MultiTurnSFTDataset
+from RL.verl.verl.utils.device import auto_set_device, get_device_name
+from RL.verl.verl.utils.distributed import destroy_global_process_group
+from RL.verl.verl.utils.logger import log_with_rank
+from RL.verl.verl.utils.memory_utils import aggressive_empty_cache
+from RL.verl.verl.utils.profiler import log_gpu_memory_usage
+from RL.verl.verl.utils.tracking import Tracking
+from RL.verl.verl.workers.engine_workers import TrainingWorker
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_SFT_LOGGING_LEVEL", "WARN"))
@@ -136,7 +136,7 @@ class SFTTrainer:
         }
 
     def _build_config(self):
-        from verl.utils.config import omega_conf_to_dataclass
+        from RL.verl.verl.utils.config import omega_conf_to_dataclass
 
         self.model_config = omega_conf_to_dataclass(self.config.model)
         self.engine_config = omega_conf_to_dataclass(self.config.engine)
@@ -157,8 +157,8 @@ class SFTTrainer:
             assert self.end_profile_step < 0
 
     def _build_engine(self):
-        from verl.workers.engine_workers import TrainingWorkerConfig
-        from verl.workers.utils.losses import sft_loss
+        from RL.verl.verl.workers.engine_workers import TrainingWorkerConfig
+        from RL.verl.verl.workers.utils.losses import sft_loss
 
         self.loss_fn = partial(sft_loss, config=None)
 
@@ -450,7 +450,7 @@ class SFTTrainer:
 
 
 def run_sft(config):
-    from verl.utils.distributed import initialize_global_process_group
+    from RL.verl.verl.utils.distributed import initialize_global_process_group
 
     initialize_global_process_group()
     trainer = SFTTrainer(config=config)
@@ -470,7 +470,7 @@ def create_sft_dataset(data_paths, data_config, tokenizer, processor, max_sample
     # build dataset
     # First check if a custom dataset class is specified
     if data_config.custom_cls.get("path", None):
-        from verl.utils.import_utils import load_extern_object
+        from RL.verl.verl.utils.import_utils import load_extern_object
 
         dataset_cls = load_extern_object(data_config.custom_cls.path, data_config.custom_cls.name)
     else:

@@ -28,12 +28,12 @@ import pytest
 import torch
 from omegaconf import OmegaConf
 
-from verl.protocol import DataProto
-from verl.utils.config import omega_conf_to_dataclass
-from verl.utils.skip.base_skip import SKIP_REGISTRY, BaseSkip, SkipAction, register_skip
-from verl.utils.skip.config import AsyncRolloutSkipConfig, RolloutSkipConfig, SkipManagerConfig
-from verl.utils.skip.rollout_skip import AsyncRolloutSkip, RolloutSkip, parse_async_rollout_sample_step
-from verl.utils.skip.skip_manager import SkipManager
+from RL.verl.verl.protocol import DataProto
+from RL.verl.verl.utils.config import omega_conf_to_dataclass
+from RL.verl.verl.utils.skip.base_skip import SKIP_REGISTRY, BaseSkip, SkipAction, register_skip
+from RL.verl.verl.utils.skip.config import AsyncRolloutSkipConfig, RolloutSkipConfig, SkipManagerConfig
+from RL.verl.verl.utils.skip.rollout_skip import AsyncRolloutSkip, RolloutSkip, parse_async_rollout_sample_step
+from RL.verl.verl.utils.skip.skip_manager import SkipManager
 
 
 def _noop(*_args: Any, **_kwargs: Any) -> None:

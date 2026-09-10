@@ -23,19 +23,19 @@ from ray.actor import ActorHandle
 from ray.util import placement_group_table
 from ray.util.placement_group import PlacementGroup
 
-from verl.plugin.platform import get_platform
-from verl.single_controller.ray import SubRayResourcePool
-from verl.utils.config import omega_conf_to_dataclass
-from verl.utils.net_utils import is_valid_ipv6_address
-from verl.utils.profiler import (
+from RL.verl.verl.plugin.platform import get_platform
+from RL.verl.verl.single_controller.ray import SubRayResourcePool
+from RL.verl.verl.utils.config import omega_conf_to_dataclass
+from RL.verl.verl.utils.net_utils import is_valid_ipv6_address
+from RL.verl.verl.utils.profiler import (
     DistProfiler,
     build_rollout_dist_profiler,
     relocate_rollout_traces,
     rollout_profiler_global_ranks,
 )
-from verl.workers.config import HFModelConfig, RolloutConfig
-from verl.workers.rollout.replica import RolloutMode, RolloutReplica, TokenOutput
-from verl.workers.rollout.utils import get_max_position_embeddings, qwen2_5_vl_dedup_image_tokens, run_uvicorn
+from RL.verl.verl.workers.config import HFModelConfig, RolloutConfig
+from RL.verl.verl.workers.rollout.replica import RolloutMode, RolloutReplica, TokenOutput
+from RL.verl.verl.workers.rollout.utils import get_max_position_embeddings, qwen2_5_vl_dedup_image_tokens, run_uvicorn
 
 logger = logging.getLogger(__file__)
 logger.setLevel(logging.INFO)
@@ -421,7 +421,7 @@ class TRTLLMHttpServer:
         await self.llm.resume(tags=["kv_cache"])
 
     async def wake_up(self):
-        from verl.workers.rollout.trtllm_rollout.trtllm_rollout import ServerAdapter
+        from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_rollout import ServerAdapter
 
         if self.rollout_mode == RolloutMode.HYBRID:
             # In hybrid mode, rollout is wake up in `update_weights`
@@ -432,7 +432,7 @@ class TRTLLMHttpServer:
             logger.info("skip wake_up in standalone mode")
 
     async def sleep(self):
-        from verl.workers.rollout.trtllm_rollout.trtllm_rollout import ServerAdapter
+        from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_rollout import ServerAdapter
 
         if not self.config.free_cache_engine:
             return
@@ -477,7 +477,7 @@ class TRTLLMHttpServer:
                 tool_config = omega_conf_to_dataclass((profiler_config.tool_config or {}).get(profiler_config.tool))
             elif profiler_config.tool == "nsys":
                 # nsys config lives in global_tool_config, not tool_config
-                from verl.utils.profiler.config import NsightToolConfig
+                from RL.verl.verl.utils.profiler.config import NsightToolConfig
 
                 raw = (profiler_config.global_tool_config or {}).get("nsys")
                 tool_config = omega_conf_to_dataclass(raw) if raw is not None else NsightToolConfig()

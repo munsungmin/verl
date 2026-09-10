@@ -81,9 +81,9 @@ def test_trtllm_abort():
 
         # ==================== Create TRTLLMHttpServer ====================
         print("\n[3] Creating TRTLLMHttpServer (this may take a while)...")
-        from verl.single_controller.ray import RayResourcePool
-        from verl.workers.rollout.replica import RolloutMode
-        from verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMHttpServer
+        from RL.verl.verl.single_controller.ray import RayResourcePool
+        from RL.verl.verl.workers.rollout.replica import RolloutMode
+        from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMHttpServer
 
         resource_pool = RayResourcePool(
             process_on_nodes=[GPUS_PER_NODE],
@@ -124,7 +124,7 @@ def test_trtllm_abort():
 
         # ==================== Prepare Prompts ====================
         print("\n[5] Preparing prompts...")
-        from verl.utils.tokenizer import normalize_token_ids
+        from RL.verl.verl.utils.tokenizer import normalize_token_ids
 
         prompts = [
             "Write a very long story about a brave knight and dragon.",

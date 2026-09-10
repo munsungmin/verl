@@ -27,14 +27,14 @@ import numpy as np
 import ray
 from omegaconf import DictConfig
 
-from verl.single_controller.ray.base import RayResourcePool, RayWorkerGroup
-from verl.utils import normalize_token_ids
-from verl.utils.ray_utils import auto_await
-from verl.utils.rollout_trace import rollout_trace_op
-from verl.utils.tracking import RLInsightLogger
-from verl.workers.rollout.replica import RolloutReplica, TokenOutput, get_rollout_replica_class
-from verl.workers.rollout.router import GlobalRequestLoadBalancer  # noqa: F401
-from verl.workers.rollout.utils import update_prometheus_config
+from RL.verl.verl.single_controller.ray.base import RayResourcePool, RayWorkerGroup
+from RL.verl.verl.utils import normalize_token_ids
+from RL.verl.verl.utils.ray_utils import auto_await
+from RL.verl.verl.utils.rollout_trace import rollout_trace_op
+from RL.verl.verl.utils.tracking import RLInsightLogger
+from RL.verl.verl.workers.rollout.replica import RolloutReplica, TokenOutput, get_rollout_replica_class
+from RL.verl.verl.workers.rollout.router import GlobalRequestLoadBalancer  # noqa: F401
+from RL.verl.verl.workers.rollout.utils import update_prometheus_config
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -479,7 +479,7 @@ class LLMServerManager:
                 )
 
     async def _init_global_load_balancer(self) -> None:
-        from verl.workers.rollout.router import get_router_handle
+        from RL.verl.verl.workers.rollout.router import get_router_handle
 
         self.global_load_balancer = get_router_handle(
             servers=dict(zip(self.server_addresses, self.server_handles, strict=True)),

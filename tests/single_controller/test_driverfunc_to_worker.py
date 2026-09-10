@@ -18,11 +18,11 @@ import ray
 import torch
 from tensordict import TensorDict
 
-from verl import DataProto
-from verl.single_controller.base.worker import Worker
-from verl.single_controller.ray import RayWorkerGroup
-from verl.single_controller.ray.base import RayClassWithInitArgs, RayResourcePool
-from verl.utils.device import get_device_name
+from ext.verl.verl import DataProto
+from RL.verl.verl.single_controller.base.worker import Worker
+from RL.verl.verl.single_controller.ray import RayWorkerGroup
+from RL.verl.verl.single_controller.ray.base import RayClassWithInitArgs, RayResourcePool
+from RL.verl.verl.utils.device import get_device_name
 
 os.environ["RAY_DEDUP_LOGS"] = "0"
 os.environ["NCCL_DEBUG"] = "WARN"

@@ -16,8 +16,8 @@ import torch
 import torch.nn.functional as F
 from tensordict import TensorDict
 
-from verl.utils import tensordict_utils as tu
-from verl.utils.attention_utils import index_first_axis, unpad_input
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils.attention_utils import index_first_axis, unpad_input
 
 
 def left_right_2_no_padding(data: TensorDict) -> TensorDict:

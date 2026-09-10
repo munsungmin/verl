@@ -20,8 +20,8 @@ from typing import Any
 import numpy as np
 import torch
 
-from verl import DataProto
-from verl.trainer.ppo.ray_trainer import compute_response_mask
+from ext.verl.verl import DataProto
+from RL.verl.verl.trainer.ppo.ray_trainer import compute_response_mask
 
 
 @dataclass

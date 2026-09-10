@@ -38,12 +38,12 @@ from megatron.core.transformer.multi_token_prediction import MTPLossLoggingHelpe
 from megatron.core.utils import get_attr_wrapped_model
 from transformers import PretrainedConfig
 
-import verl.utils.megatron.tensor_parallel as tp_utils
-from verl.utils.device import get_device_id, get_device_name, get_torch_device
-from verl.utils.fs import local_mkdir_safe
-from verl.utils.model import normalize_model_name
-from verl.utils.torch_dtypes import PrecisionType
-from verl.workers.config import HFModelConfig, McoreEngineConfig
+import RL.verl.verl.utils.megatron.tensor_parallel as tp_utils
+from RL.verl.verl.utils.device import get_device_id, get_device_name, get_torch_device
+from RL.verl.verl.utils.fs import local_mkdir_safe
+from RL.verl.verl.utils.model import normalize_model_name
+from RL.verl.verl.utils.torch_dtypes import PrecisionType
+from RL.verl.verl.workers.config import HFModelConfig, McoreEngineConfig
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -305,7 +305,7 @@ def make_megatron_module(
     peft_cls: Any = None,
     peft_config: Any = None,
 ):
-    from verl.models.mcore.config_converter import get_hf_rope_theta
+    from RL.verl.verl.models.mcore.config_converter import get_hf_rope_theta
 
     try:
         hf_config.rope_theta = get_hf_rope_theta(hf_config)
@@ -319,11 +319,11 @@ def make_megatron_module(
 
     if bridge is not None:
         if provider is None:
-            from verl.models.mcore.mbridge import freeze_moe_router, make_value_model
+            from RL.verl.verl.models.mcore.mbridge import freeze_moe_router, make_value_model
 
             value_model_hook = make_value_model
         else:
-            from verl.models.mcore.bridge import freeze_moe_router, make_value_model
+            from RL.verl.verl.models.mcore.bridge import freeze_moe_router, make_value_model
 
             hidden_size = (
                 hf_config.text_config.hidden_size if hasattr(hf_config, "text_config") else hf_config.hidden_size
@@ -348,7 +348,7 @@ def make_megatron_module(
             if peft_cls is not None:
                 from megatron.bridge.peft.utils import create_peft_hook, load_peft_adapter_checkpoint
 
-                from verl.utils.megatron_peft_utils import print_adapter_info
+                from RL.verl.verl.utils.megatron_peft_utils import print_adapter_info
 
                 provider.register_pre_wrap_hook(create_peft_hook(peft_cls, training=True))
 
@@ -475,13 +475,13 @@ def make_megatron_module(
 
         if isinstance(tf_config, MLATransformerConfig):
             # Keep the same behavior as hf_to_mcore_config_dpskv3
-            from verl.models.mcore.patch import apply_patch
+            from RL.verl.verl.models.mcore.patch import apply_patch
 
             apply_patch()
     else:
 
         def megatron_model_provider(pre_process, post_process, vp_stage=None):
-            from verl.models.mcore import init_mcore_model
+            from RL.verl.verl.models.mcore import init_mcore_model
 
             parallel_model = init_mcore_model(
                 tf_config,
@@ -1844,7 +1844,7 @@ def patch_engine_mtp(module, model_config):
         model_config: The model configuration containing MTP settings.
     """
     logger.warning("Applying mtp patch...")
-    from verl.models.mcore.mtp_patch import (
+    from RL.verl.verl.models.mcore.mtp_patch import (
         patch_mtp_layer_checkpointed_forward,
         patch_mtp_layer_get_embeddings,
         patch_postprocess,

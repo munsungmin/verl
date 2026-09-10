@@ -22,15 +22,15 @@ from typing import Literal
 
 import pytest
 
-from verl.tools import function_tool as function_tool_mod
-from verl.tools.function_tool import (
+from RL.verl.verl.tools import function_tool as function_tool_mod
+from RL.verl.verl.tools.function_tool import (
     FUNCTION_TOOL_REGISTRY,
     FunctionTool,
     function_tool,
     load_function_tools_from_path,
     normalize_function_tool_return,
 )
-from verl.tools.schemas import OpenAIFunctionToolSchema, ToolResponse
+from RL.verl.verl.tools.schemas import OpenAIFunctionToolSchema, ToolResponse
 
 
 @pytest.fixture(autouse=True)
@@ -608,7 +608,7 @@ def test_tool_list_wrap_survives_hydra_instantiate(tmp_path):
     ``isinstance(tool, FunctionTool)`` in ``ToolAgentLoop._call_tool``."""
     import hydra
 
-    from verl.experimental.agent_loop.agent_loop import ToolListWrap
+    from RL.verl.verl.experimental.agent_loop.agent_loop import ToolListWrap
 
     path = _write_tool_file(
         tmp_path,

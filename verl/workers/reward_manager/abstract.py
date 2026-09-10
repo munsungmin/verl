@@ -19,7 +19,7 @@ from typing import Any, Callable
 
 import torch
 
-from verl.protocol import DataProto
+from RL.verl.verl.protocol import DataProto
 
 RawRewardFn = Callable[..., Any]
 

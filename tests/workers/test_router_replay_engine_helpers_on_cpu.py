@@ -74,9 +74,9 @@ for _mod in (
     sys.modules.setdefault(_mod, MagicMock())
 
 
-from verl.utils.veomni.router_replay import VeOmniRouterReplay  # noqa: E402
-from verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead  # noqa: E402
-from verl.workers.engine.veomni.transformer_impl import VeOmniEngineWithLMHead  # noqa: E402
+from RL.verl.verl.utils.veomni.router_replay import VeOmniRouterReplay  # noqa: E402
+from RL.verl.verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead  # noqa: E402
+from RL.verl.verl.workers.engine.veomni.transformer_impl import VeOmniEngineWithLMHead  # noqa: E402
 
 # ----------------------------------------------------------------- helpers
 

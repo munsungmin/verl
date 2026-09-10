@@ -40,7 +40,7 @@ _MTP_LOSS_NORMALIZATION_FACTOR_ATTR = "_verl_mtp_loss_normalization_factor"
 try:
     from megatron.core.utils import unwrap_model
 except ImportError:
-    from verl.utils.megatron_utils import unwrap_model
+    from RL.verl.verl.utils.megatron_utils import unwrap_model
 
 
 def _resolve_cp_group(module, packed_seq_params=None):

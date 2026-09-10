@@ -27,18 +27,18 @@ from megatron.core import parallel_state  # noqa: E402
 from megatron.core.transformer.multi_token_prediction import roll_tensor  # noqa: E402
 from megatron.core.transformer.transformer_config import TransformerConfig  # noqa: E402
 
-from verl.models.mcore.mtp_patch import (  # noqa: E402
+from RL.verl.verl.models.mcore.mtp_patch import (  # noqa: E402
     _megatron_gptmodel_postprocess,
     _patched_get_embeddings_for_detach,
 )
-from verl.models.mcore.util import preprocess_thd_engine  # noqa: E402
-from verl.utils.distributed import destroy_global_process_group, initialize_global_process_group  # noqa: E402
-from verl.utils.megatron.router_replay_patch import (  # noqa: E402
+from RL.verl.verl.models.mcore.util import preprocess_thd_engine  # noqa: E402
+from RL.verl.verl.utils.distributed import destroy_global_process_group, initialize_global_process_group  # noqa: E402
+from RL.verl.verl.utils.megatron.router_replay_patch import (  # noqa: E402
     RouterReplay,
     RouterReplayAction,
     _patched_topk_routing_with_score_function,
 )
-from verl.utils.megatron.router_replay_utils import merge_router_topk_indices, set_router_replay_data  # noqa: E402
+from RL.verl.verl.utils.megatron.router_replay_utils import merge_router_topk_indices, set_router_replay_data  # noqa: E402
 
 pytestmark = [
     pytest.mark.skipif(not torch.cuda.is_available(), reason="Dynamic CP feature coverage requires CUDA"),

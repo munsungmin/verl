@@ -15,7 +15,7 @@
 import pytest
 import torch
 
-from verl.workers.engine.fsdp.transformer_impl import (
+from RL.verl.verl.workers.engine.fsdp.transformer_impl import (
     _is_scalar_unit_temperature,
     _scale_logits_by_temperature,
 )

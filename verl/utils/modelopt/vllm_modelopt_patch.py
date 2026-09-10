@@ -20,7 +20,7 @@ from typing import Optional
 import torch
 from torch.nn import Parameter
 
-from verl.utils.device import get_device_name
+from RL.verl.verl.utils.device import get_device_name
 
 
 def _save_param_meta(layer: torch.nn.Module, param_name: str):

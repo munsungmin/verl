@@ -14,12 +14,12 @@
 
 
 def test_import():
-    import verl
+    import ext.verl.verl as verl
 
     print(verl.__version__)
 
 
 def test_single_controller_import():
-    import verl.single_controller
+    import RL.verl.verl.single_controller
 
-    print(verl.single_controller.__version__)
+    print(RL.verl.verl.single_controller.__version__)

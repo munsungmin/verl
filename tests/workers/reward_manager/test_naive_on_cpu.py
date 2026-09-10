@@ -20,8 +20,8 @@ import numpy as np
 import pytest
 import torch
 
-from verl import DataProto
-from verl.workers.reward_manager.naive import NaiveRewardManager, _score_timeout
+from ext.verl.verl import DataProto
+from RL.verl.verl.workers.reward_manager.naive import NaiveRewardManager, _score_timeout
 
 
 class _DummyTokenizer:

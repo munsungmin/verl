@@ -18,7 +18,7 @@ from enum import Enum
 import torch
 from tensordict.tensorclass import NonTensorData
 
-from verl.utils.tensordict_utils import nested_tensor_from_tensor_list
+from RL.verl.verl.utils.tensordict_utils import nested_tensor_from_tensor_list
 
 
 class DatasetPadMode(str, Enum):

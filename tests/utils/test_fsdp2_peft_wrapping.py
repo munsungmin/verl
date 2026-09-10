@@ -24,7 +24,7 @@ from types import SimpleNamespace
 
 import torch.nn as nn
 
-from verl.utils.fsdp_utils import _select_fsdp2_wrap_targets
+from RL.verl.verl.utils.fsdp_utils import _select_fsdp2_wrap_targets
 
 
 class MockDecoderLayer(nn.Module):

@@ -33,10 +33,10 @@ import torch.distributed
 from torch.distributed import init_device_mesh
 from transformers import AutoModelForCausalLM, LlamaConfig
 
-from verl.models.transformers.monkey_patch import apply_monkey_patch
-from verl.utils.device import get_device_name, get_torch_device
-from verl.utils.distributed import initialize_global_process_group
-from verl.utils.ulysses import (
+from RL.verl.verl.models.transformers.monkey_patch import apply_monkey_patch
+from RL.verl.verl.utils.device import get_device_name, get_torch_device
+from RL.verl.verl.utils.distributed import initialize_global_process_group
+from RL.verl.verl.utils.ulysses import (
     FSDPUlyssesShardingManager,
     gather_outputs_and_unpad,
     set_ulysses_sequence_parallel_group,

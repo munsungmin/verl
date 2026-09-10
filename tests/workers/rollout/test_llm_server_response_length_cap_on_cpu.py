@@ -38,9 +38,9 @@ from typing import Any
 import pytest
 from omegaconf import OmegaConf
 
-from verl.workers.rollout import llm_server
-from verl.workers.rollout.llm_server import FullyAsyncLLMServerClient
-from verl.workers.rollout.replica import TokenOutput
+from RL.verl.verl.workers.rollout import llm_server
+from RL.verl.verl.workers.rollout.llm_server import FullyAsyncLLMServerClient
+from RL.verl.verl.workers.rollout.replica import TokenOutput
 
 PROMPT_LENGTH = 2048
 RESPONSE_LENGTH = 8192

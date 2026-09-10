@@ -19,9 +19,9 @@ import torch
 
 pytest.importorskip("megatron")
 
-import verl.utils.megatron.router_replay_utils as router_utils
-from verl.utils.dynamic_cp_scheduler import DCP_SAMPLE_IDS
-from verl.workers.engine.megatron.transformer_impl import _attach_dcp_recorded_routes
+import RL.verl.verl.utils.megatron.router_replay_utils as router_utils
+from RL.verl.verl.utils.dynamic_cp_scheduler import DCP_SAMPLE_IDS
+from RL.verl.verl.workers.engine.megatron.transformer_impl import _attach_dcp_recorded_routes
 
 
 def _nested(parts):

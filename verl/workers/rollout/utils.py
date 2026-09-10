@@ -21,8 +21,8 @@ import uvicorn
 import yaml
 from fastapi import FastAPI
 
-from verl.utils.tokenizer import get_processor_token_id
-from verl.workers.config.rollout import PrometheusConfig
+from RL.verl.verl.utils.tokenizer import get_processor_token_id
+from RL.verl.verl.workers.config.rollout import PrometheusConfig
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

@@ -24,7 +24,7 @@ import uuid
 import pytest
 import torch
 
-from verl.utils.device import get_device_name, get_torch_device, is_support_ipc
+from RL.verl.verl.utils.device import get_device_name, get_torch_device, is_support_ipc
 
 PROCESS_TIMEOUT = 60
 
@@ -75,7 +75,7 @@ class _FakeTorchDevice:
 
 
 def test_sender_accepts_strided_tensor(monkeypatch):
-    from verl.workers.rollout.vllm_rollout import bucketed_weight_transfer
+    from RL.verl.verl.workers.rollout.vllm_rollout import bucketed_weight_transfer
 
     base = torch.arange(2 * 3 * 4, dtype=torch.float32).reshape(2, 3, 4)
     weight = base[:, 0, :]
@@ -124,7 +124,7 @@ def test_sender_accepts_strided_tensor(monkeypatch):
 # ---------------------------------------------------------------------------
 def _sender_fn(zmq_handle, weight_specs, seed, bucket_size_mb, use_shm):
     """Sender process: generate weights, move to device, send."""
-    from verl.workers.rollout.vllm_rollout.bucketed_weight_transfer import BucketedWeightSender
+    from RL.verl.verl.workers.rollout.vllm_rollout.bucketed_weight_transfer import BucketedWeightSender
 
     weights = _generate_weights(weight_specs, seed)
     sender = BucketedWeightSender(
@@ -137,8 +137,8 @@ def _sender_fn(zmq_handle, weight_specs, seed, bucket_size_mb, use_shm):
 
 def _receiver_fn(zmq_handle, use_shm, result_queue):
     """Receiver process: receive weights, send back (name, dtype, shape, checksum)."""
-    from verl.utils.device import get_device_name
-    from verl.workers.rollout.vllm_rollout.bucketed_weight_transfer import BucketedWeightReceiver
+    from RL.verl.verl.utils.device import get_device_name
+    from RL.verl.verl.workers.rollout.vllm_rollout.bucketed_weight_transfer import BucketedWeightReceiver
 
     device = torch.device(f"{get_device_name()}:0")
     receiver = BucketedWeightReceiver(

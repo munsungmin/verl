@@ -14,7 +14,7 @@
 
 import torch
 
-from verl.utils.fsdp_utils import fsdp2_load_full_state_dict
+from RL.verl.verl.utils.fsdp_utils import fsdp2_load_full_state_dict
 
 from ..base import EngineRegistry
 from .transformer_impl import FSDPEngineWithLMHead
@@ -137,7 +137,7 @@ class FSDPTurboEngineWithLMHead(FSDPEngineWithLMHead):
                 self.optimizer.step()
 
         if self._qat_enabled:
-            from verl.utils.qat.core import invalidate_all_scales
+            from RL.verl.verl.utils.qat.core import invalidate_all_scales
 
             invalidate_all_scales(self.module)
 

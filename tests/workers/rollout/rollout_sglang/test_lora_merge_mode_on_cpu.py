@@ -29,7 +29,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from verl.workers.rollout.sglang_rollout.utils import lora_served_as_adapter
+from RL.verl.verl.workers.rollout.sglang_rollout.utils import lora_served_as_adapter
 
 
 @dataclass

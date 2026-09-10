@@ -54,8 +54,8 @@ for _mod in (
     sys.modules.setdefault(_mod, MagicMock())
 
 
-from verl.utils.megatron import router_replay_utils  # noqa: E402
-from verl.utils.megatron.router_replay_patch import RouterReplay, RouterReplayAction  # noqa: E402
+from RL.verl.verl.utils.megatron import router_replay_utils  # noqa: E402
+from RL.verl.verl.utils.megatron.router_replay_patch import RouterReplay, RouterReplayAction  # noqa: E402
 
 NUM_LAYERS = 4
 NUM_TOKENS = 3

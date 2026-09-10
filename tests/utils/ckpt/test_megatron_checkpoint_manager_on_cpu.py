@@ -30,8 +30,8 @@ import torch
 import torch.distributed as dist
 from megatron.core import parallel_state as mpu
 
-from verl.trainer.config import CheckpointConfig
-from verl.utils.checkpoint.megatron_checkpoint_manager import MegatronCheckpointManager
+from RL.verl.verl.trainer.config import CheckpointConfig
+from RL.verl.verl.utils.checkpoint.megatron_checkpoint_manager import MegatronCheckpointManager
 
 # ---------------------------------------------------------------------------
 # Session-scoped: initialize torch.distributed + megatron parallel state once

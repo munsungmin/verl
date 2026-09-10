@@ -15,9 +15,9 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from verl.utils.profiler.config import NPUToolConfig, ProfilerConfig
-from verl.utils.profiler.mstx_profile import NPUProfiler
-from verl.utils.profiler.profile import DistProfiler
+from RL.verl.verl.utils.profiler.config import NPUToolConfig, ProfilerConfig
+from RL.verl.verl.utils.profiler.mstx_profile import NPUProfiler
+from RL.verl.verl.utils.profiler.profile import DistProfiler
 
 
 class TestNPUProfilerInitialization(unittest.TestCase):

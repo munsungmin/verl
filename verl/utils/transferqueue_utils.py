@@ -28,7 +28,7 @@ import torch
 from tensordict.tensorclass import NonTensorData, NonTensorStack
 
 if TYPE_CHECKING:
-    from verl.single_controller.base.decorator import Dispatch
+    from RL.verl.verl.single_controller.base.decorator import Dispatch
 
 from tensordict import TensorDict
 
@@ -63,7 +63,7 @@ except ImportError:
     tq = _MockTQ()
 
 
-from verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils import tensordict_utils as tu
 
 logger = logging.getLogger(__name__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -232,8 +232,8 @@ def _compute_need_collect(dispatch_mode: "dict | Dispatch", args: list) -> bool:
         data parallel rank for the mesh specified in collect_fn.args[0] to determine
         if this worker should collect data.
     """
-    from verl.single_controller.base.decorator import Dispatch
-    from verl.single_controller.base.worker import Worker
+    from RL.verl.verl.single_controller.base.decorator import Dispatch
+    from RL.verl.verl.single_controller.base.worker import Worker
 
     if dispatch_mode is None or isinstance(dispatch_mode, Dispatch):
         return True
@@ -287,7 +287,7 @@ def _postprocess_common(output, put_data, need_collect):
         across different execution paths and avoid redundant data operations in
         distributed scenarios.
     """
-    from verl.protocol import DataProto
+    from RL.verl.verl.protocol import DataProto
 
     if put_data and not need_collect:
         return BatchMeta()
@@ -363,7 +363,7 @@ def tqbridge(dispatch_mode: "dict | Dispatch" = None):
         A decorator function used to decorate target functions (synchronous or asynchronous).
     """
     # TODO: move to the top
-    from verl.single_controller.base.decorator import _check_dispatch_mode
+    from RL.verl.verl.single_controller.base.decorator import _check_dispatch_mode
 
     if dispatch_mode is not None:
         _check_dispatch_mode(dispatch_mode)

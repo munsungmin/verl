@@ -35,10 +35,10 @@ from packaging.version import parse as parse_version
 from tensordict import TensorDict
 from torch.utils.data import DataLoader
 
-from verl.utils.device import get_device_id, get_torch_device
-from verl.utils.py_functional import list_of_dict_to_dict_of_list, union_two_dict
-from verl.utils.torch_functional import allgather_dict_tensors
-from verl.utils.transferqueue_utils import BatchMeta, KVBatchMeta
+from RL.verl.verl.utils.device import get_device_id, get_torch_device
+from RL.verl.verl.utils.py_functional import list_of_dict_to_dict_of_list, union_two_dict
+from RL.verl.verl.utils.torch_functional import allgather_dict_tensors
+from RL.verl.verl.utils.transferqueue_utils import BatchMeta, KVBatchMeta
 
 __all__ = ["DataProto", "union_tensor_dict"]
 
@@ -1110,7 +1110,7 @@ class DataProto:
 
         from tensordict.tensorclass import NonTensorData, NonTensorStack
 
-        from verl.utils import tensordict_utils as tu
+        from RL.verl.verl.utils import tensordict_utils as tu
 
         common_keys = set(tensor_batch.keys()) & set(non_tensor_batch.keys())
         assert len(common_keys) == 0, f"tensor_batch and non_tensor_batch have common keys {common_keys}"
@@ -1214,7 +1214,7 @@ class DataProtoFuture:
         if isinstance(output[0], DataProto):
             output = DataProto.concat(output)  # select dp, concat
         elif isinstance(output[0], TensorDict):
-            from verl.utils.tensordict_utils import concat_tensordict
+            from RL.verl.verl.utils.tensordict_utils import concat_tensordict
 
             output = concat_tensordict(output)
         else:
@@ -1272,14 +1272,14 @@ class BatchData:
         """
         data = self._data
         if isinstance(data, TensorDict):
-            from verl.utils.tensordict_utils import chunk_tensordict, contiguous
+            from RL.verl.verl.utils.tensordict_utils import chunk_tensordict, contiguous
 
             raw_chunks = chunk_tensordict(data, chunks)
             return tuple(contiguous(val).consolidate() for val in raw_chunks)
         if isinstance(data, KVBatchMeta):
             # early translate KVBatchMeta -> BatchMeta to prevent frequent
             # controller communication during PUT/GET in each rank
-            from verl.utils.transferqueue_utils import kv_batch_meta2batch_meta
+            from RL.verl.verl.utils.transferqueue_utils import kv_batch_meta2batch_meta
 
             data = kv_batch_meta2batch_meta(data)
         # DataProto, DataProtoFuture, etc. all expose .chunk()
@@ -1297,7 +1297,7 @@ class BatchData:
         if isinstance(sample, ray.ObjectRef):
             return DataProtoFuture.concat(data)
         if isinstance(sample, TensorDict):
-            from verl.utils.tensordict_utils import concat_tensordict
+            from RL.verl.verl.utils.tensordict_utils import concat_tensordict
 
             return concat_tensordict(data)
         if isinstance(sample, BatchMeta):
@@ -1311,7 +1311,7 @@ class BatchData:
             # translate BatchMeta -> KVBatchMeta
             batch_meta = BatchMeta.concat(data)
             batch_meta.extra_info = merged_extra_info
-            from verl.utils.transferqueue_utils import batch_meta2kv_batch_meta
+            from RL.verl.verl.utils.transferqueue_utils import batch_meta2kv_batch_meta
 
             return batch_meta2kv_batch_meta(batch_meta)
         # DataProto, etc. expose .concat() as classmethod / staticmethod

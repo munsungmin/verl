@@ -20,9 +20,9 @@ import socket
 import warnings
 from dataclasses import dataclass
 
-import ray
+import RL.verl.verl.single_controller.ray as ray
 
-from verl.utils.device import (
+from RL.verl.verl.utils.device import (
     get_resource_name,
     get_torch_device,
     get_visible_devices_keyword,
@@ -229,7 +229,7 @@ class Worker(WorkerHelper):
         return self.fused_worker_dict.get(worker_name, None)
 
     def _setup_env_cuda_visible_devices(self):
-        from verl.utils.ray_utils import ray_noset_visible_devices
+        from RL.verl.verl.utils.ray_utils import ray_noset_visible_devices
 
         is_ray_noset_visible_devices = ray_noset_visible_devices()
 

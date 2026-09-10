@@ -39,9 +39,9 @@ from torch.distributed.fsdp import CPUOffloadPolicy
 from torch.distributed.tensor import DTensor
 from transformers import AutoModelForCausalLM, Qwen2Config
 
-from verl.utils.device import get_device_id, get_device_name, get_torch_device
-from verl.utils.distributed import initialize_global_process_group
-from verl.utils.fsdp_utils import MixedPrecisionPolicy, apply_fsdp2, load_fsdp_model_to_gpu
+from RL.verl.verl.utils.device import get_device_id, get_device_name, get_torch_device
+from RL.verl.verl.utils.distributed import initialize_global_process_group
+from RL.verl.verl.utils.fsdp_utils import MixedPrecisionPolicy, apply_fsdp2, load_fsdp_model_to_gpu
 
 
 def _build_fsdp2_cpu_offload_module(device_mesh):

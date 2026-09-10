@@ -16,7 +16,7 @@ import math
 
 import pytest
 
-from verl.utils.flops_counter import FlopsCounter
+from RL.verl.verl.utils.flops_counter import FlopsCounter
 
 VALID_CONFIG_TYPE = {
     "llama",

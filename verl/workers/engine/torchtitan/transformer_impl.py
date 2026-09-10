@@ -38,22 +38,22 @@ from torchtitan.distributed.context_parallel import prepare_context_parallel_inp
 from torchtitan.distributed.parallel_dims import ParallelDims
 from torchtitan.train import Trainer
 
-import verl.utils.torch_functional as verl_F
-from verl.trainer.config import CheckpointConfig
-from verl.utils import tensordict_utils as tu
-from verl.utils.dataset.dataset_utils import DatasetPadMode
-from verl.utils.debug import log_gpu_memory_usage
-from verl.utils.device import get_device_id, get_device_name
-from verl.utils.fsdp_utils import (
+import RL.verl.verl.utils.torch_functional as verl_F
+from RL.verl.verl.trainer.config import CheckpointConfig
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode
+from RL.verl.verl.utils.debug import log_gpu_memory_usage
+from RL.verl.verl.utils.device import get_device_id, get_device_name
+from RL.verl.verl.utils.fsdp_utils import (
     load_fsdp_model_to_gpu,
     load_fsdp_optimizer,
     offload_fsdp_model_to_cpu,
     offload_fsdp_optimizer,
 )
-from verl.utils.model import extract_multi_modal_inputs
-from verl.utils.torch_functional import logprobs_from_logits
-from verl.workers.config import HFModelConfig, TorchtitanEngineConfig, TorchtitanOptimizerConfig
-from verl.workers.engine.torchtitan.utils import (
+from RL.verl.verl.utils.model import extract_multi_modal_inputs
+from RL.verl.verl.utils.torch_functional import logprobs_from_logits
+from RL.verl.verl.workers.config import HFModelConfig, TorchtitanEngineConfig, TorchtitanOptimizerConfig
+from RL.verl.verl.workers.engine.torchtitan.utils import (
     NoOpDataLoader,
     derive_torchtitan_name_and_flavor,
     enable_fsdp_gradient_division,

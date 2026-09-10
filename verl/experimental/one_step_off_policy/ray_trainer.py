@@ -30,20 +30,20 @@ from omegaconf import OmegaConf
 from torch.utils.data import Dataset, Sampler
 from tqdm import tqdm
 
-from verl import DataProto
-from verl.experimental.separation.ray_trainer import SeparateRayPPOTrainer
-from verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
-from verl.trainer.ppo import core_algos
-from verl.trainer.ppo.ray_trainer import (
+from ext.verl.verl import DataProto
+from RL.verl.verl.experimental.separation.ray_trainer import SeparateRayPPOTrainer
+from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
+from RL.verl.verl.trainer.ppo import core_algos
+from RL.verl.verl.trainer.ppo.ray_trainer import (
     ResourcePoolManager,
     compute_response_mask,
 )
-from verl.trainer.ppo.reward import extract_reward
-from verl.trainer.ppo.utils import Role, WorkerType, need_critic, need_reference_policy, need_reward_model
-from verl.utils.debug import marked_timer
-from verl.utils.import_utils import load_class_from_fqn
-from verl.utils.tracking import ValidationGenerationsLogger
-from verl.workers.rollout.llm_server import LLMServerManager
+from RL.verl.verl.trainer.ppo.reward import extract_reward
+from RL.verl.verl.trainer.ppo.utils import Role, WorkerType, need_critic, need_reference_policy, need_reward_model
+from RL.verl.verl.utils.debug import marked_timer
+from RL.verl.verl.utils.import_utils import load_class_from_fqn
+from RL.verl.verl.utils.tracking import ValidationGenerationsLogger
+from RL.verl.verl.workers.rollout.llm_server import LLMServerManager
 
 
 class OneStepOffRayTrainer(SeparateRayPPOTrainer):
@@ -184,7 +184,7 @@ class OneStepOffRayTrainer(SeparateRayPPOTrainer):
         if manager_class_fqn:
             AgentLoopManager = load_class_from_fqn(manager_class_fqn, "AgentLoopManager")
         else:
-            from verl.experimental.agent_loop import AgentLoopManager
+            from RL.verl.verl.experimental.agent_loop import AgentLoopManager
 
         self.llm_server_manager = LLMServerManager.create(config=self.config)
         self.async_rollout_mode = True
@@ -270,7 +270,7 @@ class OneStepOffRayTrainer(SeparateRayPPOTrainer):
         The light-weight advantage computation is done on the driver process.
         """
 
-        from verl.utils.tracking import Tracking
+        from RL.verl.verl.utils.tracking import Tracking
 
         self.logger = Tracking(
             project_name=self.config.trainer.project_name,

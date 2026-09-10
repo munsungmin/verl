@@ -56,9 +56,9 @@ for _mod in (
     sys.modules.setdefault(_mod, MagicMock())
 
 
-from verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead  # noqa: E402
-from verl.workers.engine.utils import pad_packed_inputs  # noqa: E402
-from verl.workers.engine.veomni.transformer_impl import VeOmniEngineWithLMHead  # noqa: E402
+from RL.verl.verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead  # noqa: E402
+from RL.verl.verl.workers.engine.utils import pad_packed_inputs  # noqa: E402
+from RL.verl.verl.workers.engine.veomni.transformer_impl import VeOmniEngineWithLMHead  # noqa: E402
 
 ENGINE_CLASSES = pytest.mark.parametrize(
     "engine_cls",

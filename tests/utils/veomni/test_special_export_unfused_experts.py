@@ -20,7 +20,7 @@ from torch.distributed.tensor import DTensor, Shard, distribute_tensor
 from transformers.models.qwen3_5_moe.configuration_qwen3_5_moe import Qwen3_5MoeTextConfig
 from transformers.models.qwen3_5_moe.modeling_qwen3_5_moe import Qwen3_5MoeDecoderLayer
 
-from verl.workers.engine.veomni.utils import MOE_PARAM_HANDERS, default_moe_param_handler
+from RL.verl.verl.workers.engine.veomni.utils import MOE_PARAM_HANDERS, default_moe_param_handler
 
 
 def get_by_path(obj, path: str):

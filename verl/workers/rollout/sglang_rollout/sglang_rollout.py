@@ -35,12 +35,12 @@ from sglang.srt.weight_sync.utils import _preprocess_tensor_for_update_weights
 from sglang.srt.weight_sync.utils import update_weights as sgl_update_weights
 from torch.distributed.device_mesh import DeviceMesh, init_device_mesh
 
-from verl.utils.device import get_device_id
-from verl.utils.net_utils import is_valid_ipv6_address
-from verl.workers.config import HFModelConfig, RolloutConfig
-from verl.workers.rollout.base import BaseRollout
-from verl.workers.rollout.sglang_rollout.http_server_engine import AsyncHttpServerAdapter
-from verl.workers.rollout.sglang_rollout.utils import (
+from RL.verl.verl.utils.device import get_device_id
+from RL.verl.verl.utils.net_utils import is_valid_ipv6_address
+from RL.verl.verl.workers.config import HFModelConfig, RolloutConfig
+from RL.verl.verl.workers.rollout.base import BaseRollout
+from RL.verl.verl.workers.rollout.sglang_rollout.http_server_engine import AsyncHttpServerAdapter
+from RL.verl.verl.workers.rollout.sglang_rollout.utils import (
     DEEPSEEK_V4_FUSION_GROUPS,
     SGLANG_LORA_NAME,
     get_named_tensor_buckets,
@@ -134,7 +134,7 @@ class ServerAdapter(BaseRollout):
             import sglang
             from packaging import version
 
-            from verl.utils.sglang.sglang_fp8_utils import build_sglang_fp8_quant_config
+            from RL.verl.verl.utils.sglang.sglang_fp8_utils import build_sglang_fp8_quant_config
 
             assert version.parse(sglang.__version__) >= version.parse("0.5.5"), (
                 "sglang>=0.5.5 is required for FP8 quantization"
@@ -358,7 +358,7 @@ class ServerAdapter(BaseRollout):
         else:
             update_weights_bucket_bytes = int(self.config.checkpoint_engine.update_weights_bucket_megabytes) << 20
             if self.config.get("quantization", None) == "fp8":
-                from verl.utils.sglang.sglang_fp8_utils import SGLangFP8QuantizerHelper
+                from RL.verl.verl.utils.sglang.sglang_fp8_utils import SGLangFP8QuantizerHelper
 
                 logger.info("Convert bf16 weights to fp8 format before loading")
                 fp8_quantizer_helper = SGLangFP8QuantizerHelper(self.model_config.hf_config.quantization_config)
@@ -430,7 +430,7 @@ class ServerAdapter(BaseRollout):
         except ImportError:  # moved out of model_runner in sglang 0.5.16
             from sglang.srt.model_executor.model_runner_components.weight_updater import LocalSerializedTensor
 
-        from verl.workers.rollout.sglang_rollout.delta_loader import LOADER_FQN
+        from RL.verl.verl.workers.rollout.sglang_rollout.delta_loader import LOADER_FQN
 
         monkey_patch_torch_reductions()
         mesh = self.device_mesh["infer_tp"]

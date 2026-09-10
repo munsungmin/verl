@@ -17,10 +17,10 @@ from typing import Any
 import numpy as np
 import torch
 
-from verl.protocol import DataProto
-from verl.trainer.ppo import core_algos
-from verl.trainer.ppo.ray_trainer import compute_advantage
-from verl.trainer.ppo.v1.replay_buffer import DAPO_FILTERED_REWARD_COUNTS_KEY
+from RL.verl.verl.protocol import DataProto
+from RL.verl.verl.trainer.ppo import core_algos
+from RL.verl.verl.trainer.ppo.ray_trainer import compute_advantage
+from RL.verl.verl.trainer.ppo.v1.replay_buffer import DAPO_FILTERED_REWARD_COUNTS_KEY
 
 
 class MetricsAggregator:

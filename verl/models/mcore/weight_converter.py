@@ -19,7 +19,7 @@
 # not including resharding
 import torch
 from megatron.core.transformer import TransformerConfig
-from transformers import PretrainedConfig
+from RL.verl.verl.models.transformers import PretrainedConfig
 
 
 class McoreToHFWeightConverterBase:

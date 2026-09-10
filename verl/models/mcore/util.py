@@ -24,8 +24,8 @@ import torch
 from megatron.core import parallel_state as mpu
 from megatron.core.packed_seq_params import PackedSeqParams
 
-from verl.utils.device import is_npu_available
-from verl.utils.model import CausalLMOutputForPPO
+from RL.verl.verl.utils.device import is_npu_available
+from RL.verl.verl.utils.model import CausalLMOutputForPPO
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

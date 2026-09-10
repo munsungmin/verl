@@ -29,11 +29,11 @@ from megatron.core.dist_checkpointing.mapping import ShardedObject
 from packaging import version
 from transformers import GenerationConfig
 
-from verl.utils.device import get_device_name, get_torch_device, is_device_available
-from verl.utils.fs import is_non_local, local_mkdir_safe
-from verl.utils.logger import log_with_rank
-from verl.utils.megatron.dist_checkpointing import load_dist_checkpointing, save_dist_checkpointing
-from verl.utils.megatron_utils import (
+from RL.verl.verl.utils.device import get_device_name, get_torch_device, is_device_available
+from RL.verl.verl.utils.fs import is_non_local, local_mkdir_safe
+from RL.verl.verl.utils.logger import log_with_rank
+from RL.verl.verl.utils.megatron.dist_checkpointing import load_dist_checkpointing, save_dist_checkpointing
+from RL.verl.verl.utils.megatron_utils import (
     get_checkpoint_contents_manifest_path,
     get_extra_dist_checkpoint_path,
     get_hf_model_checkpoint_path,
@@ -1125,7 +1125,7 @@ class MegatronCheckpointManager(BaseCheckpointManager):
 
         if self.rank == 0 and hdfs_path is not None:
             log_with_rank(f"Uploading checkpoint to {hdfs_path}", rank=self.rank, logger=logger)
-            from verl.utils import hdfs_io
+            from RL.verl.verl.utils import hdfs_io
 
             hdfs_io.makedirs(hdfs_path, exist_ok=True)
             # Upload the entire checkpoint directory as a single recursive

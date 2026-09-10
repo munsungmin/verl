@@ -15,8 +15,8 @@
 import asyncio
 from types import SimpleNamespace
 
-from verl.checkpoint_engine.base import CheckpointEngineWorker
-from verl.workers.engine_workers import ActorRolloutRefWorker
+from RL.verl.verl.checkpoint_engine.base import CheckpointEngineWorker
+from RL.verl.verl.workers.engine_workers import ActorRolloutRefWorker
 
 
 class _FakeTrainerEngine:

@@ -22,7 +22,7 @@ from typing import Any, Optional
 
 import torch.nn as nn
 
-from verl.base_config import BaseConfig
+from RL.verl.verl.base_config import BaseConfig
 
 logger = logging.getLogger(__name__)
 
@@ -89,7 +89,7 @@ def apply_qat(
     config: QATConfig | dict[str, Any],
 ) -> nn.Module:
     """Apply QAT to a model by replacing nn.Linear with QATLinear."""
-    from verl.utils.qat.linear import QATLinear, QATMode
+    from RL.verl.verl.utils.qat.linear import QATLinear, QATMode
 
     if not isinstance(config, QATConfig):
         config = QATConfig(**config)
@@ -147,7 +147,7 @@ def setup_fusion_siblings(model: nn.Module):
     """Setup fusion siblings for QKV and GateUp layers."""
     import weakref
 
-    from verl.utils.qat.linear import QATLinear
+    from RL.verl.verl.utils.qat.linear import QATLinear
 
     qat_modules = {name: m for name, m in model.named_modules() if isinstance(m, QATLinear)}
 
@@ -183,7 +183,7 @@ def enable_qat_fuse(model: nn.Module):
 
 def invalidate_all_scales(model: nn.Module):
     """Clear all cached weight scales after optimizer.step()."""
-    from verl.utils.qat.linear import QATLinear
+    from RL.verl.verl.utils.qat.linear import QATLinear
 
     count = 0
     for module in model.modules():

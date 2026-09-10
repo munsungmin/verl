@@ -35,14 +35,14 @@ from megatron.core.transformer.moe.router import TopKRouter
 from megatron.core.transformer.transformer_config import TransformerConfig
 from megatron.core.transformer.transformer_layer import get_transformer_layer_offset
 
-from verl.models.mcore.util import (
+from RL.verl.verl.models.mcore.util import (
     postprocess_packed_seqs,
     postprocess_thd_engine,
     preprocess_packed_seqs,
     preprocess_thd_engine,
 )
-from verl.utils.device import get_device_name
-from verl.utils.megatron.router_replay_patch import RouterReplay, RouterReplayAction
+from RL.verl.verl.utils.device import get_device_name
+from RL.verl.verl.utils.megatron.router_replay_patch import RouterReplay, RouterReplayAction
 
 device_name = get_device_name()
 

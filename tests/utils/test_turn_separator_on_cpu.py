@@ -23,7 +23,7 @@ import re
 
 from jinja2 import Template
 
-from verl.utils.tokenizer.chat_template import initialize_system_prompt, initialize_turn_separator
+from RL.verl.verl.utils.tokenizer.chat_template import initialize_system_prompt, initialize_turn_separator
 
 # Qwen-style ChatML: every turn renders as ``<|im_start|>{role}\n{content}<|im_end|>\n`` with a
 # trailing ``\n`` turn separator that generation never emits (the model stops at ``<|im_end|>``).

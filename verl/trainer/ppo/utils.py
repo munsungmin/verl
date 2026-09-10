@@ -17,9 +17,9 @@ from enum import Enum
 
 from omegaconf import DictConfig
 
-from verl.single_controller.base import Worker
-from verl.trainer.distillation import is_distillation_enabled
-from verl.trainer.ppo.core_algos import AdvantageEstimator
+from RL.verl.verl.single_controller.base import Worker
+from RL.verl.verl.trainer.distillation import is_distillation_enabled
+from RL.verl.verl.trainer.ppo.core_algos import AdvantageEstimator
 
 WorkerType = type[Worker]
 
@@ -120,7 +120,7 @@ def create_rl_dataset(data_paths, data_config, tokenizer, processor, is_train=Tr
         dataset (Dataset): The dataset.
     """
 
-    from verl.utils.dataset.rl_dataset import get_dataset_class
+    from RL.verl.verl.utils.dataset.rl_dataset import get_dataset_class
 
     # Get the dataset class
     dataset_cls = get_dataset_class(data_config)

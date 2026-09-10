@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from verl.utils.fp8_utils import FP8QuantizerHelper
+from RL.verl.verl.utils.fp8_utils import FP8QuantizerHelper
 
 
 class TRTLLMFP8QuantizerHelper(FP8QuantizerHelper):

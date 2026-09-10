@@ -20,8 +20,8 @@ import numpy as np
 import torch
 import torch.distributed as dist
 
-from verl.utils.device import get_device_name
-from verl.workers.rollout.utils import ensure_async_iterator
+from RL.verl.verl.utils.device import get_device_name
+from RL.verl.verl.workers.rollout.utils import ensure_async_iterator
 
 SGLANG_LORA_NAME = "verl_actor_lora_name"
 

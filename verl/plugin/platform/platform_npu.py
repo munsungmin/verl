@@ -164,7 +164,7 @@ class PlatformNPU(PlatformBase):
     def is_ipc_supported(self) -> bool:
         import subprocess
 
-        from verl.utils.device import AscendHardwareVersion, check_ipc_version_support, get_npu_versions
+        from RL.verl.verl.utils.device import AscendHardwareVersion, check_ipc_version_support, get_npu_versions
 
         try:
             hardware_version, software_version, cann_version = get_npu_versions()

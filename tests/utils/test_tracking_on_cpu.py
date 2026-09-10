@@ -16,7 +16,7 @@ import sys
 import types
 from unittest.mock import MagicMock, call, patch
 
-from verl.utils.tracking import DapoFilteredRewardTableLogger, Tracking, ValidationGenerationsLogger
+from RL.verl.verl.utils.tracking import DapoFilteredRewardTableLogger, Tracking, ValidationGenerationsLogger
 
 
 def test_tracking_finish_finalizes_wandb_once():

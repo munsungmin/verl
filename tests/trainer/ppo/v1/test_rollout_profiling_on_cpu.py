@@ -19,10 +19,10 @@ from unittest.mock import MagicMock, call, patch
 
 from omegaconf import OmegaConf
 
-from verl.trainer.ppo.v1.trainer_base import PPOTrainer
-from verl.trainer.ppo.v1.trainer_colocate_async import PPOTrainerColocateAsync
-from verl.trainer.ppo.v1.trainer_separate_async import PPOTrainerSeparateAsync
-from verl.trainer.ppo.v1.trainer_sync import PPOTrainerSync
+from RL.verl.verl.trainer.ppo.v1.trainer_base import PPOTrainer
+from RL.verl.verl.trainer.ppo.v1.trainer_colocate_async import PPOTrainerColocateAsync
+from RL.verl.verl.trainer.ppo.v1.trainer_separate_async import PPOTrainerSeparateAsync
+from RL.verl.verl.trainer.ppo.v1.trainer_sync import PPOTrainerSync
 
 
 class _StubTrainer(PPOTrainer):

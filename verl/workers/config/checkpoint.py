@@ -25,7 +25,7 @@ mirroring how ``ActorConfig`` / ``McoreActorConfig`` are split between
 from dataclasses import dataclass, field
 from typing import Any
 
-from verl.trainer.config import CheckpointConfig
+from RL.verl.verl.trainer.config import CheckpointConfig
 
 __all__ = ["McoreCheckpointConfig"]
 

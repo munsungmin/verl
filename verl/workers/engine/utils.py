@@ -19,13 +19,13 @@ import numpy as np
 import torch
 from tensordict import TensorDict
 
-from verl.utils import tensordict_utils as tu
-from verl.utils.dataset.dataset_utils import DatasetPadMode
-from verl.utils.device import is_npu_available
-from verl.utils.device import manual_seed as device_manual_seed
-from verl.utils.device import manual_seed_all as device_manual_seed_all
-from verl.utils.py_functional import append_to_dict
-from verl.utils.seqlen_balancing import rearrange_micro_batches, restore_dynamic_batch
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode
+from RL.verl.verl.utils.device import is_npu_available
+from RL.verl.verl.utils.device import manual_seed as device_manual_seed
+from RL.verl.verl.utils.device import manual_seed_all as device_manual_seed_all
+from RL.verl.verl.utils.py_functional import append_to_dict
+from RL.verl.verl.utils.seqlen_balancing import rearrange_micro_batches, restore_dynamic_batch
 
 
 def enable_full_determinism(seed: int):
@@ -231,7 +231,7 @@ def hf_delta_export(gen, snaps: dict, entry_fn):
     The delta engine consumes these entries verbatim (batch -> gather -> wire); no
     spec, no placement and no conversion cross the boundary. Requires a prior seed
     pass."""
-    from verl.checkpoint_engine.delta_sync.sparse_gather import shard_delta_indices
+    from RL.verl.verl.checkpoint_engine.delta_sync.sparse_gather import shard_delta_indices
 
     from .spec import derive_dtensor_placement
 

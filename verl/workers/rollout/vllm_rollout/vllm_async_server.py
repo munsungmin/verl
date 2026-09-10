@@ -39,28 +39,28 @@ from vllm.usage.usage_lib import UsageContext
 from vllm.utils.argparse_utils import FlexibleArgumentParser
 from vllm.v1.engine.async_llm import AsyncLLM
 
-from verl.plugin.platform import get_platform
-from verl.utils.config import omega_conf_to_dataclass
-from verl.utils.device import get_resource_name, get_visible_devices_keyword, is_torch_npu_available
-from verl.utils.net_utils import get_free_port, is_valid_ipv6_address
-from verl.utils.profiler import (
+from RL.verl.verl.plugin.platform import get_platform
+from RL.verl.verl.utils.config import omega_conf_to_dataclass
+from RL.verl.verl.utils.device import get_resource_name, get_visible_devices_keyword, is_torch_npu_available
+from RL.verl.verl.utils.net_utils import get_free_port, is_valid_ipv6_address
+from RL.verl.verl.utils.profiler import (
     build_rollout_dist_profiler,
     build_vllm_profiler_args,
     relocate_rollout_traces,
     rollout_profiler_global_ranks,
 )
-from verl.utils.tokenizer import normalize_token_ids
-from verl.utils.tracking import RLInsightLogger
-from verl.utils.vllm.vllm_quant_utils import apply_vllm_quant_patches
-from verl.workers.config import HFModelConfig, RolloutConfig
-from verl.workers.rollout.replica import RolloutMode, RolloutReplica, TokenOutput
-from verl.workers.rollout.utils import (
+from RL.verl.verl.utils.tokenizer import normalize_token_ids
+from RL.verl.verl.utils.tracking import RLInsightLogger
+from RL.verl.verl.utils.vllm.vllm_quant_utils import apply_vllm_quant_patches
+from RL.verl.verl.workers.config import HFModelConfig, RolloutConfig
+from RL.verl.verl.workers.rollout.replica import RolloutMode, RolloutReplica, TokenOutput
+from RL.verl.verl.workers.rollout.utils import (
     get_max_position_embeddings,
     get_vision_placeholder_token_ids,
     qwen2_5_vl_dedup_image_tokens,
     run_uvicorn,
 )
-from verl.workers.rollout.vllm_rollout.utils import (
+from RL.verl.verl.workers.rollout.vllm_rollout.utils import (
     VLLM_LORA_INT_ID,
     VLLM_LORA_NAME,
     VLLM_LORA_PATH,
@@ -147,7 +147,7 @@ class vLLMHttpServer:
         self._validate_configs()
 
         if self.config.full_determinism:
-            from verl.workers.engine.utils import enable_full_determinism
+            from RL.verl.verl.workers.engine.utils import enable_full_determinism
 
             rollout_seed = replica_rank + self.config.seed
             enable_full_determinism(seed=rollout_seed)
@@ -296,7 +296,7 @@ class vLLMHttpServer:
 
         logger.info(f"enable_sleep_mode: {self.config.enable_sleep_mode}")
         if not self.config.enable_sleep_mode:
-            from verl.utils.device import set_expandable_segments
+            from RL.verl.verl.utils.device import set_expandable_segments
 
             set_expandable_segments(True)
 
@@ -1099,7 +1099,7 @@ class vLLMHttpServer:
 
         checkpoint_config = getattr(self.config, "checkpoint_engine", None)
         if getattr(checkpoint_config, "backend", None) == "delta_sharded":
-            from verl.workers.rollout.vllm_rollout.delta_weight_transfer import (
+            from RL.verl.verl.workers.rollout.vllm_rollout.delta_weight_transfer import (
                 VERL_DELTA_WEIGHT_TRANSFER_BACKEND,
                 is_moe_model,
                 require_vllm_delta_support,
@@ -1173,19 +1173,19 @@ class vLLMHttpServer:
         # Handle QAT (Quantization-Aware Training) configuration
         qat_config_dict = getattr(self.config, "qat", {}) or {}
         if qat_config_dict.get("enable", False):
-            from verl.utils.qat import QATConfig, load_quantization_config
+            from RL.verl.verl.utils.qat import QATConfig, load_quantization_config
 
             qat_config = QATConfig(**qat_config_dict)
             quantization_config_dict = load_quantization_config(qat_config)
             quant_method = quantization_config_dict.get("quant_method", None)
 
             if quant_method == "modelopt":
-                from verl.utils.modelopt import apply_modelopt_nvfp4_patches
+                from RL.verl.verl.utils.modelopt import apply_modelopt_nvfp4_patches
 
                 apply_modelopt_nvfp4_patches()
                 quantization = "modelopt"
             elif quant_method == "compressed-tensors":
-                from verl.utils.qat import apply_qat_patches
+                from RL.verl.verl.utils.qat import apply_qat_patches
 
                 apply_qat_patches()
                 quantization = "compressed-tensors"

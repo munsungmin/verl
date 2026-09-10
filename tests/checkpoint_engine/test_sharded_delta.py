@@ -24,7 +24,7 @@ from __future__ import annotations
 import pytest
 import torch
 
-from verl.checkpoint_engine.delta_sync.sparse_gather import shard_delta_indices
+from RL.verl.verl.checkpoint_engine.delta_sync.sparse_gather import shard_delta_indices
 
 
 @pytest.mark.parametrize("dtype", [torch.bfloat16, torch.float32])
@@ -59,7 +59,7 @@ def test_shard_delta_indices_no_change_is_empty():
 def test_derive_dtensor_placement_unsharded():
     # A non-DTensor (replicated / unsharded) param: offset 0, no gather group,
     # and outside a process group rank 0 is assumed -> contributes.
-    from verl.workers.engine.spec import ShardSpec, derive_dtensor_placement
+    from RL.verl.verl.workers.engine.spec import ShardSpec, derive_dtensor_placement
 
     t = torch.randn(64, 8, dtype=torch.bfloat16)
     spec = ShardSpec.from_param(t)
@@ -71,7 +71,7 @@ def test_derive_dtensor_placement_unsharded():
 def test_spec_to_hf_chunk_preserves_nan_sentinels():
     """A dim-0-separable converter must preserve NaN sentinel positions -- the
     property the engine's sender-side non-NaN extraction relies on."""
-    from verl.workers.engine.spec import ShardSpec
+    from RL.verl.verl.workers.engine.spec import ShardSpec
 
     def to_hf_chunk(dim0_start, segment):
         # pure slice + rename, one output per dim-0 row (identity permutation)
@@ -97,7 +97,7 @@ def test_gather_slot_entries_sub_rounds_world1():
 
     import torch.distributed as dist
 
-    from verl.checkpoint_engine.delta_sync.sparse_gather import gather_slot_entries_to_rank0
+    from RL.verl.verl.checkpoint_engine.delta_sync.sparse_gather import gather_slot_entries_to_rank0
 
     owns_pg = not dist.is_initialized()
     if owns_pg:
@@ -132,8 +132,8 @@ def test_prime_then_hf_delta_export_roundtrip():
     shards; a later pass through hf_delta_export yields a final-HF-coordinate
     entry with exactly the changed elements and refreshes the snapshot (a
     second delta pass yields a zero-count entry)."""
-    from verl.workers.engine.spec import ShardSpec
-    from verl.workers.engine.utils import _hf_entry_identity, hf_delta_export, prime_delta_snapshots
+    from RL.verl.verl.workers.engine.spec import ShardSpec
+    from RL.verl.verl.workers.engine.utils import _hf_entry_identity, hf_delta_export, prime_delta_snapshots
 
     w = torch.arange(12, dtype=torch.float32)
     spec = ShardSpec(full_shape=(12,))
@@ -170,9 +170,9 @@ def test_hf_delta_export_converter_param():
     # veomni/utils.py is torch-only, but the veomni package __init__ pulls in the
     # full engine (heavy deps); load the module by file path to keep this a CPU
     # unit test.
-    import verl.workers.engine as _eng
-    from verl.workers.engine.spec import BlockPlacement, ShardSpec
-    from verl.workers.engine.utils import hf_delta_export, prime_delta_snapshots
+    import RL.verl.verl.workers.engine as _eng
+    from RL.verl.verl.workers.engine.spec import BlockPlacement, ShardSpec
+    from RL.verl.verl.workers.engine.utils import hf_delta_export, prime_delta_snapshots
 
     _p = pathlib.Path(_eng.__file__).parent / "veomni" / "utils.py"
     _spec = importlib.util.spec_from_file_location("_veomni_delta_utils", _p)
@@ -211,7 +211,7 @@ def _load_veomni_delta_utils():
     import importlib.util
     import pathlib
 
-    import verl.workers.engine as _eng
+    import RL.verl.verl.workers.engine as _eng
 
     _p = pathlib.Path(_eng.__file__).parent / "veomni" / "utils.py"
     _spec = importlib.util.spec_from_file_location("_veomni_delta_utils", _p)
@@ -225,8 +225,8 @@ def test_hf_delta_export_converter_nontrivial_block():
     strict sub-block -- experts 2:4, dim-1 window 3:6 of full (8, 6, 4) -- so
     the entry must translate through both the dim-0 (manual ep) and dim-1
     (FSDP ``Shard(1)``) offsets before slot attribution."""
-    from verl.workers.engine.spec import BlockPlacement, ShardSpec
-    from verl.workers.engine.utils import hf_delta_export, prime_delta_snapshots
+    from RL.verl.verl.workers.engine.spec import BlockPlacement, ShardSpec
+    from RL.verl.verl.workers.engine.utils import hf_delta_export, prime_delta_snapshots
 
     hf_entry_converter = _load_veomni_delta_utils().hf_entry_converter
 
@@ -259,8 +259,8 @@ def test_hf_delta_export_replica_rank_stays_lockstep():
     """A rank whose block is an HSDP replica (``spec.contributes=False``) must
     emit the full slot enumeration with zero counts -- lockstep intact, nothing
     on the wire -- and still refresh its snapshot."""
-    from verl.workers.engine.spec import BlockPlacement, ShardSpec
-    from verl.workers.engine.utils import hf_delta_export, prime_delta_snapshots
+    from RL.verl.verl.workers.engine.spec import BlockPlacement, ShardSpec
+    from RL.verl.verl.workers.engine.utils import hf_delta_export, prime_delta_snapshots
 
     hf_entry_converter = _load_veomni_delta_utils().hf_entry_converter
 
@@ -293,8 +293,8 @@ def test_hf_delta_export_requires_seed():
     garbage."""
     import pytest
 
-    from verl.workers.engine.spec import ShardSpec
-    from verl.workers.engine.utils import _hf_entry_identity, hf_delta_export
+    from RL.verl.verl.workers.engine.spec import ShardSpec
+    from RL.verl.verl.workers.engine.utils import _hf_entry_identity, hf_delta_export
 
     def raw():
         yield "w", torch.zeros(4), ShardSpec(full_shape=(4,))

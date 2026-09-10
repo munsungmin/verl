@@ -15,7 +15,7 @@
 import pytest
 import torch
 
-from verl.model_merger.fsdp_model_merger import merge_non_dtensor_shards
+from RL.verl.verl.model_merger.fsdp_model_merger import merge_non_dtensor_shards
 
 
 def test_replicated_scalar_buffer_is_kept_as_is():

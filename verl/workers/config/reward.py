@@ -17,8 +17,8 @@ import os
 from dataclasses import dataclass, field
 from typing import Optional
 
-from verl.base_config import BaseConfig
-from verl.trainer.config.config import ModuleConfig
+from RL.verl.verl.base_config import BaseConfig
+from RL.verl.verl.trainer.config.config import ModuleConfig
 
 from .rollout import RolloutConfig
 
@@ -51,7 +51,7 @@ class RewardManagerConfig(BaseConfig):
     def __post_init__(self):
         super().__post_init__()
         if self.source == "register":
-            from verl.experimental.reward_loop.reward_manager.registry import REWARD_MANAGER
+            from RL.verl.verl.experimental.reward_loop.reward_manager.registry import REWARD_MANAGER
 
             assert self.name in REWARD_MANAGER, (
                 f"Reward manager is not registered: {self.name=} ,{REWARD_MANAGER.keys()=}"

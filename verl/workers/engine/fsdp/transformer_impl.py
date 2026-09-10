@@ -31,16 +31,16 @@ from torch.distributed.fsdp import FullyShardedDataParallel as FSDP
 from torch.distributed.fsdp.api import FullStateDictConfig, ShardedStateDictConfig, StateDictType
 from torch.distributed.tensor import DTensor
 
-import verl.utils.torch_functional as verl_F
-from verl.models.transformers.monkey_patch import apply_monkey_patch
-from verl.trainer.config import CheckpointConfig
-from verl.utils import tensordict_utils as tu
-from verl.utils.activation_offload import enable_activation_offloading
-from verl.utils.checkpoint.fsdp_checkpoint_manager import FSDPCheckpointManager
-from verl.utils.dataset.dataset_utils import DatasetPadMode
-from verl.utils.debug import log_gpu_memory_usage
-from verl.utils.device import get_device_id, get_device_name
-from verl.utils.fsdp_utils import (
+import RL.verl.verl.utils.torch_functional as verl_F
+from RL.verl.verl.models.transformers.monkey_patch import apply_monkey_patch
+from RL.verl.verl.trainer.config import CheckpointConfig
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils.activation_offload import enable_activation_offloading
+from RL.verl.verl.utils.checkpoint.fsdp_checkpoint_manager import FSDPCheckpointManager
+from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode
+from RL.verl.verl.utils.debug import log_gpu_memory_usage
+from RL.verl.verl.utils.device import get_device_id, get_device_name
+from RL.verl.verl.utils.fsdp_utils import (
     CPUOffloadPolicy,
     FSDPModule,
     MixedPrecisionPolicy,
@@ -60,19 +60,19 @@ from verl.utils.fsdp_utils import (
     offload_fsdp_optimizer,
     replace_lora_wrapper,
 )
-from verl.utils.model import convert_weight_keys, extract_multi_modal_inputs
-from verl.utils.py_functional import convert_to_regular_types
-from verl.utils.seqlen_balancing import ceildiv
-from verl.utils.torch_functional import logprobs_from_logits
-from verl.utils.ulysses import (
+from RL.verl.verl.utils.model import convert_weight_keys, extract_multi_modal_inputs
+from RL.verl.verl.utils.py_functional import convert_to_regular_types
+from RL.verl.verl.utils.seqlen_balancing import ceildiv
+from RL.verl.verl.utils.torch_functional import logprobs_from_logits
+from RL.verl.verl.utils.ulysses import (
     gather_outputs_and_unpad,
     get_ulysses_sequence_parallel_group,
     set_ulysses_sequence_parallel_group,
     ulysses_pad,
     ulysses_pad_and_slice_inputs,
 )
-from verl.workers.config import FSDPEngineConfig, FSDPOptimizerConfig, HFModelConfig
-from verl.workers.utils.padding import build_attention_mask_from_nested
+from RL.verl.verl.workers.config import FSDPEngineConfig, FSDPOptimizerConfig, HFModelConfig
+from RL.verl.verl.workers.utils.padding import build_attention_mask_from_nested
 
 from ..base import BaseEngine, BaseEngineCtx, EngineRegistry
 from ..utils import enable_full_determinism, pad_packed_inputs, postprocess_batch_func, prepare_micro_batches
@@ -247,8 +247,8 @@ class FSDPEngine(BaseEngine):
         self.use_ulysses_sp = self.ulysses_sequence_parallel_size > 1
 
     def _build_module(self):
-        from verl.utils.model import get_hf_auto_model_class
-        from verl.utils.torch_dtypes import PrecisionType
+        from RL.verl.verl.utils.model import get_hf_auto_model_class
+        from RL.verl.verl.utils.torch_dtypes import PrecisionType
 
         torch_dtype = self.engine_config.model_dtype
 
@@ -283,7 +283,7 @@ class FSDPEngine(BaseEngine):
                         delattr(module, attr)
                         logger.info(f"Stripped unused sub-module '{attr}' to reduce memory")
             else:
-                from verl.utils.model import load_valuehead_model
+                from RL.verl.verl.utils.model import load_valuehead_model
 
                 assert self.model_config.model_type == "value_model", (
                     f"Unsupported model type: {self.model_config.model_type}"
@@ -338,7 +338,7 @@ class FSDPEngine(BaseEngine):
         if lora_adapter_path is not None:
             from peft import PeftModel
 
-            from verl.utils.fs import copy_to_local
+            from RL.verl.verl.utils.fs import copy_to_local
 
             print(f"Loading pre-trained LoRA adapter to from: {lora_adapter_path}")
             # Copy adapter to local if needed
@@ -381,7 +381,7 @@ class FSDPEngine(BaseEngine):
         # TODO(ziheng): need to improve
         from torch.distributed.fsdp import CPUOffload, MixedPrecision
 
-        from verl.utils.torch_dtypes import PrecisionType
+        from RL.verl.verl.utils.torch_dtypes import PrecisionType
 
         mixed_precision_config = self.engine_config.mixed_precision
         if mixed_precision_config is not None:
@@ -489,14 +489,14 @@ class FSDPEngine(BaseEngine):
         return module
 
     def _build_optimizer(self, module):
-        from verl.workers.config.optimizer import build_optimizer
+        from RL.verl.verl.workers.config.optimizer import build_optimizer
 
         optimizer = build_optimizer(module.parameters(), self.optimizer_config)
 
         return optimizer
 
     def _build_lr_scheduler(self, optimizer):
-        from verl.utils.torch_functional import get_constant_schedule_with_warmup, get_cosine_schedule_with_warmup
+        from RL.verl.verl.utils.torch_functional import get_constant_schedule_with_warmup, get_cosine_schedule_with_warmup
 
         optim_config = self.optimizer_config
 
@@ -530,7 +530,7 @@ class FSDPEngine(BaseEngine):
 
     def _apply_qat(self, module):
         """Apply QAT transformations to the model before FSDP wrapping."""
-        from verl.utils.qat.core import apply_qat, enable_qat_fuse
+        from RL.verl.verl.utils.qat.core import apply_qat, enable_qat_fuse
 
         module = apply_qat(
             module,
@@ -581,7 +581,7 @@ class FSDPEngine(BaseEngine):
         logger.info(f"[QAT W4A4] Restored {loaded_count} input_global_scale/input_amax from {model_path}")
 
     def _build_model_optimizer(self):
-        from verl.utils.model import print_model_size
+        from RL.verl.verl.utils.model import print_model_size
 
         # Load base model with specified configuration and dtype
         module = self._build_module()
@@ -822,7 +822,7 @@ class FSDPEngine(BaseEngine):
                 self.optimizer.step()
 
         if self._qat_enabled:
-            from verl.utils.qat.core import invalidate_all_scales
+            from RL.verl.verl.utils.qat.core import invalidate_all_scales
 
             invalidate_all_scales(self.module)
 
@@ -1032,8 +1032,8 @@ class FSDPEngine(BaseEngine):
             per_tensor_param = unfuse_moe_params(per_tensor_param, self.model_config.hf_config.model_type)
 
         if self._qat_enabled:
-            from verl.utils.qat.quantizer import QATQuantizer
-            from verl.utils.torch_dtypes import PrecisionType
+            from RL.verl.verl.utils.qat.quantizer import QATQuantizer
+            from RL.verl.verl.utils.torch_dtypes import PrecisionType
 
             mixed_precision_config = self.engine_config.mixed_precision
             if mixed_precision_config is not None:

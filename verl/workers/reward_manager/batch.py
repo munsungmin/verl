@@ -17,9 +17,9 @@ from typing import Any
 
 import torch
 
-from verl import DataProto
-from verl.workers.reward_manager import register
-from verl.workers.reward_manager.abstract import AbstractRewardManager, RawRewardFn
+from ext.verl.verl import DataProto
+from RL.verl.verl.workers.reward_manager import register
+from RL.verl.verl.workers.reward_manager.abstract import AbstractRewardManager, RawRewardFn
 
 
 @register("batch")

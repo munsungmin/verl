@@ -42,27 +42,27 @@ from sglang.srt.managers.io_struct import (
 )
 from sglang.srt.managers.tokenizer_manager import ServerStatus
 
-from verl.plugin.platform import get_platform
-from verl.utils.config import omega_conf_to_dataclass
-from verl.utils.device import get_visible_devices_keyword
-from verl.utils.net_utils import get_free_port, is_valid_ipv6_address
-from verl.utils.profiler import (
+from RL.verl.verl.plugin.platform import get_platform
+from RL.verl.verl.utils.config import omega_conf_to_dataclass
+from RL.verl.verl.utils.device import get_visible_devices_keyword
+from RL.verl.verl.utils.net_utils import get_free_port, is_valid_ipv6_address
+from RL.verl.verl.utils.profiler import (
     build_rollout_dist_profiler,
     build_sglang_profiler_args,
     relocate_rollout_traces,
     rollout_profiler_global_ranks,
 )
-from verl.utils.tracking import RLInsightLogger
-from verl.workers.config import HFModelConfig, RolloutConfig
-from verl.workers.rollout.replica import RolloutMode, RolloutReplica, TokenOutput
-from verl.workers.rollout.sglang_rollout.sglang_rollout import _set_envs_and_config
-from verl.workers.rollout.sglang_rollout.utils import (
+from RL.verl.verl.utils.tracking import RLInsightLogger
+from RL.verl.verl.workers.config import HFModelConfig, RolloutConfig
+from RL.verl.verl.workers.rollout.replica import RolloutMode, RolloutReplica, TokenOutput
+from RL.verl.verl.workers.rollout.sglang_rollout.sglang_rollout import _set_envs_and_config
+from RL.verl.verl.workers.rollout.sglang_rollout.utils import (
     SGLANG_LORA_NAME,
     lora_rank_of,
     lora_served_as_adapter,
     sglang_lora_target_modules,
 )
-from verl.workers.rollout.utils import get_max_position_embeddings, run_uvicorn
+from RL.verl.verl.workers.rollout.utils import get_max_position_embeddings, run_uvicorn
 
 logger = logging.getLogger(__file__)
 logger.setLevel(logging.INFO)
@@ -282,7 +282,7 @@ class SGLangHttpServer:
         custom_weight_loader = list(engine_kwargs.pop("custom_weight_loader", None) or [])
         ce_backend = str((self.config.get("checkpoint_engine", None) or {}).get("backend", ""))
         if ce_backend == "delta_sharded":
-            from verl.workers.rollout.sglang_rollout.delta_loader import LOADER_FQN
+            from RL.verl.verl.workers.rollout.sglang_rollout.delta_loader import LOADER_FQN
 
             if LOADER_FQN not in custom_weight_loader:
                 custom_weight_loader.append(LOADER_FQN)
@@ -302,7 +302,7 @@ class SGLangHttpServer:
         quantization = self.config.get("quantization", None)
         if quantization is not None:
             if quantization == "fp8":
-                from verl.utils.sglang.sglang_fp8_utils import build_sglang_fp8_quant_config
+                from RL.verl.verl.utils.sglang.sglang_fp8_utils import build_sglang_fp8_quant_config
 
                 assert version.parse(sglang.__version__) >= version.parse("0.5.5"), (
                     "sglang>=0.5.5 is required for FP8 quantization"

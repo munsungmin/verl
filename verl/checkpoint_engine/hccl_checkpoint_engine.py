@@ -22,16 +22,16 @@ import torch
 import zmq
 from vllm.distributed.utils import StatelessProcessGroup
 
-from verl.checkpoint_engine.base import (
+from RL.verl.verl.checkpoint_engine.base import (
     CheckpointEngine,
     CheckpointEngineRegistry,
     TensorMeta,
     merge_weight_chunks,
     split_weight_chunks,
 )
-from verl.utils.device import is_torch_npu_available
-from verl.utils.distributed import stateless_init_process_group
-from verl.utils.net_utils import get_free_port, is_valid_ipv6_address
+from RL.verl.verl.utils.device import is_torch_npu_available
+from RL.verl.verl.utils.distributed import stateless_init_process_group
+from RL.verl.verl.utils.net_utils import get_free_port, is_valid_ipv6_address
 
 if not is_torch_npu_available(check_device=False):
     raise ImportError("HCCLCheckpointEngine is unavailable because the torch.npu module is not available.")

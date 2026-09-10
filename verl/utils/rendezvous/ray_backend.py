@@ -18,7 +18,7 @@ import time
 import ray
 from ray.util import list_named_actors
 
-from verl.plugin.platform import get_platform
+from RL.verl.verl.plugin.platform import get_platform
 
 
 def _get_collective_module():

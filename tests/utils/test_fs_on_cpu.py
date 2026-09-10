@@ -15,7 +15,7 @@
 import os
 from pathlib import Path
 
-import verl.utils.fs as fs
+import RL.verl.verl.utils.fs as fs
 
 
 def test_record_and_check_directory_structure(tmp_path):

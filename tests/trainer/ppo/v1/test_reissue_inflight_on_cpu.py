@@ -43,9 +43,9 @@ import transfer_queue as tq
 from omegaconf import OmegaConf
 from tensordict import TensorDict
 
-from verl.trainer.ppo.v1 import trainer_base
-from verl.trainer.ppo.v1.trainer_base import PPOTrainer
-from verl.utils import tensordict_utils as tu
+from RL.verl.verl.trainer.ppo.v1 import trainer_base
+from RL.verl.verl.trainer.ppo.v1.trainer_base import PPOTrainer
+from RL.verl.verl.utils import tensordict_utils as tu
 
 # Capture the real compatibility guard before the autouse fixture patches it. The save/load round-trip
 # tests call the real APIs, so they must skip on builds that do not provide them.

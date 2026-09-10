@@ -7,9 +7,9 @@ from unittest import mock
 
 import pytest
 
-from verl.plugin.platform import get_platform, set_platform
-from verl.plugin.platform.platform_base import PlatformBase
-from verl.plugin.platform.platform_manager import (
+from RL.verl.verl.plugin.platform import get_platform, set_platform
+from RL.verl.verl.plugin.platform.platform_base import PlatformBase
+from RL.verl.verl.plugin.platform.platform_manager import (
     PlatformRegistry,
     _create_platform,
     _detect_platform_name,
@@ -103,7 +103,7 @@ class TestPlatformDetection:
     """Test platform auto-detection logic."""
 
     def setup_method(self):
-        import verl.plugin.platform.platform_manager as pm
+        import RL.verl.verl.plugin.platform.platform_manager as pm
 
         pm._current_platform = None
 
@@ -153,7 +153,7 @@ class TestPlatformSingleton:
     """Test singleton and external injection."""
 
     def setup_method(self):
-        import verl.plugin.platform.platform_manager as pm
+        import RL.verl.verl.plugin.platform.platform_manager as pm
 
         pm._current_platform = None
 
@@ -174,7 +174,7 @@ class TestPlatformRegistry:
     """Test PlatformRegistry dynamic registration."""
 
     def setup_method(self):
-        import verl.plugin.platform.platform_manager as pm
+        import RL.verl.verl.plugin.platform.platform_manager as pm
 
         pm._current_platform = None
 

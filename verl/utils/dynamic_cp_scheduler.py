@@ -20,8 +20,8 @@ import math
 import torch
 from tensordict import TensorDict
 
-from verl.utils import tensordict_utils as tu
-from verl.utils.py_functional import append_to_dict
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils.py_functional import append_to_dict
 
 DCP_GROUP_LEADER = "_dcp_group_leader"
 DCP_LOCAL_NUM_TOKENS = "_dcp_local_num_tokens"

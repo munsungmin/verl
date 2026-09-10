@@ -24,8 +24,8 @@ from torch.distributed.device_mesh import init_device_mesh
 from torch.distributed.fsdp import FullyShardedDataParallel as FSDP
 from torch.distributed.fsdp import ShardingStrategy, fully_shard
 
-from verl.workers.engine.fsdp import transformer_impl
-from verl.workers.engine.fsdp.transformer_impl import FSDPEngine
+from RL.verl.verl.workers.engine.fsdp import transformer_impl
+from RL.verl.verl.workers.engine.fsdp.transformer_impl import FSDPEngine
 
 
 class _FSDP1Module:

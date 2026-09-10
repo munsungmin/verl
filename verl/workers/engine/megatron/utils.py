@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-from verl.utils.device import get_torch_device, is_cuda_available, is_npu_available
+from RL.verl.verl.utils.device import get_torch_device, is_cuda_available, is_npu_available
 
 
 def set_random_seed(seed):

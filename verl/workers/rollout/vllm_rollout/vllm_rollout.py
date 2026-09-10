@@ -35,12 +35,12 @@ import ray
 import torch
 from torch.distributed.device_mesh import DeviceMesh
 
-from verl import DataProto
-from verl.third_party.vllm import VLLM_SLEEP_LEVEL
-from verl.utils.device import is_support_ipc
-from verl.workers.config import HFModelConfig, RolloutConfig
-from verl.workers.rollout.base import BaseRollout
-from verl.workers.rollout.vllm_rollout.bucketed_weight_transfer import BucketedWeightSender
+from ext.verl.verl import DataProto
+from RL.verl.verl.third_party.vllm import VLLM_SLEEP_LEVEL
+from RL.verl.verl.utils.device import is_support_ipc
+from RL.verl.verl.workers.config import HFModelConfig, RolloutConfig
+from RL.verl.verl.workers.rollout.base import BaseRollout
+from RL.verl.verl.workers.rollout.vllm_rollout.bucketed_weight_transfer import BucketedWeightSender
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "INFO"))
@@ -260,7 +260,7 @@ class ServerAdapter(BaseRollout):
     ) -> None:
         """Send one delta weight update as a stream of DeltaFlush payloads."""
 
-        from verl.workers.rollout.utils import ensure_async_iterator
+        from RL.verl.verl.workers.rollout.utils import ensure_async_iterator
 
         if self.use_shm:
             raise NotImplementedError("delta_sharded with vLLM requires colocated CUDA IPC")

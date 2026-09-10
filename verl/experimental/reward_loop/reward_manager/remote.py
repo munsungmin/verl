@@ -17,10 +17,10 @@ import itertools
 
 import ray
 
-from verl import DataProto
-from verl.experimental.reward_loop.reward_manager import register
-from verl.experimental.reward_loop.reward_manager.base import RewardManagerBase
-from verl.utils.reward_score import default_compute_score
+from ext.verl.verl import DataProto
+from RL.verl.verl.experimental.reward_loop.reward_manager import register
+from RL.verl.verl.experimental.reward_loop.reward_manager.base import RewardManagerBase
+from RL.verl.verl.utils.reward_score import default_compute_score
 
 
 @ray.remote(num_cpus=1)

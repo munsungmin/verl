@@ -18,7 +18,7 @@ from collections import namedtuple
 
 import pytest
 
-from verl.utils.checkpoint.checkpoint_manager import BaseCheckpointManager
+from RL.verl.verl.utils.checkpoint.checkpoint_manager import BaseCheckpointManager
 
 # Return type mimicking torch.nn.Module.load_state_dict with strict=False
 _LoadStateDictResult = namedtuple("_LoadStateDictResult", ["missing_keys", "unexpected_keys"])
@@ -111,7 +111,7 @@ class TestFSDPCheckpointManagerLoraOnly:
         monkeypatch.setattr(torch.distributed, "barrier", lambda: None)
 
     def _make_fsdp_manager(self, checkpoint_config, model=None):
-        from verl.utils.checkpoint.fsdp_checkpoint_manager import FSDPCheckpointManager
+        from RL.verl.verl.utils.checkpoint.fsdp_checkpoint_manager import FSDPCheckpointManager
 
         if model is None:
             model = _FakeFSDPModel(has_lora=True)

@@ -19,11 +19,11 @@ from typing import Callable, Optional
 
 from omegaconf import DictConfig
 
-from verl.single_controller.base.decorator import Dispatch, register
-from verl.utils.device import (
+from RL.verl.verl.single_controller.base.decorator import Dispatch, register
+from RL.verl.verl.utils.device import (
     get_device_name,
 )
-from verl.workers.engine_workers import ActorRolloutRefWorker, DistillationConfig
+from RL.verl.verl.workers.engine_workers import ActorRolloutRefWorker, DistillationConfig
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -84,21 +84,21 @@ class DetachActorWorker(ActorRolloutRefWorker):
         # Callers should ensure the model is loaded back to GPU before calling
         # save_model_to_cpu / restore_model_from_cpu in offload scenarios.
         if strategy == "fsdp":
-            from verl.utils.fsdp_utils import (
+            from RL.verl.verl.utils.fsdp_utils import (
                 fsdp1_sharded_load_from_cpu,
                 fsdp1_sharded_save_to_cpu,
             )
 
             self._strategy_handlers = (fsdp1_sharded_save_to_cpu, fsdp1_sharded_load_from_cpu)
         elif strategy in ["fsdp2", "veomni"]:
-            from verl.utils.fsdp_utils import (
+            from RL.verl.verl.utils.fsdp_utils import (
                 fsdp2_sharded_load_from_cpu,
                 fsdp2_sharded_save_to_cpu,
             )
 
             self._strategy_handlers = (fsdp2_sharded_save_to_cpu, fsdp2_sharded_load_from_cpu)
         elif strategy == "megatron":
-            from verl.utils.megatron_utils import (
+            from RL.verl.verl.utils.megatron_utils import (
                 copy_megatron_model_to_cpu,
                 restore_megatron_model_from_cpu,
             )

@@ -23,8 +23,8 @@ import torch
 from accelerate import init_empty_weights
 from transformers import AutoConfig, AutoModelForCausalLM, AutoModelForTokenClassification, GenerationConfig
 
-from verl.utils import hf_processor, hf_tokenizer
-from verl.utils.transformers_compat import drop_tied_target_keys, get_auto_model_for_vision2seq
+from RL.verl.verl.utils import hf_processor, hf_tokenizer
+from RL.verl.verl.utils.transformers_compat import drop_tied_target_keys, get_auto_model_for_vision2seq
 
 from .output_validation import validate_hf_model_output
 

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from . import algorithm, config
+from ......verl.verl.trainer.config import algorithm, config
 from .algorithm import *  # noqa: F401
 from .config import *  # noqa: F401
 

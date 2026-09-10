@@ -23,7 +23,7 @@ from typing import Any, Optional
 
 from omegaconf import MISSING
 
-from verl.base_config import BaseConfig
+from RL.verl.verl.base_config import BaseConfig
 
 
 @dataclass

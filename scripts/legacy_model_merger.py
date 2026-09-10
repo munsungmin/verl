@@ -63,8 +63,8 @@ except ImportError:
 
 from tqdm import tqdm
 
-from verl.utils import hf_processor, hf_tokenizer
-from verl.utils.transformers_compat import get_auto_model_for_vision2seq
+from RL.verl.verl.utils import hf_processor, hf_tokenizer
+from RL.verl.verl.utils.transformers_compat import get_auto_model_for_vision2seq
 
 AutoModelForVision2Seq = get_auto_model_for_vision2seq()
 
@@ -440,7 +440,7 @@ class FSDPModelMerger(BaseModelMerger):
 
 class MegatronModelMerger(BaseModelMerger):
     def __init__(self, config: ModelMergerConfig):
-        from verl.utils.megatron_utils import \
+        from RL.verl.verl.utils.megatron_utils import \
             get_hf_config_and_tokenizer_checkpoint_path
 
         config.hf_model_config_path = get_hf_config_and_tokenizer_checkpoint_path(config.local_dir)
@@ -663,7 +663,7 @@ class MegatronModelMerger(BaseModelMerger):
         return state_dict
 
     def merge_and_save(self):
-        from verl.utils.megatron_utils import get_model_checkpoint_path
+        from RL.verl.verl.utils.megatron_utils import get_model_checkpoint_path
 
         model_ckpt_path = get_model_checkpoint_path(self.config.local_dir)
         sharded_dirs, tp_size, pp_size = self._check_megatron_checkpoint_path(model_ckpt_path)

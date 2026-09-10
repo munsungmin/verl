@@ -20,13 +20,13 @@ import torch
 from omegaconf import DictConfig
 from torch.nn import functional as F
 
-from verl.utils.config import omega_conf_to_dataclass
-from verl.workers.config import (
+from RL.verl.verl.utils.config import omega_conf_to_dataclass
+from RL.verl.verl.workers.config import (
     DistillationConfig,
     DistillationLossConfig,
     DistillationTeacherModelConfig,
 )
-from verl.workers.rollout.llm_server import LLMServerClient
+from RL.verl.verl.workers.rollout.llm_server import LLMServerClient
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "INFO"))

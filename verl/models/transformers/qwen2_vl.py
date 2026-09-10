@@ -28,9 +28,9 @@ from transformers.models.qwen2_vl.modeling_qwen2_vl import (
 )
 from transformers.utils import is_flash_attn_2_available, is_flash_attn_greater_or_equal_2_10
 
-from verl.utils.device import is_npu_available
-from verl.utils.transformers_compat import is_transformers_version_in_range, unpack_visual_output
-from verl.utils.ulysses import (
+from RL.verl.verl.utils.device import is_npu_available
+from RL.verl.verl.utils.transformers_compat import is_transformers_version_in_range, unpack_visual_output
+from RL.verl.verl.utils.ulysses import (
     gather_heads_scatter_seq,
     gather_seq_scatter_heads,
     get_ulysses_sequence_parallel_group,
@@ -495,7 +495,7 @@ def forward_with_torch_backend(
     shift_labels: Optional[torch.LongTensor] = None,
     **kwargs,
 ) -> tuple | Qwen2VLCausalLMOutputForPPO:
-    from verl.utils.experimental.torch_functional import FusedLinearForPPO
+    from RL.verl.verl.utils.experimental.torch_functional import FusedLinearForPPO
 
     outputs = qwen2_vl_forward(self, input_ids, **kwargs)
     hidden_states = outputs[0]
@@ -533,7 +533,7 @@ def forward_with_triton_backend(
     shift_labels: Optional[torch.LongTensor] = None,
     **kwargs,
 ) -> tuple | Qwen2VLCausalLMOutputForPPO:
-    from verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
+    from RL.verl.verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
 
     outputs = qwen2_vl_forward(self, input_ids, **kwargs)
     hidden_states = outputs[0]

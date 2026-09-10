@@ -26,10 +26,10 @@ from types import SimpleNamespace
 import pytest
 from omegaconf import OmegaConf
 
-import verl.trainer.ppo.v1.trainer_separate_async as trainer_module
-from verl.trainer.config import HybridRolloutSwitchConfig
-from verl.trainer.ppo.v1.trainer_separate_async import HybridEngineMode, PPOTrainerSeparateAsync
-from verl.utils.config import omega_conf_to_dataclass
+import RL.verl.verl.trainer.ppo.v1.trainer_separate_async as trainer_module
+from RL.verl.verl.trainer.config import HybridRolloutSwitchConfig
+from RL.verl.verl.trainer.ppo.v1.trainer_separate_async import HybridEngineMode, PPOTrainerSeparateAsync
+from RL.verl.verl.utils.config import omega_conf_to_dataclass
 
 
 class _RecordingCheckpointManager:

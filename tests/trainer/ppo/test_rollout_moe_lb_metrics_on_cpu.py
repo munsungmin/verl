@@ -17,8 +17,8 @@ from types import SimpleNamespace
 
 import torch
 
-import verl.trainer.ppo.metric_utils as metric_utils
-from verl.trainer.ppo.metric_utils import (
+import RL.verl.verl.trainer.ppo.metric_utils as metric_utils
+from RL.verl.verl.trainer.ppo.metric_utils import (
     RolloutMoELoadBalanceMetricsAccumulator,
     compute_moe_lb_metrics,
     compute_rollout_moe_load_balance_metrics,

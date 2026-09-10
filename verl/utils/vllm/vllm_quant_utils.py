@@ -47,14 +47,14 @@ try:
 except ImportError:
     FusedMoE = None
 
-from verl.utils.kernel.fp8_kernel import scaled_fp8_blockwise
-from verl.utils.vllm.vllm_fp4_utils import (
+from RL.verl.verl.utils.kernel.fp8_kernel import scaled_fp8_blockwise
+from RL.verl.verl.utils.vllm.vllm_fp4_utils import (
     is_deepseek_v4_model,
     iter_deepseek_v4_weights,
     process_mxfp4_moe_weights_after_loading,
     stage_mxfp4_moe_params_for_loading,
 )
-from verl.utils.vllm.vllm_fp8_utils import (
+from RL.verl.verl.utils.vllm.vllm_fp8_utils import (
     build_fp8_method_patchers,
     process_fp8_weights_after_loading,
     stage_fp8_params_for_loading,

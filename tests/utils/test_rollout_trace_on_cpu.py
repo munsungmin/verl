@@ -20,7 +20,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from pydantic import BaseModel
 
-from verl.utils.rollout_trace import RolloutTraceConfig, rollout_trace_attr, rollout_trace_op
+from RL.verl.verl.utils.rollout_trace import RolloutTraceConfig, rollout_trace_attr, rollout_trace_op
 
 
 @pytest.fixture(autouse=True)

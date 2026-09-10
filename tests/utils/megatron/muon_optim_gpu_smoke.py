@@ -50,8 +50,8 @@ def main():
     from megatron.core.optimizer.emerging_optimizers import TensorParallelMuon  # noqa: F401
     from megatron.core.transformer import TransformerConfig
 
-    from verl.utils.megatron.optimizer import get_megatron_optimizer, init_megatron_optim_config
-    from verl.workers.config.optimizer import McoreOptimizerConfig
+    from RL.verl.verl.utils.megatron.optimizer import get_megatron_optimizer, init_megatron_optim_config
+    from RL.verl.verl.workers.config.optimizer import McoreOptimizerConfig
 
     class Net(nn.Module):
         def __init__(self):

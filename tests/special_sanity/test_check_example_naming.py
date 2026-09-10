@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tests.special_sanity.check_example_naming import (
+from RL.verl.tests.special_sanity.check_example_naming import (
     ALLOWED_BACKENDS,
     FORBIDDEN_TOKENS,
     check_filename,

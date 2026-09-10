@@ -24,8 +24,8 @@ import pytest
 import torch
 import torch.distributed as dist
 
-from verl.models.transformers.qwen3_5 import qwen3_5_decoder_layer_forward, qwen3_5_gated_delta_net_forward
-from verl.utils.ulysses import set_ulysses_sequence_parallel_group
+from RL.verl.verl.models.transformers.qwen3_5 import qwen3_5_decoder_layer_forward, qwen3_5_gated_delta_net_forward
+from RL.verl.verl.utils.ulysses import set_ulysses_sequence_parallel_group
 
 pytest.importorskip("fla")
 qwen35_config_mod = pytest.importorskip("transformers.models.qwen3_5.configuration_qwen3_5")

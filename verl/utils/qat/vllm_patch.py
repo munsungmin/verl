@@ -30,7 +30,7 @@ from unittest.mock import patch
 import torch
 from torch.nn import Parameter
 
-from verl.utils.device import get_device_name
+from RL.verl.verl.utils.device import get_device_name
 
 logger = logging.getLogger(__name__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

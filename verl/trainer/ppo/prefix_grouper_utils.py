@@ -17,7 +17,7 @@ from __future__ import annotations
 import torch
 from prefix_grouper import PrefixGrouper
 
-from verl.utils.torch_functional import logprobs_from_logits
+from RL.verl.verl.utils.torch_functional import logprobs_from_logits
 
 
 def build_position_ids_for_prefix_grouper(prefix_grouper: PrefixGrouper) -> torch.Tensor:
@@ -171,7 +171,7 @@ def forward_micro_batch_with_prefix_grouper(
     Returns:
         tuple: (entropy, log_probs) where entropy may be None if not calculated.
     """
-    import verl.utils.torch_functional as verl_F
+    import RL.verl.verl.utils.torch_functional as verl_F
 
     entropy_fn = None
     if calculate_entropy:

@@ -113,8 +113,8 @@ def _spec_tensor(spec: dict) -> torch.Tensor:
 
 def _sparse_flush(old: dict, new: dict):
     """Encode changed elements exactly like the sender's indices wire."""
-    from verl.checkpoint_engine.delta_sync import DeltaParam, checksum
-    from verl.checkpoint_engine.delta_sync.sparse_gather import shard_delta_indices
+    from RL.verl.verl.checkpoint_engine.delta_sync import DeltaParam, checksum
+    from RL.verl.verl.checkpoint_engine.delta_sync.sparse_gather import shard_delta_indices
 
     params, idx_pieces, val_pieces = [], [], []
     pos_off = val_off = 0
@@ -150,7 +150,7 @@ def _sparse_flush(old: dict, new: dict):
 
 
 def _verify_flush(expected: dict):
-    from verl.checkpoint_engine.delta_sync import DeltaParam, checksum
+    from RL.verl.verl.checkpoint_engine.delta_sync import DeltaParam, checksum
 
     params, pieces, val_off = [], [], 0
     for name, t in expected.items():
@@ -183,7 +183,7 @@ def _verify_flush(expected: dict):
 def main():
     import sglang as sgl
 
-    from verl.workers.rollout.sglang_rollout.delta_loader import LOADER_FQN
+    from RL.verl.verl.workers.rollout.sglang_rollout.delta_loader import LOADER_FQN
 
     cfg_dir = _build_tiny_hf_dir()
     named = _load_named(cfg_dir)

@@ -39,12 +39,12 @@ from transformers import (
     PretrainedConfig,
 )
 
-from verl.models.mcore import hf_to_mcore_config
-from verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
-from verl.utils.distributed import set_numa_affinity
-from verl.utils.megatron.dist_checkpointing import load_dist_checkpointing
-from verl.utils.megatron_utils import get_model
-from verl.utils.tokenizer import hf_processor, hf_tokenizer
+from RL.verl.verl.models.mcore import hf_to_mcore_config
+from RL.verl.verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
+from RL.verl.verl.utils.distributed import set_numa_affinity
+from RL.verl.verl.utils.megatron.dist_checkpointing import load_dist_checkpointing
+from RL.verl.verl.utils.megatron_utils import get_model
+from RL.verl.verl.utils.tokenizer import hf_processor, hf_tokenizer
 
 from .base_model_merger import BaseModelMerger, ModelMergerConfig
 from .output_validation import validate_hf_model_output
@@ -244,7 +244,7 @@ class MegatronModelMerger(BaseModelMerger):
 
         # init megatron model
         def megatron_model_provider(pre_process, post_process):
-            from verl.models.mcore import init_mcore_model
+            from RL.verl.verl.models.mcore import init_mcore_model
 
             parallel_model = init_mcore_model(
                 tf_config,
@@ -493,7 +493,7 @@ class MegatronModelMerger(BaseModelMerger):
             validate_hf_model_output(self.config.target_dir)
 
     def merge_and_save(self):
-        from verl.utils.megatron_utils import get_model_dist_checkpoint_path
+        from RL.verl.verl.utils.megatron_utils import get_model_dist_checkpoint_path
 
         model_ckpt_path = get_model_dist_checkpoint_path(self.config.local_dir)
 

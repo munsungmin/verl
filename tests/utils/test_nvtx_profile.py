@@ -21,9 +21,9 @@ import unittest
 from contextlib import redirect_stdout
 from unittest.mock import MagicMock, patch
 
-from verl.utils import omega_conf_to_dataclass
-from verl.utils.profiler.config import NsightToolConfig, ProfilerConfig
-from verl.utils.profiler.profile import DistProfiler
+from RL.verl.verl.utils import omega_conf_to_dataclass
+from RL.verl.verl.utils.profiler.config import NsightToolConfig, ProfilerConfig
+from RL.verl.verl.utils.profiler.profile import DistProfiler
 
 
 class TestProfilerConfig(unittest.TestCase):
@@ -130,7 +130,7 @@ class TestProfilerConfig(unittest.TestCase):
         """Test that modifying frozen keys in ProfilerConfig raises exceptions."""
         from dataclasses import FrozenInstanceError
 
-        from verl.utils.profiler.config import ProfilerConfig
+        from RL.verl.verl.utils.profiler.config import ProfilerConfig
 
         # Create a new ProfilerConfig instance
         config = ProfilerConfig(all_ranks=False, ranks=[0])
@@ -281,7 +281,7 @@ class TestProfilerFinishHook(unittest.TestCase):
         return buffer.getvalue(), mock_get_platform
 
     def test_finish_hook_cmd_runs_on_default_ranks(self):
-        from verl.utils.profiler.nvtx_profile import RAY_NSIGHT_LOG_DIR
+        from RL.verl.verl.utils.profiler.nvtx_profile import RAY_NSIGHT_LOG_DIR
 
         config = ProfilerConfig(
             tool="nsys",
@@ -357,7 +357,7 @@ class TestNsightRelocateResults(unittest.TestCase):
     """Tests for moving Ray's fixed-location Nsight reports into save_path."""
 
     def _make_profiler(self):
-        from verl.utils.profiler.nvtx_profile import NsightSystemsProfiler
+        from RL.verl.verl.utils.profiler.nvtx_profile import NsightSystemsProfiler
 
         return NsightSystemsProfiler(
             rank=0,

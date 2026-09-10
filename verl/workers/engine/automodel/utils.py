@@ -17,7 +17,7 @@
 import torch
 import torch.distributed
 
-from verl.utils.device import get_device_id, get_torch_device
+from RL.verl.verl.utils.device import get_device_id, get_torch_device
 
 
 def get_dp_rank(device_mesh, include_cp=False):
@@ -82,7 +82,7 @@ def build_distributed_config_from_engine_config(engine_config, world_size):
     if strategy == "fsdp2":
         from torch.distributed.fsdp import MixedPrecisionPolicy
 
-        from verl.utils.torch_dtypes import PrecisionType
+        from RL.verl.verl.utils.torch_dtypes import PrecisionType
 
         mp_policy = MixedPrecisionPolicy(
             param_dtype=PrecisionType.to_dtype(engine_config.mp_param_dtype),
@@ -177,7 +177,7 @@ def build_automodel_model(model_config, engine_config, distributed_config, devic
 
     kwargs["attn_implementation"] = engine_config.attn_implementation
 
-    from verl.utils.torch_dtypes import PrecisionType
+    from RL.verl.verl.utils.torch_dtypes import PrecisionType
 
     kwargs["torch_dtype"] = PrecisionType.to_dtype(engine_config.model_dtype)
 

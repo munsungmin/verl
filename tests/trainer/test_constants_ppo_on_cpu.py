@@ -17,7 +17,7 @@ from unittest.mock import patch
 
 from omegaconf import OmegaConf
 
-from verl.trainer.constants_ppo import NVTX_INJECTION_ENV, get_ppo_ray_runtime_env
+from RL.verl.verl.trainer.constants_ppo import NVTX_INJECTION_ENV, get_ppo_ray_runtime_env
 
 _INHERITED = "/usr/local/cuda/lib64/libcupti.so"
 

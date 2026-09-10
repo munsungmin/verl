@@ -21,8 +21,8 @@ import torch
 from omegaconf import DictConfig
 from transformers import AutoTokenizer
 
-from verl import DataProto
-from verl.utils.ray_utils import get_event_loop
+from ext.verl.verl import DataProto
+from RL.verl.verl.utils.ray_utils import get_event_loop
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

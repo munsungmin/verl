@@ -46,7 +46,7 @@ from typing import Any, Optional
 import numpy as np
 import torch
 
-from verl.utils.device import get_device_name
+from RL.verl.verl.utils.device import get_device_name
 
 __all__ = ["as_torch_index", "group_mean_std"]
 

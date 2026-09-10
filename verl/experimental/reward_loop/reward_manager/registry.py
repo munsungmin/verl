@@ -14,7 +14,7 @@
 
 from typing import Callable
 
-from verl.experimental.reward_loop.reward_manager.base import RewardManagerBase
+from RL.verl.verl.experimental.reward_loop.reward_manager.base import RewardManagerBase
 
 __all__ = ["register", "get_reward_manager_cls"]
 

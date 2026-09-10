@@ -30,21 +30,21 @@ from veomni.models.checkpoint_tensor_loading import get_checkpoint_tensor_conver
 from veomni.optim import build_lr_scheduler, build_optimizer
 from veomni.utils.seqlen_pos_transform_utils import prepare_fa_kwargs_from_position_ids
 
-import verl.utils.torch_functional as verl_F
-from verl.trainer.config import CheckpointConfig
-from verl.utils import tensordict_utils as tu
-from verl.utils.checkpoint.fsdp_checkpoint_manager import FSDPCheckpointManager
-from verl.utils.device import get_device_id, get_device_name
-from verl.utils.fsdp_utils import fsdp_version
-from verl.utils.model import convert_weight_keys
-from verl.utils.profiler import log_gpu_memory_usage
-from verl.utils.ulysses import (
+import RL.verl.verl.utils.torch_functional as verl_F
+from RL.verl.verl.trainer.config import CheckpointConfig
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils.checkpoint.fsdp_checkpoint_manager import FSDPCheckpointManager
+from RL.verl.verl.utils.device import get_device_id, get_device_name
+from RL.verl.verl.utils.fsdp_utils import fsdp_version
+from RL.verl.verl.utils.model import convert_weight_keys
+from RL.verl.verl.utils.profiler import log_gpu_memory_usage
+from RL.verl.verl.utils.ulysses import (
     get_ulysses_sequence_parallel_group,
     set_ulysses_sequence_parallel_group,
     slice_input_tensor,
 )
-from verl.utils.veomni.router_replay import RouterReplayAction, VeOmniRouterReplay
-from verl.workers.config import HFModelConfig, VeOmniEngineConfig, VeOmniOptimizerConfig
+from RL.verl.verl.utils.veomni.router_replay import RouterReplayAction, VeOmniRouterReplay
+from RL.verl.verl.workers.config import HFModelConfig, VeOmniEngineConfig, VeOmniOptimizerConfig
 
 from ..base import BaseEngineCtx, EngineRegistry
 from ..fsdp.transformer_impl import FSDPEngine, FSDPEngineWithLMHead, FSDPEngineWithValueHead
@@ -871,7 +871,7 @@ class VeOmniEngineWithLMHead(VeOmniEngine, FSDPEngineWithLMHead):
                 # (1, total_nnz, K) so use slice_input_tensor directly —
                 # ulysses_pad_and_slice_inputs hardcodes 2D.
                 if self.use_ulysses_sp:
-                    from verl.utils.ulysses import slice_input_tensor
+                    from RL.verl.verl.utils.ulysses import slice_input_tensor
 
                     teacher_topk_ids = slice_input_tensor(teacher_topk_ids, dim=1, padding=True)
                     teacher_topk_log_probs = slice_input_tensor(teacher_topk_log_probs, dim=1, padding=True)

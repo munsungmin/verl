@@ -22,14 +22,14 @@ import hydra
 import ray
 from omegaconf import OmegaConf
 
-from verl.experimental.fully_async_policy.fully_async_rollouter import FullyAsyncRollouter
-from verl.experimental.fully_async_policy.fully_async_trainer import FullyAsyncTrainer
-from verl.experimental.fully_async_policy.message_queue import MessageQueue, MessageQueueClient
-from verl.experimental.reward_loop import migrate_legacy_reward_impl
-from verl.experimental.separation.utils import create_resource_pool_manager, create_role_worker_mapping
-from verl.trainer.ppo.utils import Role
-from verl.utils.device import auto_set_device
-from verl.utils.fs import copy_to_local
+from RL.verl.verl.experimental.fully_async_policy.fully_async_rollouter import FullyAsyncRollouter
+from RL.verl.verl.experimental.fully_async_policy.fully_async_trainer import FullyAsyncTrainer
+from RL.verl.verl.experimental.fully_async_policy.message_queue import MessageQueue, MessageQueueClient
+from RL.verl.verl.experimental.reward_loop import migrate_legacy_reward_impl
+from RL.verl.verl.experimental.separation.utils import create_resource_pool_manager, create_role_worker_mapping
+from RL.verl.verl.trainer.ppo.utils import Role
+from RL.verl.verl.utils.device import auto_set_device
+from RL.verl.verl.utils.fs import copy_to_local
 
 
 @ray.remote(num_cpus=1)
@@ -57,7 +57,7 @@ class FullyAsyncTaskRunner:
         local_path = copy_to_local(
             config.actor_rollout_ref.model.path, use_shm=config.actor_rollout_ref.model.get("use_shm", False)
         )
-        from verl.utils import hf_processor, hf_tokenizer
+        from RL.verl.verl.utils import hf_processor, hf_tokenizer
 
         trust_remote_code = config.data.get("trust_remote_code", False)
         tokenizer = hf_tokenizer(local_path, trust_remote_code=trust_remote_code)
@@ -221,7 +221,7 @@ class FullyAsyncTaskRunner:
 
 @hydra.main(config_path="config", config_name="fully_async_ppo_trainer", version_base=None)
 def main(config):
-    from verl.trainer.main_ppo import run_ppo
+    from RL.verl.verl.trainer.main_ppo import run_ppo
 
     # Ensure async training config exists
     if not hasattr(config, "async_training"):

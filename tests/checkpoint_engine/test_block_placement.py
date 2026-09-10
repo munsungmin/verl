@@ -26,7 +26,7 @@ import itertools
 import pytest
 import torch
 
-from verl.workers.engine.spec import BlockPlacement, translate_flat_indices
+from RL.verl.verl.workers.engine.spec import BlockPlacement, translate_flat_indices
 
 
 def _blocks_for_grid(full_shape, grid):
@@ -230,7 +230,7 @@ def test_explicit_place_never_reaches_derive():
     derive_dtensor_placement only accepts DTensor-declared specs."""
     import pytest
 
-    from verl.workers.engine.spec import ShardSpec, derive_dtensor_placement
+    from RL.verl.verl.workers.engine.spec import ShardSpec, derive_dtensor_placement
 
     block = BlockPlacement((2, 3), (4, 0), (8, 3))
     spec = ShardSpec(full_shape=(8, 3), place=block, gather_group=object())

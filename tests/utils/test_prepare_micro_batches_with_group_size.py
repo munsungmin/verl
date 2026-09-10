@@ -28,8 +28,8 @@ import pytest
 import torch
 from tensordict import TensorDict
 
-from verl.utils import tensordict_utils as tu
-from verl.workers.engine.utils import prepare_micro_batches
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.workers.engine.utils import prepare_micro_batches
 
 
 def _make_batch(seq_lens: list[int], force_group_size: int, max_token_len_per_gpu: int) -> TensorDict:

@@ -21,8 +21,8 @@ import pytest
 pytest.importorskip("ray")
 pytest.importorskip("vllm")
 
-from verl.trainer.ppo.ray_trainer import compute_spec_decode_metrics
-from verl.workers.rollout.vllm_rollout import vllm_async_server
+from RL.verl.verl.trainer.ppo.ray_trainer import compute_spec_decode_metrics
+from RL.verl.verl.workers.rollout.vllm_rollout import vllm_async_server
 
 
 class _FakeMtpEngine:

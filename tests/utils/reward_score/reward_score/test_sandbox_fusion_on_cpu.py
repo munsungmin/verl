@@ -20,7 +20,7 @@ from unittest.mock import patch
 import pytest
 
 # Import the function to be tested
-from verl.utils.reward_score.sandbox_fusion.utils import check_correctness
+from RL.verl.verl.utils.reward_score.sandbox_fusion.utils import check_correctness
 
 # Get SANDBOX_URL from environment variable
 SANDBOX_URL = os.environ.get("SANDBOX_FUSION_URL")
@@ -421,11 +421,11 @@ def _process_pool_worker_for_concurrency_test(
     # ---- START DEBUG PRINTS ----
     import os
 
-    import verl.utils.reward_score.sandbox_fusion.utils
+    import RL.verl.verl.utils.reward_score.sandbox_fusion.utils
 
     print(
         f"[Worker PID:{os.getpid()}] Original call_sandbox_api: "
-        f"{verl.utils.reward_score.sandbox_fusion.utils.call_sandbox_api}",
+        f"{RL.verl.verl.utils.reward_score.sandbox_fusion.utils.call_sandbox_api}",
         flush=True,
     )
     # ---- END DEBUG PRINTS ----
@@ -436,7 +436,7 @@ def _process_pool_worker_for_concurrency_test(
         # ---- START DEBUG PRINTS ----
         print(
             f"[Worker PID:{os.getpid()}] Patched call_sandbox_api: "
-            f"{verl.utils.reward_score.sandbox_fusion.utils.call_sandbox_api}",
+            f"{RL.verl.verl.utils.reward_score.sandbox_fusion.utils.call_sandbox_api}",
             flush=True,
         )
         print(f"[Worker PID:{os.getpid()}] Mock object: {mock_obj}", flush=True)

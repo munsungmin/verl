@@ -15,7 +15,7 @@ import os
 
 import pytest
 
-from verl.single_controller.base import Worker
+from RL.verl.verl.single_controller.base import Worker
 
 
 def test_get_set_dispatch_collect_cpu():

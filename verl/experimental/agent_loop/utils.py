@@ -15,7 +15,7 @@
 from typing import Any
 
 # Moved to verl.utils.import_utils; re-exported for compat.
-from verl.utils.import_utils import resolve_config_path  # noqa: F401
+from RL.verl.verl.utils.import_utils import resolve_config_path  # noqa: F401
 
 
 # tokenizer.apply_chat_template is not working properly for gpt-oss model.

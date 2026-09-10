@@ -17,10 +17,10 @@ from typing import Any, Optional
 
 from omegaconf import MISSING
 
-from verl.base_config import BaseConfig
-from verl.trainer.config import CheckpointConfig, RolloutCorrectionConfig
-from verl.utils.profiler.config import ProfilerConfig
-from verl.utils.qat import QATConfig
+from RL.verl.verl.base_config import BaseConfig
+from RL.verl.verl.trainer.config import CheckpointConfig, RolloutCorrectionConfig
+from RL.verl.verl.utils.profiler.config import ProfilerConfig
+from RL.verl.verl.utils.qat import QATConfig
 
 from .checkpoint import McoreCheckpointConfig
 from .engine import (

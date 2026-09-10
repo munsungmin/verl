@@ -19,8 +19,8 @@ import warnings
 from dataclasses import dataclass, field
 from typing import Any, Callable, Literal, Optional
 
-from verl.base_config import BaseConfig
-from verl.trainer.config import CheckpointConfig
+from RL.verl.verl.base_config import BaseConfig
+from RL.verl.verl.trainer.config import CheckpointConfig
 
 from ...utils.profiler import ProfilerConfig
 from .model import HFModelConfig

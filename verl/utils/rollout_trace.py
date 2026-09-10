@@ -22,7 +22,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from verl.utils.ray_utils import get_event_loop
+from RL.verl.verl.utils.ray_utils import get_event_loop
 
 _trace_enabled: ContextVar[bool] = ContextVar("_trace_enabled", default=True)
 _trace_attributes: ContextVar[dict | None] = ContextVar("_trace_attributes", default=None)

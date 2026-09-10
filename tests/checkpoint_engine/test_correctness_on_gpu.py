@@ -17,15 +17,15 @@ import pytest
 import ray
 import torch
 
-from tests.checkpoint_engine.test_utils import create_rollout_worker_group, create_trainer_worker_group
-from verl.checkpoint_engine import CheckpointEngineManager
-from verl.single_controller.ray.base import (
+from RL.verl.tests.checkpoint_engine.test_utils import create_rollout_worker_group, create_trainer_worker_group
+from RL.verl.verl.checkpoint_engine import CheckpointEngineManager
+from RL.verl.verl.single_controller.ray.base import (
     RayResourcePool,
     split_resource_pool,
 )
-from verl.utils.device import get_device_name
-from verl.utils.ray_utils import auto_await
-from verl.workers.config import CheckpointEngineConfig, HFModelConfig, RolloutConfig
+from RL.verl.verl.utils.device import get_device_name
+from RL.verl.verl.utils.ray_utils import auto_await
+from RL.verl.verl.workers.config import CheckpointEngineConfig, HFModelConfig, RolloutConfig
 
 _ngpus = torch.cuda.device_count()
 

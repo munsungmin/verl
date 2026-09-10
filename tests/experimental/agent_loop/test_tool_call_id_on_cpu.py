@@ -16,9 +16,9 @@ import unittest
 from types import SimpleNamespace
 from typing import Any
 
-from verl.experimental.agent_loop.tool_agent_loop import AgentState, ToolAgentLoop
-from verl.experimental.agent_loop.tool_parser import FunctionCall, KimiToolParser
-from verl.tools.schemas import OpenAIFunctionToolSchema, ToolResponse
+from RL.verl.verl.experimental.agent_loop.tool_agent_loop import AgentState, ToolAgentLoop
+from RL.verl.verl.experimental.agent_loop.tool_parser import FunctionCall, KimiToolParser
+from RL.verl.verl.tools.schemas import OpenAIFunctionToolSchema, ToolResponse
 
 
 class _FakeTokenizer:

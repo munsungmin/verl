@@ -33,9 +33,9 @@ import numpy as np
 import pytest
 import torch
 
-from verl.workers.rollout import llm_server
-from verl.workers.rollout.llm_server import FullyAsyncLLMServerClient
-from verl.workers.rollout.replica import TokenOutput
+from RL.verl.verl.workers.rollout import llm_server
+from RL.verl.verl.workers.rollout.llm_server import FullyAsyncLLMServerClient
+from RL.verl.verl.workers.rollout.replica import TokenOutput
 
 LAYERS, TOPK = 2, 4
 BACKENDS = ["vllm", "sglang_detokenized", "sglang_skip_tokenizer_init"]

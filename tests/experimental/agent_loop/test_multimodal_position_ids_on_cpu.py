@@ -14,7 +14,7 @@
 
 import torch
 
-from verl.experimental.agent_loop.agent_loop import AgentLoopWorker
+from RL.verl.verl.experimental.agent_loop.agent_loop import AgentLoopWorker
 
 
 def test_compute_position_ids_accepts_processor_rope_kwargs_hook():

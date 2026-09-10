@@ -27,7 +27,7 @@ import pytest
 import torch
 from transformers import Qwen3VLConfig, Qwen3VLForConditionalGeneration
 
-from verl.models.transformers.monkey_patch import apply_monkey_patch
+from RL.verl.verl.models.transformers.monkey_patch import apply_monkey_patch
 
 
 def create_tiny_qwen3_vl():

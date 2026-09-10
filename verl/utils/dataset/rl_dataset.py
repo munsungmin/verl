@@ -32,8 +32,8 @@ from PIL import Image
 from torch.utils.data import Dataset
 from transformers import PreTrainedTokenizer, ProcessorMixin
 
-from verl.utils.import_utils import load_extern_object
-from verl.utils.tokenizer import build_multimodal_processor_inputs, normalize_token_ids
+from RL.verl.verl.utils.import_utils import load_extern_object
+from RL.verl.verl.utils.tokenizer import build_multimodal_processor_inputs, normalize_token_ids
 
 logger = logging.getLogger(__name__)
 
@@ -127,7 +127,7 @@ class RLHFDataset(Dataset):
         self.tool_schemas = None
         if self.tool_config_path or self.function_tool_path:
             try:
-                from verl.tools.tool_registry import load_all_tools
+                from RL.verl.verl.tools.tool_registry import load_all_tools
 
                 tool_list = load_all_tools(
                     tool_config_path=self.tool_config_path,
@@ -160,7 +160,7 @@ class RLHFDataset(Dataset):
         self._read_files_and_tokenize()
 
     def _download(self, use_origin_parquet=False):
-        from verl.utils.fs import copy_to_local
+        from RL.verl.verl.utils.fs import copy_to_local
 
         data_files = self.data_files if not use_origin_parquet else self.original_data_files
         for i, parquet_file in enumerate(data_files):

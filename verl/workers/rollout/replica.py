@@ -23,10 +23,10 @@ from omegaconf import DictConfig
 from pydantic import BaseModel
 from ray.actor import ActorHandle
 
-from verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup, ResourcePoolManager
-from verl.utils.config import omega_conf_to_dataclass
-from verl.utils.device import get_device_name
-from verl.workers.config import HFModelConfig, RolloutConfig
+from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup, ResourcePoolManager
+from RL.verl.verl.utils.config import omega_conf_to_dataclass
+from RL.verl.verl.utils.device import get_device_name
+from RL.verl.verl.workers.config import HFModelConfig, RolloutConfig
 
 logger = logging.getLogger(__file__)
 
@@ -227,7 +227,7 @@ class RolloutReplica(ABC):
 
     def get_ray_class_with_init_args(self) -> RayClassWithInitArgs:
         """Get rollout worker actor class for colocated and standalone mode."""
-        from verl.checkpoint_engine.base import CheckpointEngineWorker
+        from RL.verl.verl.checkpoint_engine.base import CheckpointEngineWorker
 
         rollout_worker_actor_cls = ray.remote(CheckpointEngineWorker)
 
@@ -319,7 +319,7 @@ class RolloutReplicaRegistry:
 
 # Loader functions for built-in types
 def _load_vllm():
-    from verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMReplica
+    from RL.verl.verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMReplica
 
     return vLLMReplica
 
@@ -362,14 +362,14 @@ def _load_sglang():
         sys.modules["vllm.model_executor.layers"] = mock_layers
         sys.modules["vllm.model_executor.layers.activation"] = mock_activation
 
-    from verl.workers.rollout.sglang_rollout.async_sglang_server import SGLangReplica
+    from RL.verl.verl.workers.rollout.sglang_rollout.async_sglang_server import SGLangReplica
 
     del os.environ["SGLANG_USE_CPU_ENGINE"]
     return SGLangReplica
 
 
 def _load_trtllm():
-    from verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
+    from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
 
     return TRTLLMReplica
 
@@ -395,11 +395,11 @@ def get_rollout_replica_class(rollout: str, disaggregation_enabled: bool = False
             # _load_sglang side-effect: installs vllm mocks needed by SGLangPDReplica's
             # transitive imports. Cheap if already installed.
             RolloutReplicaRegistry.get("sglang")
-            from verl.workers.rollout.sglang_rollout.sglang_pd_replica import SGLangPDReplica
+            from RL.verl.verl.workers.rollout.sglang_rollout.sglang_pd_replica import SGLangPDReplica
 
             return SGLangPDReplica
         if rollout == "vllm":
-            from verl.workers.rollout.vllm_rollout.vllm_pd_replica import vLLMPDReplica
+            from RL.verl.verl.workers.rollout.vllm_rollout.vllm_pd_replica import vLLMPDReplica
 
             return vLLMPDReplica
         raise NotImplementedError(

@@ -86,7 +86,7 @@ def forward_with_torch_backend(
     shift_labels: Optional[torch.LongTensor] = None,
     **loss_kwargs,
 ) -> tuple | CausalLMOutputForPPO:
-    from verl.utils.experimental.torch_functional import FusedLinearForPPO
+    from RL.verl.verl.utils.experimental.torch_functional import FusedLinearForPPO
 
     outputs = forward_base_model(
         self,
@@ -154,7 +154,7 @@ def forward_with_triton_backend(
     shift_labels: Optional[torch.LongTensor] = None,
     **loss_kwargs,
 ) -> tuple | CausalLMOutputForPPO:
-    from verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
+    from RL.verl.verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
 
     outputs = forward_base_model(
         self,

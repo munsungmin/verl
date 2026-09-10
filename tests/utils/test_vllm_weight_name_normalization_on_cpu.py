@@ -654,7 +654,7 @@ def test_update_weights_from_ipc_accumulates_lora_across_buckets(monkeypatch):
     # module, whose package __init__ hard-requires vllm. vllm isn't in the `cpu` extra,
     # so this is skipped under cpu_unit_tests and run in vllm.yml (the vllm venv).
     pytest.importorskip("vllm")
-    import verl.workers.rollout.vllm_rollout.bucketed_weight_transfer as bwt
+    import RL.verl.verl.workers.rollout.vllm_rollout.bucketed_weight_transfer as bwt
 
     monkeypatch.setattr(
         bwt,
@@ -698,7 +698,7 @@ def test_update_weights_from_ipc_standard_loads_per_bucket(monkeypatch):
     # See the note above: needs the real bucketed_weight_transfer (vllm-backed), which
     # the `cpu` extra can't provide, so it is skipped here and run in vllm.yml.
     pytest.importorskip("vllm")
-    import verl.workers.rollout.vllm_rollout.bucketed_weight_transfer as bwt
+    import RL.verl.verl.workers.rollout.vllm_rollout.bucketed_weight_transfer as bwt
 
     monkeypatch.setattr(
         bwt,

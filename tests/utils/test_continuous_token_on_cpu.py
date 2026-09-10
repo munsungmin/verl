@@ -16,7 +16,7 @@ import logging
 
 import pytest
 
-from verl.utils.tokenizer.continuous_token import (
+from RL.verl.verl.utils.tokenizer.continuous_token import (
     ContinuousTokenBuilder,
     DeepSeekContinuousTokenBuilder,
     DeepSeekVL2ContinuousTokenBuilder,
@@ -30,7 +30,7 @@ from verl.utils.tokenizer.continuous_token import (
     QwenContinuousTokenBuilder,
     QwenVLContinuousTokenBuilder,
 )
-from verl.utils.tokenizer.continuous_token_wiring import (
+from RL.verl.verl.utils.tokenizer.continuous_token_wiring import (
     CONTINUOUS_TOKEN_BUILDER_FAMILIES,
     ContinuousTokenModelFamily,
     create_continuous_token_builder,
@@ -39,7 +39,7 @@ from verl.utils.tokenizer.continuous_token_wiring import (
     list_continuous_token_builder_families,
     resolve_continuous_token_model_family,
 )
-from verl.utils.tokenizer.deepseek import DeepSeekV4ContinuousTokenBuilder
+from RL.verl.verl.utils.tokenizer.deepseek import DeepSeekV4ContinuousTokenBuilder
 
 
 class _DummyTokenizer:
@@ -1818,7 +1818,7 @@ class TestMultimodalMergeResultWithExistingSubclasses:
 
     def test_qwen_merge_still_works(self):
         """QwenContinuousTokenBuilder merge should produce token-only MergeResult."""
-        from verl.utils.tokenizer.continuous_token import QwenContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token import QwenContinuousTokenBuilder
 
         class MockQwenTokenizer:
             def encode(self, text, add_special_tokens=False):
@@ -1848,7 +1848,7 @@ class TestQwenVLContinuousTokenBuilder:
     """Test QwenVL vision token handling."""
 
     def setup_method(self):
-        from verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
 
         class MockQwenVLTokenizer:
             def encode(self, text, add_special_tokens=False):
@@ -1895,7 +1895,7 @@ class TestWiringVLFactory:
 
     def test_vl_family_requires_processor(self):
         """VL families should raise if processor not provided."""
-        from verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
+        from RL.verl.verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
 
         class MockTokenizer:
             name_or_path = "Qwen/Qwen2.5-VL-7B-Instruct"
@@ -1922,8 +1922,8 @@ class TestWiringVLFactory:
 
     def test_vl_family_succeeds_with_processor(self):
         """VL families should instantiate correctly with processor provided."""
-        from verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
-        from verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
+        from RL.verl.verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
 
         class MockTokenizer:
             name_or_path = "Qwen/Qwen2.5-VL-7B-Instruct"
@@ -1958,8 +1958,8 @@ class TestWiringVLFactory:
 
     def test_vl_family_inferred_from_model_type_with_processor(self):
         """A registered VL model_type resolves to its processor-backed builder."""
-        from verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
-        from verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
+        from RL.verl.verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
 
         class MockTokenizer:
             name_or_path = "Qwen/Qwen2.5-VL-7B-Instruct"
@@ -1982,8 +1982,8 @@ class TestWiringVLFactory:
 
     def test_unknown_model_with_processor_falls_back_to_default_vl(self, caplog):
         """Unrecognized model + multimodal processor -> default VL builder, with a warning."""
-        from verl.utils.tokenizer.continuous_token import VLContinuousTokenBuilder
-        from verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
+        from RL.verl.verl.utils.tokenizer.continuous_token import VLContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
 
         class MockTokenizer:
             name_or_path = "acme/foobar-7b-instruct"
@@ -2004,8 +2004,8 @@ class TestWiringVLFactory:
 
     def test_gemma4_unified_with_processor_upgrades_to_vl(self):
         """Gemma4 (unified checkpoint, no vl marker) + processor -> Gemma4 VL builder."""
-        from verl.utils.tokenizer.continuous_token import Gemma4VLContinuousTokenBuilder
-        from verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
+        from RL.verl.verl.utils.tokenizer.continuous_token import Gemma4VLContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
 
         class MockTokenizer:
             name_or_path = "google/gemma-4-27b-it"
@@ -2030,8 +2030,8 @@ class TestWiringVLFactory:
 
     def test_qwen35_unified_with_processor_upgrades_to_vl(self):
         """Qwen3.5 (unified checkpoint, no vl marker) + processor -> Qwen VL builder."""
-        from verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
-        from verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
+        from RL.verl.verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
 
         class MockTokenizer:
             name_or_path = "Qwen/Qwen3.5-35B-A3B"
@@ -2061,7 +2061,7 @@ class TestWiringVLFactory:
 
     def test_text_specific_family_with_processor_raises(self):
         """A recognized text-only family paired with a multimodal processor is a misconfiguration."""
-        from verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
+        from RL.verl.verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
 
         class MockTokenizer:
             name_or_path = "Qwen/Qwen3-8B"
@@ -2202,7 +2202,7 @@ class TestQwenVLBuildInitialTokens:
     """Integration test for QwenVL build_initial_tokens with images."""
 
     def setup_method(self):
-        from verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
 
         self.tokenizer = _MockQwenVLTokenizer()
         self.processor = _MockQwenVLProcessor()
@@ -2235,7 +2235,7 @@ class TestQwenVLMergeContextTokens:
     """Integration test for QwenVL merge_context_tokens with images in appended messages."""
 
     def setup_method(self):
-        from verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
 
         self.tokenizer = _MockQwenVLTokenizer()
         self.processor = _MockQwenVLProcessor()
@@ -2285,7 +2285,7 @@ class TestQwenVLMergeContextTokens:
                     result["input_ids"][0][0] = 9999
                 return result
 
-        from verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
+        from RL.verl.verl.utils.tokenizer.continuous_token import QwenVLContinuousTokenBuilder
 
         builder = QwenVLContinuousTokenBuilder(self.tokenizer, BadPrefixProcessor())
         previous = [{"role": "user", "content": "Hi"}]
@@ -2323,7 +2323,7 @@ def test_other_vl_builders_reject_non_prefix_processor_output(builder_name):
                 result["input_ids"][0][0] = 9999
             return result
 
-    import verl.utils.tokenizer.continuous_token as continuous_token
+    import RL.verl.verl.utils.tokenizer.continuous_token as continuous_token
 
     builder_cls = getattr(continuous_token, builder_name)
     builder = builder_cls(_MockQwenVLTokenizer(), BadPrefixProcessor())

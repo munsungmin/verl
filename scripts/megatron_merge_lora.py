@@ -31,9 +31,9 @@ import ray
 import torch
 from omegaconf import OmegaConf
 
-from verl.single_controller.base.decorator import Dispatch, register
-from verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
-from verl.workers.engine_workers import ActorRolloutRefWorker
+from RL.verl.verl.single_controller.base.decorator import Dispatch, register
+from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
+from RL.verl.verl.workers.engine_workers import ActorRolloutRefWorker
 
 os.environ["NCCL_DEBUG"] = "WARN"
 os.environ["TOKENIZERS_PARALLELISM"] = "true"

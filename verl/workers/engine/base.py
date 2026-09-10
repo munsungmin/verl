@@ -23,8 +23,8 @@ from typing import Any, Callable, ContextManager, Generator, Optional
 import torch
 from tensordict import TensorDict
 
-from verl.utils.device import get_device_name, get_vendor
-from verl.utils.tensordict_utils import maybe_fix_3d_position_ids
+from RL.verl.verl.utils.device import get_device_name, get_vendor
+from RL.verl.verl.utils.tensordict_utils import maybe_fix_3d_position_ids
 
 
 class BaseEngine:
@@ -197,8 +197,8 @@ class BaseEngine:
         Concrete here: it only consumes :meth:`get_per_tensor_param_shard`, so any
         engine that implements the shard export gets it for free.
         """
-        from verl.utils.device import is_cuda_available
-        from verl.workers.engine.utils import prime_delta_snapshots
+        from RL.verl.verl.utils.device import is_cuda_available
+        from RL.verl.verl.workers.engine.utils import prime_delta_snapshots
 
         self._delta_shard_snap = getattr(self, "_delta_shard_snap", {})
         gen, _ = self.get_per_tensor_param_shard()

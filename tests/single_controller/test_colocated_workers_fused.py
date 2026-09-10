@@ -14,16 +14,16 @@
 
 import ray
 
-from verl import DataProto
-from verl.single_controller.base import Worker
-from verl.single_controller.base.decorator import Dispatch, register
-from verl.single_controller.ray.base import (
+from ext.verl.verl import DataProto
+from RL.verl.verl.single_controller.base import Worker
+from RL.verl.verl.single_controller.base.decorator import Dispatch, register
+from RL.verl.verl.single_controller.ray.base import (
     RayClassWithInitArgs,
     RayResourcePool,
     RayWorkerGroup,
     create_colocated_worker_cls_fused,
 )
-from verl.utils.device import get_device_name
+from RL.verl.verl.utils.device import get_device_name
 
 
 @ray.remote

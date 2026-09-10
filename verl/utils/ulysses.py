@@ -26,7 +26,7 @@ from torch.distributed import ProcessGroup
 from torch.distributed.device_mesh import DeviceMesh
 
 if TYPE_CHECKING:
-    from verl import DataProto
+    from ext.verl.verl import DataProto
 
 _ULYSSES_SEQUENCE_PARALLEL_GROUP = None
 
@@ -387,7 +387,7 @@ class FSDPUlyssesShardingManager(BaseShardingManager):
         In Ulysses, we need to make sure the same data is used across a SP group.
         """
         if self.device_mesh is not None:
-            from verl.protocol import all_gather_data_proto
+            from RL.verl.verl.protocol import all_gather_data_proto
 
             group = self.device_mesh["sp"].get_group()
             all_gather_data_proto(data=data, process_group=group)

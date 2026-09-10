@@ -19,10 +19,10 @@ from typing import Any, Optional
 
 import torch
 
-from verl import DataProto
-from verl.utils.reward_score import default_compute_score
-from verl.workers.reward_manager import register
-from verl.workers.reward_manager.abstract import AbstractRewardManager
+from ext.verl.verl import DataProto
+from RL.verl.verl.utils.reward_score import default_compute_score
+from RL.verl.verl.workers.reward_manager import register
+from RL.verl.verl.workers.reward_manager.abstract import AbstractRewardManager
 
 
 @contextmanager

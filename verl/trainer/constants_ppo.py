@@ -19,7 +19,7 @@ import os
 import torch
 from ray._private.runtime_env.constants import RAY_JOB_CONFIG_JSON_ENV_VAR
 
-from verl.utils.device import get_device_capability
+from RL.verl.verl.utils.device import get_device_capability
 
 logger = logging.getLogger(__name__)
 

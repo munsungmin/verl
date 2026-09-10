@@ -16,9 +16,9 @@ import asyncio
 import logging
 import os
 
-from verl.single_controller.ray.base import RayResourcePool, split_resource_pool
-from verl.workers.config import HFModelConfig, RewardModelConfig
-from verl.workers.rollout.replica import get_rollout_replica_class
+from RL.verl.verl.single_controller.ray.base import RayResourcePool, split_resource_pool
+from RL.verl.verl.workers.config import HFModelConfig, RewardModelConfig
+from RL.verl.verl.workers.rollout.replica import get_rollout_replica_class
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

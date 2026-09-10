@@ -19,8 +19,8 @@ import torch
 import torch.distributed as dist
 import torch.multiprocessing as mp
 
-from verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
-from verl.utils.torch_functional import (
+from RL.verl.verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
+from RL.verl.verl.utils.torch_functional import (
     calculate_sum_pi_squared_from_logits,
     distributed_masked_mean,
     distributed_mean_max_min_std,

@@ -18,12 +18,12 @@ from typing import Any, Callable, Optional
 import torch
 from tensordict import TensorDict
 
-from verl.base_config import BaseConfig
-from verl.trainer.ppo.core_algos import agg_loss, get_policy_loss_fn, kl_penalty
-from verl.utils.metric import AggregationType, Metric
-from verl.workers.config import ActorConfig, DistillationConfig, DistillationLossConfig
-from verl.workers.utils.losses import ppo_loss
-from verl.workers.utils.padding import no_padding_2_padding
+from RL.verl.verl.base_config import BaseConfig
+from RL.verl.verl.trainer.ppo.core_algos import agg_loss, get_policy_loss_fn, kl_penalty
+from RL.verl.verl.utils.metric import AggregationType, Metric
+from RL.verl.verl.workers.config import ActorConfig, DistillationConfig, DistillationLossConfig
+from RL.verl.verl.workers.utils.losses import ppo_loss
+from RL.verl.verl.workers.utils.padding import no_padding_2_padding
 
 DistillationLossFn = Callable[
     [
@@ -137,11 +137,11 @@ def compute_topk_loss(
     match config.strategy:
         # VeOmni uses FSDP2 internally, so its loss computation is identical to FSDP.
         case "fsdp" | "veomni":
-            import verl.trainer.distillation.fsdp.losses as fsdp_losses
+            import RL.verl.verl.trainer.distillation.fsdp.losses as fsdp_losses
 
             distillation_loss_fn = fsdp_losses.compute_forward_kl_topk
         case "megatron":
-            import verl.trainer.distillation.megatron.losses as megatron_losses
+            import RL.verl.verl.trainer.distillation.megatron.losses as megatron_losses
 
             distillation_loss_fn = megatron_losses.compute_forward_kl_topk
         case _:

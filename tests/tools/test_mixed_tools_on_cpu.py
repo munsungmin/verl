@@ -27,15 +27,15 @@ from pathlib import Path
 
 import pytest
 
-from tests.tools._stub_search_tools import StubCrawlTool, StubSearchTool
-from verl.tools import function_tool as function_tool_mod
-from verl.tools.base_tool import BaseTool
-from verl.tools.function_tool import (
+from RL.verl.tests.tools._stub_search_tools import StubCrawlTool, StubSearchTool
+from RL.verl.verl.tools import function_tool as function_tool_mod
+from RL.verl.verl.tools.base_tool import BaseTool
+from RL.verl.verl.tools.function_tool import (
     FUNCTION_TOOL_REGISTRY,
     FunctionTool,
     normalize_function_tool_return,
 )
-from verl.tools.tool_registry import load_all_tools
+from RL.verl.verl.tools.tool_registry import load_all_tools
 
 
 @pytest.fixture(autouse=True)
@@ -316,7 +316,7 @@ def test_dataset_loader_sees_function_tools(native_yaml_path, function_tool_py_p
     prompt-length filtering and rollout disagree."""
     from omegaconf import OmegaConf
 
-    from verl.utils.dataset.rl_dataset import RLHFDataset
+    from RL.verl.verl.utils.dataset.rl_dataset import RLHFDataset
 
     cfg = OmegaConf.create(
         {

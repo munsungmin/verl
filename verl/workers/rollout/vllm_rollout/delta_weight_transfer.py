@@ -29,7 +29,7 @@ from typing import TYPE_CHECKING, Any
 import torch
 import vllm
 
-from verl.utils.device import get_device_name, is_cuda_available
+from RL.verl.verl.utils.device import get_device_name, is_cuda_available
 
 try:
     from vllm.config.weight_transfer import WeightTransferConfig
@@ -137,7 +137,7 @@ def decode_delta_payload(
 ) -> tuple[str, list[CheckpointWeightPatch]]:
     """Validate and decode one DeltaFlush into vLLM checkpoint patches."""
 
-    from verl.checkpoint_engine.delta_sync.encode import checksum
+    from RL.verl.verl.checkpoint_engine.delta_sync.encode import checksum
 
     CheckpointWeightPatch, _ = _checkpoint_patch_api()
     tensors = dict(named_tensors)
@@ -241,7 +241,7 @@ class VerlDeltaIPCWeightTransferEngine(WeightTransferEngine):
         self._session_encoding = None
 
     def _receive_payload(self, *, zmq_handle: str) -> list[tuple[str, torch.Tensor]]:
-        from verl.workers.rollout.vllm_rollout.bucketed_weight_transfer import (
+        from RL.verl.verl.workers.rollout.vllm_rollout.bucketed_weight_transfer import (
             BucketedWeightReceiver,
         )
 

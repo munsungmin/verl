@@ -23,7 +23,7 @@ from dataclasses import dataclass, field
 from typing import Any
 from unittest.mock import MagicMock
 
-from verl.tools.schemas import ToolResponse
+from RL.verl.verl.tools.schemas import ToolResponse
 
 
 @dataclass
@@ -81,7 +81,7 @@ def _make_tool_agent_loop(
     tool_response_truncate_side: str = "left",
 ):
     """Create a minimal ToolAgentLoop instance with only the fields _call_tool needs."""
-    from verl.experimental.agent_loop.tool_agent_loop import ToolAgentLoop
+    from RL.verl.verl.experimental.agent_loop.tool_agent_loop import ToolAgentLoop
 
     mock = MagicMock(spec=ToolAgentLoop)
     mock.tools = tools

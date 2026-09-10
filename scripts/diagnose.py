@@ -102,7 +102,7 @@ def check_verl():
     print("----------verl Info-----------")
     try:
         sys.path.insert(0, os.getcwd())
-        import verl
+        import ext.verl.verl as verl
 
         print("Version      :", verl.__version__)
         verl_dir = os.path.dirname(verl.__file__)

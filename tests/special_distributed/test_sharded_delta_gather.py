@@ -22,11 +22,11 @@ from torch.distributed.device_mesh import init_device_mesh
 from torch.distributed.tensor import Replicate, Shard, distribute_tensor
 from torch.distributed.tensor.placement_types import _StridedShard
 
-from verl.checkpoint_engine.delta_sync.sparse_gather import (
+from RL.verl.verl.checkpoint_engine.delta_sync.sparse_gather import (
     gather_slot_entries_to_rank0,
     shard_delta_indices,
 )
-from verl.workers.engine.spec import ShardSpec, derive_dtensor_placement, translate_flat_indices
+from RL.verl.verl.workers.engine.spec import ShardSpec, derive_dtensor_placement, translate_flat_indices
 
 
 def _run_case(shape, placements, mesh, dev, rank, si):

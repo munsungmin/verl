@@ -19,9 +19,9 @@ import pytest
 import torch
 from tensordict import TensorDict
 
-from verl.utils import tensordict_utils as tu
-from verl.workers.engine.fsdp.transformer_impl import FSDPEngine
-from verl.workers.engine_workers_tinker import TinkerTrainingWorker
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.workers.engine.fsdp.transformer_impl import FSDPEngine
+from RL.verl.verl.workers.engine_workers_tinker import TinkerTrainingWorker
 
 
 def test_tinker_forward_backward_requests_model_output():

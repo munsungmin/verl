@@ -17,11 +17,11 @@ In client, we can get the server handler and send RPC request
 
 import ray
 import torch
-from server import Trainer
+from RL.verl.tests.single_controller.detached_worker.server import Trainer
 from tensordict import TensorDict
 
-from verl import DataProto
-from verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
+from ext.verl.verl import DataProto
+from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
 
 
 def compute_position_id_with_mask(mask):

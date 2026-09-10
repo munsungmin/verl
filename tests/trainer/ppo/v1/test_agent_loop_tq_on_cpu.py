@@ -14,7 +14,7 @@
 
 import asyncio
 
-from verl.trainer.ppo.v1.agent_loop_tq import _settle_session_tasks
+from RL.verl.verl.trainer.ppo.v1.agent_loop_tq import _settle_session_tasks
 
 
 def test_settle_session_tasks_waits_for_siblings_after_failure():

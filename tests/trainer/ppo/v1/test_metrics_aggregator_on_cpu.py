@@ -25,8 +25,8 @@ import math
 import pytest
 import torch
 
-from verl.trainer.ppo.v1.replay_buffer import DAPO_FILTERED_REWARD_COUNTS_KEY
-from verl.trainer.ppo.v1.utils import MetricsAggregator
+from RL.verl.verl.trainer.ppo.v1.replay_buffer import DAPO_FILTERED_REWARD_COUNTS_KEY
+from RL.verl.verl.trainer.ppo.v1.utils import MetricsAggregator
 
 
 def test_empty_aggregator_returns_empty():

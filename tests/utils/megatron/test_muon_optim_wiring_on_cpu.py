@@ -96,7 +96,7 @@ _ALL_MUON_FIELDS = (
 
 @pytest.fixture
 def muon_config():
-    from verl.workers.config.optimizer import McoreOptimizerConfig
+    from RL.verl.verl.workers.config.optimizer import McoreOptimizerConfig
 
     return McoreOptimizerConfig(
         lr=1e-3,
@@ -132,7 +132,7 @@ def test_only_supported_muon_fields_forwarded(muon_config):
 
 
 def test_adam_path_does_not_forward_muon(muon_config):
-    from verl.workers.config.optimizer import McoreOptimizerConfig
+    from RL.verl.verl.workers.config.optimizer import McoreOptimizerConfig
 
     mod = _install_stub_megatron(_ALL_MUON_FIELDS)
     adam_config = McoreOptimizerConfig(lr=1e-3, optimizer="adam", muon_momentum=0.42)

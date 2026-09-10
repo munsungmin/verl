@@ -19,15 +19,15 @@ from typing import Any, AsyncGenerator, Generator
 import ray
 import torch
 
-from verl.single_controller.base import Worker
-from verl.single_controller.base.decorator import Dispatch, register
-from verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
-from verl.utils.distributed import initialize_global_process_group_ray
-from verl.utils.import_utils import import_external_libs
-from verl.utils.ray_utils import auto_await
-from verl.workers.config import CheckpointEngineConfig, HFModelConfig, RolloutConfig
-from verl.workers.rollout import BaseRollout, RolloutReplica, get_rollout_class
-from verl.workers.rollout.utils import ensure_async_iterator
+from RL.verl.verl.single_controller.base import Worker
+from RL.verl.verl.single_controller.base.decorator import Dispatch, register
+from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
+from RL.verl.verl.utils.distributed import initialize_global_process_group_ray
+from RL.verl.verl.utils.import_utils import import_external_libs
+from RL.verl.verl.utils.ray_utils import auto_await
+from RL.verl.verl.workers.config import CheckpointEngineConfig, HFModelConfig, RolloutConfig
+from RL.verl.verl.workers.rollout import BaseRollout, RolloutReplica, get_rollout_class
+from RL.verl.verl.workers.rollout.utils import ensure_async_iterator
 
 
 @dataclass

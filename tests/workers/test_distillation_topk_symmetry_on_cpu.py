@@ -41,11 +41,11 @@ import pytest
 import torch
 from tensordict import TensorDict
 
-from verl.trainer.distillation.fsdp.losses import compute_forward_kl_topk as compute_fsdp_forward_kl_topk
-from verl.trainer.distillation.losses import compute_forward_kl_topk as collect_forward_kl_topk_metrics
-from verl.utils import tensordict_utils as tu
-from verl.utils.dataset.dataset_utils import DatasetPadMode
-from verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead
+from RL.verl.verl.trainer.distillation.fsdp.losses import compute_forward_kl_topk as compute_fsdp_forward_kl_topk
+from RL.verl.verl.trainer.distillation.losses import compute_forward_kl_topk as collect_forward_kl_topk_metrics
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode
+from RL.verl.verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead
 
 _VOCAB_SIZE = 8
 _DISTILLATION_KEYS = ("distillation_losses", "student_mass", "overlap_count", "overlap_token_advantage")

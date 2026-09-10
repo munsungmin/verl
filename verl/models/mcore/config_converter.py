@@ -24,9 +24,9 @@ import torch
 import torch.nn.functional as F
 from megatron.core import parallel_state as mpu
 from megatron.core.transformer import MLATransformerConfig, TransformerConfig
-from transformers import PretrainedConfig
+from RL.verl.verl.models.transformers import PretrainedConfig
 
-from verl.utils.megatron_utils import get_hf_rope_theta
+from RL.verl.verl.utils.megatron_utils import get_hf_rope_theta
 
 T = TypeVar("T", bound=TransformerConfig)
 

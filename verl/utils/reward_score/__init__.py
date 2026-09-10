@@ -13,7 +13,7 @@
 # limitations under the License.
 # from . import gsm8k, math, prime_math, prime_code
 
-from verl.utils.import_utils import deprecated
+from RL.verl.verl.utils.import_utils import deprecated
 
 
 def default_compute_score(
@@ -42,11 +42,11 @@ def default_compute_score(
         NotImplementedError: If the reward function is not implemented for the given data source.
     """
     if data_source == "openai/gsm8k":
-        from . import gsm8k
+        from ......verl.verl.utils.reward_score import gsm8k
 
         res = gsm8k.compute_score(solution_str, ground_truth)
     elif data_source in ["lighteval/MATH", "DigitalLearningGmbH/MATH-lighteval", "HuggingFaceH4/MATH-500"]:
-        from . import math_reward
+        from ......verl.verl.utils.reward_score import math_reward
 
         res = math_reward.compute_score(solution_str, ground_truth)
         # [Optional] Math-Verify Integration
@@ -57,7 +57,7 @@ def default_compute_score(
         # from . import math_verify
         # res = math_verify.compute_score(solution_str, ground_truth)
     elif data_source in ["math_dapo", "math", "math_dapo_reasoning"] or data_source.startswith("aime"):
-        from . import math_dapo
+        from ......verl.verl.utils.reward_score import math_dapo
 
         res = math_dapo.compute_score(solution_str, ground_truth)
     elif data_source in [
@@ -68,13 +68,13 @@ def default_compute_score(
         "numina_cn_k12",
         "numina_olympiads",
     ]:
-        from . import prime_math
+        from ......verl.verl.utils.reward_score import prime_math
 
         res = prime_math.compute_score(solution_str, ground_truth)
     elif data_source in ["codecontests", "apps", "codeforces", "taco"]:
         # Use the passed sandbox_fusion_url if available
         if sandbox_fusion_url:
-            from . import sandbox_fusion
+            from ......verl.verl.utils.reward_score import sandbox_fusion
 
             # Pass the URL directly, ground_truth likely contains test cases here
             res = sandbox_fusion.compute_score(
@@ -82,12 +82,12 @@ def default_compute_score(
             )
         else:
             # If no sandbox URL is provided, fall back to prime_code or raise error
-            from . import prime_code
+            from ......verl.verl.utils.reward_score import prime_code
 
             # Assuming prime_code doesn't need the URL
             res = prime_code.compute_score(solution_str, ground_truth, continuous=True)
     elif data_source in ["hiyouga/geometry3k"]:
-        from . import geo3k
+        from ......verl.verl.utils.reward_score import geo3k
 
         res = geo3k.compute_score(solution_str, ground_truth)
     elif data_source in [
@@ -99,7 +99,7 @@ def default_compute_score(
         "searchR1_musique",
         "searchR1_bamboogle",
     ]:
-        from . import search_r1_like_qa_em
+        from ......verl.verl.utils.reward_score import search_r1_like_qa_em
 
         res = search_r1_like_qa_em.compute_score(solution_str, ground_truth)
 

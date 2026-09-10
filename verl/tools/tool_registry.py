@@ -23,11 +23,11 @@ from typing import TYPE_CHECKING, Optional
 
 from omegaconf import OmegaConf
 
-from verl.tools.function_tool import FunctionTool, load_function_tools_from_path
-from verl.tools.schemas import OpenAIFunctionToolSchema
+from RL.verl.verl.tools.function_tool import FunctionTool, load_function_tools_from_path
+from RL.verl.verl.tools.schemas import OpenAIFunctionToolSchema
 
 if TYPE_CHECKING:
-    from verl.tools.base_tool import BaseTool
+    from RL.verl.verl.tools.base_tool import BaseTool
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

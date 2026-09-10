@@ -19,7 +19,7 @@ import ray
 from omegaconf import DictConfig
 from openai import AsyncOpenAI
 
-from verl.workers.rollout.replica import get_rollout_replica_class
+from RL.verl.verl.workers.rollout.replica import get_rollout_replica_class
 
 
 @pytest.fixture

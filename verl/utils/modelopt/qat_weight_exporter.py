@@ -29,7 +29,7 @@ from modelopt.torch.export.quant_utils import (
 )
 from modelopt.torch.quantization.qtensor.nvfp4_tensor import NVFP4QTensor
 
-from verl.utils.megatron_utils import unwrap_model
+from RL.verl.verl.utils.megatron_utils import unwrap_model
 
 # NVFP4 two-level scaling denominator: FP4_MAX (6.0) * FP8_MAX (448.0).
 _NVFP4_AMAX_DENOMINATOR = 6.0 * 448.0

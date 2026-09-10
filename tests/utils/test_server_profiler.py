@@ -19,7 +19,7 @@ import unittest
 from functools import partial
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from verl.utils.profiler.config import (
+from RL.verl.verl.utils.profiler.config import (
     NPUToolConfig,
     ProfilerConfig,
     TorchProfilerToolConfig,
@@ -30,7 +30,7 @@ from verl.utils.profiler.config import (
     rollout_trace_dir,
     rollout_trace_local_rank,
 )
-from verl.utils.profiler.profile import DistProfiler, build_rollout_dist_profiler
+from RL.verl.verl.utils.profiler.profile import DistProfiler, build_rollout_dist_profiler
 
 
 class TestServerProfilerArgs(unittest.TestCase):
@@ -492,7 +492,7 @@ class TestServerProfilerFunctionality(unittest.IsolatedAsyncioTestCase):
     async def test_vllm_start_stop_profile(self):
         try:
             # Import strictly inside test to avoid import errors if dependencies missing
-            from verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
+            from RL.verl.verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
         except ImportError:
             self.skipTest("vllm or dependencies not installed")
             return
@@ -536,7 +536,7 @@ class TestServerProfilerFunctionality(unittest.IsolatedAsyncioTestCase):
 
     async def test_vllm_stop_profile_skips_relocation_when_not_profiled(self):
         try:
-            from verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
+            from RL.verl.verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
         except ImportError:
             self.skipTest("vllm or dependencies not installed")
             return
@@ -561,7 +561,7 @@ class TestServerProfilerFunctionality(unittest.IsolatedAsyncioTestCase):
 
     async def test_vllm_start_stop_profile_non_master_node(self):
         try:
-            from verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
+            from RL.verl.verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
         except ImportError:
             self.skipTest("vllm or dependencies not installed")
             return
@@ -588,7 +588,7 @@ class TestServerProfilerFunctionality(unittest.IsolatedAsyncioTestCase):
     async def test_sglang_start_stop_profile(self):
         try:
             # Import strictly inside test to avoid import errors if dependencies missing
-            from verl.workers.rollout.sglang_rollout.async_sglang_server import SGLangHttpServer
+            from RL.verl.verl.workers.rollout.sglang_rollout.async_sglang_server import SGLangHttpServer
         except ImportError:
             self.skipTest("sglang or dependencies not installed")
             return

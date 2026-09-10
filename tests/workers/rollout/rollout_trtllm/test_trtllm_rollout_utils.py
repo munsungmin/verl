@@ -111,7 +111,7 @@ class TestUnimodalTRTLLMRollout:
 
     @pytest.fixture(scope="class")
     def trtllm_replica(self, ray_context):
-        from verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
+        from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
 
         rollout_config = create_rollout_config_dict()
         model_config = create_model_config_dict(UNIMODAL_MODEL_PATH)
@@ -240,7 +240,7 @@ class TestMultimodalTRTLLMRollout:
 
     @pytest.fixture(scope="class")
     def trtllm_vlm_replica(self, ray_context):
-        from verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
+        from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
 
         rollout_config = create_rollout_config_dict()
         model_config = create_model_config_dict(MULTIMODAL_MODEL_PATH)
@@ -423,7 +423,7 @@ class TestTRTLLMServerLifecycle:
 
     @pytest.fixture(scope="class")
     def trtllm_replica_lifecycle(self, ray_context):
-        from verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
+        from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
 
         rollout_config = create_rollout_config_dict()
         model_config = create_model_config_dict(UNIMODAL_MODEL_PATH)

@@ -33,23 +33,23 @@ from torch.utils.data import Dataset, Sampler
 from torchdata.stateful_dataloader import StatefulDataLoader
 from tqdm import tqdm
 
-from verl import DataProto
-from verl.protocol import pad_dataproto_to_divisor, unpad_dataproto
-from verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup, ResourcePoolManager
-from verl.single_controller.ray.base import create_colocated_worker_cls
-from verl.trainer.config import AlgoConfig
-from verl.trainer.distillation.losses import is_distillation_enabled
-from verl.trainer.ppo import core_algos
-from verl.trainer.ppo.core_algos import AdvantageEstimator, agg_loss
-from verl.trainer.ppo.metric_utils import (
+from ext.verl.verl import DataProto
+from RL.verl.verl.protocol import pad_dataproto_to_divisor, unpad_dataproto
+from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup, ResourcePoolManager
+from RL.verl.verl.single_controller.ray.base import create_colocated_worker_cls
+from RL.verl.verl.trainer.config import AlgoConfig
+from RL.verl.verl.trainer.distillation.losses import is_distillation_enabled
+from RL.verl.verl.trainer.ppo import core_algos
+from RL.verl.verl.trainer.ppo.core_algos import AdvantageEstimator, agg_loss
+from RL.verl.verl.trainer.ppo.metric_utils import (
     compute_data_metrics,
     compute_throughout_metrics,
     compute_timing_metrics,
     compute_variance_proxy_metrics,
     process_validation_metrics,
 )
-from verl.trainer.ppo.reward import extract_reward
-from verl.trainer.ppo.utils import (
+from RL.verl.verl.trainer.ppo.reward import extract_reward
+from RL.verl.verl.trainer.ppo.utils import (
     Role,
     WorkerType,
     create_rl_dataset,
@@ -59,20 +59,20 @@ from verl.trainer.ppo.utils import (
     need_reward_model,
     need_teacher_policy,
 )
-from verl.utils import tensordict_utils as tu
-from verl.utils.checkpoint.checkpoint_manager import find_latest_ckpt_path, should_save_ckpt_esi
-from verl.utils.config import omega_conf_to_dataclass
-from verl.utils.debug import marked_timer
-from verl.utils.import_utils import deprecated, load_class_from_fqn
-from verl.utils.metric import reduce_metrics
-from verl.utils.py_functional import rename_dict
-from verl.utils.seqlen_balancing import calculate_workload, get_seqlen_balanced_partitions, log_seqlen_unbalance
-from verl.utils.skip.skip_manager import SkipManager
-from verl.utils.torch_functional import masked_mean
-from verl.utils.tracking import ValidationGenerationsLogger
-from verl.workers.config import DistillationConfig, EngineConfig
-from verl.workers.rollout.llm_server import LLMServerManager
-from verl.workers.utils.padding import left_right_2_no_padding, no_padding_2_padding
+from RL.verl.verl.utils import tensordict_utils as tu
+from RL.verl.verl.utils.checkpoint.checkpoint_manager import find_latest_ckpt_path, should_save_ckpt_esi
+from RL.verl.verl.utils.config import omega_conf_to_dataclass
+from RL.verl.verl.utils.debug import marked_timer
+from RL.verl.verl.utils.import_utils import deprecated, load_class_from_fqn
+from RL.verl.verl.utils.metric import reduce_metrics
+from RL.verl.verl.utils.py_functional import rename_dict
+from RL.verl.verl.utils.seqlen_balancing import calculate_workload, get_seqlen_balanced_partitions, log_seqlen_unbalance
+from RL.verl.verl.utils.skip.skip_manager import SkipManager
+from RL.verl.verl.utils.torch_functional import masked_mean
+from RL.verl.verl.utils.tracking import ValidationGenerationsLogger
+from RL.verl.verl.workers.config import DistillationConfig, EngineConfig
+from RL.verl.verl.workers.rollout.llm_server import LLMServerManager
+from RL.verl.verl.workers.utils.padding import left_right_2_no_padding, no_padding_2_padding
 
 
 def apply_kl_penalty(data: DataProto, kl_ctrl: core_algos.AdaptiveKLController, kl_penalty="kl"):
@@ -396,7 +396,7 @@ class RayPPOTrainer:
         if train_sampler is None:
             train_sampler = create_rl_sampler(self.config.data, self.train_dataset)
         if collate_fn is None:
-            from verl.utils.dataset.rl_dataset import collate_fn as default_collate_fn
+            from RL.verl.verl.utils.dataset.rl_dataset import collate_fn as default_collate_fn
 
             collate_fn = default_collate_fn
 
@@ -798,12 +798,12 @@ class RayPPOTrainer:
         if self.use_critic:
             resource_pool = self.resource_pool_manager.get_resource_pool(Role.Critic)
 
-            from verl.workers.config import CriticConfig
+            from RL.verl.verl.workers.config import CriticConfig
 
             critic_cfg: CriticConfig = omega_conf_to_dataclass(self.config.critic)
 
             # convert critic_cfg into TrainingWorkerConfig for the unified model engine worker
-            from verl.workers.engine_workers import TrainingWorkerConfig
+            from RL.verl.verl.workers.engine_workers import TrainingWorkerConfig
 
             orig_critic_cfg = critic_cfg
             engine_config: EngineConfig = orig_critic_cfg.engine
@@ -885,7 +885,7 @@ class RayPPOTrainer:
             # assign critic loss
             from functools import partial
 
-            from verl.workers.utils.losses import value_loss
+            from RL.verl.verl.workers.utils.losses import value_loss
 
             value_loss_ = partial(value_loss, config=orig_critic_cfg)
             self.critic_wg.set_loss_fn(value_loss_)
@@ -907,7 +907,7 @@ class RayPPOTrainer:
             self.ref_policy_wg = self.actor_rollout_wg
 
         # create reward loop manager
-        from verl.experimental.reward_loop import RewardLoopManager
+        from RL.verl.verl.experimental.reward_loop import RewardLoopManager
 
         # initalize reward loop manager
         # reward model (colocate or standalone): get resource_pool
@@ -924,7 +924,7 @@ class RayPPOTrainer:
 
         # initialize teacher loop manager
         if self.use_teacher_policy:
-            from verl.experimental.teacher_loop import MultiTeacherModelManager
+            from RL.verl.verl.experimental.teacher_loop import MultiTeacherModelManager
 
             teacher_resource_pool = self.resource_pool_manager.get_resource_pool(Role.TeacherModel)
             self.teacher_model_manager = MultiTeacherModelManager(
@@ -941,7 +941,7 @@ class RayPPOTrainer:
         if manager_class_fqn:
             AgentLoopManager = load_class_from_fqn(manager_class_fqn, "AgentLoopManager")
         else:
-            from verl.experimental.agent_loop import AgentLoopManager
+            from RL.verl.verl.experimental.agent_loop import AgentLoopManager
 
         # infrastructure overview: https://verl.readthedocs.io/en/latest/advance/reward_loop.html#architecture-design
         # agent_reward_loop: streaming reward computation with actor rollout
@@ -970,7 +970,7 @@ class RayPPOTrainer:
         if checkpoint_manager_class_fqn:
             CheckpointEngineManager = load_class_from_fqn(checkpoint_manager_class_fqn, "CheckpointEngineManager")
         else:
-            from verl.checkpoint_engine import CheckpointEngineManager
+            from RL.verl.verl.checkpoint_engine import CheckpointEngineManager
         self.checkpoint_manager = CheckpointEngineManager(
             config=checkpoint_engine_config,
             actor_wg=self.actor_rollout_wg,
@@ -981,7 +981,7 @@ class RayPPOTrainer:
         self.checkpoint_manager.sleep_replicas()
 
     def _save_checkpoint(self):
-        from verl.utils.fs import local_mkdir_safe
+        from RL.verl.verl.utils.fs import local_mkdir_safe
 
         # path: given_path + `/global_step_{global_steps}` + `/actor`
         local_global_step_folder = os.path.join(
@@ -1195,7 +1195,7 @@ class RayPPOTrainer:
 
         # Use group-level balancing for PrefixGrouper to keep same-uid samples together
         if getattr(self, "use_prefix_grouper", False) and "uid" in batch.non_tensor_batch:
-            from verl.utils.seqlen_balancing import get_group_balanced_partitions
+            from RL.verl.verl.utils.seqlen_balancing import get_group_balanced_partitions
 
             uid_list = list(batch.non_tensor_batch["uid"])
             seqlen_list = global_seqlen_lst.tolist()
@@ -1414,7 +1414,7 @@ class RayPPOTrainer:
 
         from omegaconf import OmegaConf
 
-        from verl.utils.tracking import Tracking
+        from RL.verl.verl.utils.tracking import Tracking
 
         logger = Tracking(
             project_name=self.config.trainer.project_name,
@@ -1574,7 +1574,7 @@ class RayPPOTrainer:
                     rollout_corr_config = self.config.algorithm.get("rollout_correction", None)
                     bypass_recomputing_logprobs = rollout_corr_config and rollout_corr_config.get("bypass_mode", False)
                     if bypass_recomputing_logprobs:  # Use `rollout_log_probs`
-                        from verl.trainer.ppo.rollout_corr_helper import apply_bypass_mode
+                        from RL.verl.verl.trainer.ppo.rollout_corr_helper import apply_bypass_mode
 
                         apply_bypass_mode(
                             batch=batch,
@@ -1610,7 +1610,7 @@ class RayPPOTrainer:
                             batch = batch.union(old_log_prob)
                             if "rollout_log_probs" in batch.batch.keys():
                                 # TODO: we may want to add diff of probs too.
-                                from verl.utils.debug.metrics import calculate_debug_metrics
+                                from RL.verl.verl.utils.debug.metrics import calculate_debug_metrics
 
                                 metrics.update(calculate_debug_metrics(batch))
 
@@ -1652,7 +1652,7 @@ class RayPPOTrainer:
                             and "rollout_log_probs" in batch.batch
                             and not bypass_recomputing_logprobs  # Only in decoupled mode
                         ):
-                            from verl.trainer.ppo.rollout_corr_helper import compute_rollout_correction_and_add_to_batch
+                            from RL.verl.verl.trainer.ppo.rollout_corr_helper import compute_rollout_correction_and_add_to_batch
 
                             # Compute IS weights, apply rejection sampling, compute metrics
                             batch, is_metrics = compute_rollout_correction_and_add_to_batch(batch, rollout_corr_config)

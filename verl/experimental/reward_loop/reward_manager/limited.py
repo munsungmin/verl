@@ -19,12 +19,12 @@ import logging
 from omegaconf import DictConfig
 from transformers import AutoTokenizer
 
-from verl import DataProto
-from verl.experimental.reward_loop.reward_manager import register as register_manager
-from verl.experimental.reward_loop.reward_manager.base import RewardManagerBase
-from verl.utils.ray_utils import get_event_loop
-from verl.utils.reward_score import default_compute_score
-from verl.workers.reward_manager import register as register_manager_legacy
+from ext.verl.verl import DataProto
+from RL.verl.verl.experimental.reward_loop.reward_manager import register as register_manager
+from RL.verl.verl.experimental.reward_loop.reward_manager.base import RewardManagerBase
+from RL.verl.verl.utils.ray_utils import get_event_loop
+from RL.verl.verl.utils.reward_score import default_compute_score
+from RL.verl.verl.workers.reward_manager import register as register_manager_legacy
 
 logger = logging.getLogger(__file__)
 

@@ -21,7 +21,7 @@ from pathlib import Path
 import pytest
 import torch
 
-import verl.utils.device as device_module
+import RL.verl.verl.utils.device as device_module
 
 
 def _load_mcore_util_with_stubbed_megatron(monkeypatch, tp_size: int = 4, cp_size: int = 1, cp_rank: int = 0):
