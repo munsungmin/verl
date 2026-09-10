@@ -31,7 +31,6 @@ from verl.utils.torch_functional import masked_mean
 from verl.utils.ulysses import ulysses_pad_and_slice_inputs, gather_outpus_and_unpad
 from verl.utils.seqlen_balancing import rearrange_micro_batches, get_reverse_idx
 
-from flash_attn.bert_padding import pad_input, unpad_input, rearrange, index_first_axis
 
 __all__ = ['DataParallelPPOCritic']
 
@@ -43,6 +42,9 @@ class DataParallelPPOCritic(BasePPOCritic):
         self.critic_module = critic_module
         self.critic_optimizer = critic_optimizer
         self.use_remove_padding = self.config.model.get('use_remove_padding', False)
+        if self.use_remove_padding:
+            global pad_input, unpad_input, rearrange, index_first_axis
+            from flash_attn.bert_padding import pad_input, unpad_input, rearrange, index_first_axis
         print(f'Critic use_remove_padding={self.use_remove_padding}')
 
         self.ulysses_sequence_parallel_size = self.config.get('ulysses_sequence_parallel_size', 1)
@@ -55,7 +57,9 @@ class DataParallelPPOCritic(BasePPOCritic):
                 multi_modal_inputs[key] = torch.cat([inputs[key] for inputs in micro_batch['multi_modal_inputs']],
                                                     dim=0)
 
-        with torch.autocast(device_type='cuda', dtype=torch.bfloat16):
+        # Turing has no native BF16; use configured FP32 FSDP compute there.
+        with torch.autocast(device_type='cuda', dtype=torch.bfloat16,
+                            enabled=torch.cuda.is_bf16_supported()):
             input_ids = micro_batch['input_ids']
             batch, seqlen = input_ids.shape
             attention_mask = micro_batch['attention_mask']

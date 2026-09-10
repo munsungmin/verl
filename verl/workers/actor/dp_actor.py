@@ -31,7 +31,6 @@ from verl.utils.ulysses import ulysses_pad_and_slice_inputs, gather_outpus_and_u
 from verl.utils.seqlen_balancing import rearrange_micro_batches, get_reverse_idx
 import verl.utils.torch_functional as verl_F
 
-from flash_attn.bert_padding import pad_input, unpad_input, rearrange, index_first_axis
 
 __all__ = ['DataParallelPPOActor']
 
@@ -49,6 +48,9 @@ class DataParallelPPOActor(BasePPOActor):
         self.actor_module = actor_module
         self.actor_optimizer = actor_optimizer
         self.use_remove_padding = self.config.get('use_remove_padding', False)
+        if self.use_remove_padding:
+            global pad_input, unpad_input, rearrange, index_first_axis
+            from flash_attn.bert_padding import pad_input, unpad_input, rearrange, index_first_axis
         print(f'Actor use_remove_padding={self.use_remove_padding}')
         self.ulysses_sequence_parallel_size = self.config.ulysses_sequence_parallel_size
         self.use_ulysses_sp = self.ulysses_sequence_parallel_size > 1
@@ -71,7 +73,9 @@ class DataParallelPPOActor(BasePPOActor):
                 multi_modal_inputs[key] = torch.cat([inputs[key] for inputs in micro_batch['multi_modal_inputs']],
                                                     dim=0)
 
-        with torch.autocast(device_type='cuda', dtype=torch.bfloat16):
+        # Turing has no native BF16; use configured FP32 FSDP compute there.
+        with torch.autocast(device_type='cuda', dtype=torch.bfloat16,
+                            enabled=torch.cuda.is_bf16_supported()):
             input_ids = micro_batch['input_ids']
             batch_size, seqlen = input_ids.shape
             attention_mask = micro_batch['attention_mask']
