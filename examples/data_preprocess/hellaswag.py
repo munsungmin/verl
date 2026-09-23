@@ -22,7 +22,7 @@ import re
 
 import datasets
 
-from RL.verl.verl.utils.hdfs_io import copy, makedirs
+from verl.utils.hdfs_io import copy, makedirs
 
 
 def preprocess(text):

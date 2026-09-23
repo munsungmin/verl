@@ -21,9 +21,9 @@ from typing import Any, Optional
 import regex
 from pydantic import BaseModel
 
-from RL.verl.verl.tools.schemas import OpenAIFunctionToolSchema
-from RL.verl.verl.utils.ray_utils import get_event_loop
-from RL.verl.verl.utils.rollout_trace import rollout_trace_op
+from verl.tools.schemas import OpenAIFunctionToolSchema
+from verl.utils.ray_utils import get_event_loop
+from verl.utils.rollout_trace import rollout_trace_op
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

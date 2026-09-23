@@ -17,10 +17,10 @@
 import pytest
 import torch
 
-from RL.verl.verl.trainer.ppo.core_algos import (
+from verl.trainer.ppo.core_algos import (
     compute_policy_loss_dro,
 )
-from RL.verl.verl.workers.config.actor import ActorConfig, PolicyLossConfig
+from verl.workers.config.actor import ActorConfig, PolicyLossConfig
 
 
 def _actor_config(*, loss_mode: str, dro_beta=None) -> ActorConfig:

@@ -16,11 +16,10 @@ import asyncio
 import json
 import os
 
-from RL.verl.verl.utils.reward_score import default_compute_score
 import pytest
 
-from RL.verl.verl.utils.reward_score import sandbox_fusion
-from RL.verl.verl.workers.reward_manager.prime import parallel_compute_score_async
+from verl.utils.reward_score import default_compute_score, sandbox_fusion
+from verl.workers.reward_manager.prime import parallel_compute_score_async
 
 prime_math_answers = [
     """\\begin{bmatrix}\n -7 & 6 & -8 \\\\\n 11 & -9 & 12 \\\\\n 15 & -16 & 19 \n \\end{bmatrix}""",
@@ -149,7 +148,7 @@ def test_continuous_score_consistency():
     Verify that continuous score calculation is consistent between prime_code and sandbox_fusion.
     Uses a test case where the first 9 out of 11 sub-cases pass (expected score 0.9).
     """
-    from RL.verl.verl.utils.reward_score import prime_code
+    from verl.utils.reward_score import prime_code
 
     completion = prime_code_answers[1]  # Use the second sample
     ground_truth = prime_code_gts[1]  # Use the second sample (9/11 pass, first 9 pass)
@@ -173,7 +172,7 @@ def test_continuous_score_consistency():
 
 
 def test_check_correctness():
-    from RL.verl.verl.utils.reward_score.prime_code import apps_check_correctness
+    from verl.utils.reward_score.prime_code import apps_check_correctness
 
     completion = prime_code_answers[0]
     ground_truth = json.loads(prime_code_gts[0])

@@ -57,7 +57,7 @@ from typing import Any, Optional
 
 import torch
 
-from RL.verl.verl.workers.engine.spec import ShardSpec
+from verl.workers.engine.spec import ShardSpec
 
 logger = logging.getLogger(__name__)
 

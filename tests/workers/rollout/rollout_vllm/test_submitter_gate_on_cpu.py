@@ -28,7 +28,7 @@ import pytest
 pytest.importorskip("ray")
 pytest.importorskip("vllm")
 
-from RL.verl.verl.workers.rollout.vllm_rollout import vllm_async_server
+from verl.workers.rollout.vllm_rollout import vllm_async_server
 
 
 class _FakeEngine:

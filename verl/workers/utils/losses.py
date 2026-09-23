@@ -16,13 +16,13 @@
 import torch
 from tensordict import TensorDict
 
-from RL.verl.verl.trainer.ppo.core_algos import agg_loss, compute_value_loss, get_policy_loss_fn, kl_penalty
-from RL.verl.verl.utils import tensordict_utils as tu
-from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode
-from RL.verl.verl.utils.metric import AggregationType, Metric
-from RL.verl.verl.utils.torch_functional import masked_mean, masked_sum
-from RL.verl.verl.workers.config import ActorConfig, CriticConfig
-from RL.verl.verl.workers.utils.padding import no_padding_2_padding
+from verl.trainer.ppo.core_algos import agg_loss, compute_value_loss, get_policy_loss_fn, kl_penalty
+from verl.utils import tensordict_utils as tu
+from verl.utils.dataset.dataset_utils import DatasetPadMode
+from verl.utils.metric import AggregationType, Metric
+from verl.utils.torch_functional import masked_mean, masked_sum
+from verl.workers.config import ActorConfig, CriticConfig
+from verl.workers.utils.padding import no_padding_2_padding
 
 
 def sft_loss(config: ActorConfig, model_output, data: TensorDict, dp_group=None):

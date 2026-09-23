@@ -92,7 +92,7 @@ def compute_score_math_verify(
     **kwargs,
 ):
     """Compute the reward score."""
-    from RL.verl.verl.utils.reward_score.math_verify import compute_score
+    from verl.utils.reward_score.math_verify import compute_score
 
     return compute_score(
         model_output=solution_str,

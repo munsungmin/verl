@@ -35,7 +35,7 @@ from compressed_tensors.quantization.quant_args import (
 )
 from compressed_tensors.quantization.utils.helpers import generate_gparam
 
-from RL.verl.verl.utils.device import get_device_name, get_torch_device
+from verl.utils.device import get_device_name, get_torch_device
 
 logger = logging.getLogger(__name__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

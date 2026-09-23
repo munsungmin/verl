@@ -22,8 +22,8 @@ import torch.distributed
 from omegaconf import DictConfig
 from transformers import PreTrainedTokenizer, ProcessorMixin
 
-from RL.verl.verl.trainer.config import CheckpointConfig
-from RL.verl.verl.utils.device import get_device_name, get_torch_device, is_device_available
+from verl.trainer.config import CheckpointConfig
+from verl.utils.device import get_device_name, get_torch_device, is_device_available
 
 
 class BaseCheckpointManager:

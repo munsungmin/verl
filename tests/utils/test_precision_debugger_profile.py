@@ -15,8 +15,8 @@
 import logging
 import types
 
-from RL.verl.verl.utils.profiler.config import PrecisionDebuggerToolConfig
-from RL.verl.verl.utils.profiler.precision_debugger_profile import PrecisionDebuggerProfiler
+from verl.utils.profiler.config import PrecisionDebuggerToolConfig
+from verl.utils.profiler.precision_debugger_profile import PrecisionDebuggerProfiler
 
 
 class _FakeModel:

@@ -16,11 +16,11 @@ import numpy as np
 import ray
 import torch
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.protocol import DataProtoConfig
-from RL.verl.verl.single_controller.base import Worker
-from RL.verl.verl.single_controller.base.decorator import Dispatch, register
-from RL.verl.verl.single_controller.ray.base import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
+from verl import DataProto
+from verl.protocol import DataProtoConfig
+from verl.single_controller.base import Worker
+from verl.single_controller.base.decorator import Dispatch, register
+from verl.single_controller.ray.base import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
 
 # or set env var VERL_AUTO_PADDING = "1" / "true"
 DataProtoConfig.auto_padding = True

@@ -14,9 +14,9 @@
 
 from dataclasses import fields
 
-from RL.verl.verl.workers.config.actor import ActorConfig, McoreActorConfig, VeOmniActorConfig
-from RL.verl.verl.workers.config.engine import EngineRouterReplayConfig, McoreEngineConfig, VeOmniEngineConfig
-from RL.verl.verl.workers.config.optimizer import OptimizerConfig
+from verl.workers.config.actor import ActorConfig, McoreActorConfig, VeOmniActorConfig
+from verl.workers.config.engine import EngineRouterReplayConfig, McoreEngineConfig, VeOmniEngineConfig
+from verl.workers.config.optimizer import OptimizerConfig
 
 
 def test_actor_config_has_no_top_level_router_replay():

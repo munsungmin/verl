@@ -37,7 +37,7 @@ class TestCheckpointCleanupLogic:
         monkeypatch.setattr(torch.distributed, "get_rank", lambda: 0)
         monkeypatch.setattr(torch.distributed, "get_world_size", lambda: 1)
 
-        from RL.verl.verl.utils.checkpoint.checkpoint_manager import BaseCheckpointManager
+        from verl.utils.checkpoint.checkpoint_manager import BaseCheckpointManager
 
         class MockModel:
             pass

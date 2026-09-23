@@ -15,7 +15,7 @@
 import numpy as np
 import pytest
 
-from RL.verl.verl.utils.tokenizer import normalize_token_ids
+from verl.utils.tokenizer import normalize_token_ids
 
 
 class DummyBatchEncoding:

@@ -25,8 +25,8 @@ import torch
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, Qwen3Config
 
-from RL.verl.verl.trainer.config import CheckpointConfig
-from RL.verl.verl.utils.checkpoint.fsdp_checkpoint_manager import FSDPCheckpointManager
+from verl.trainer.config import CheckpointConfig
+from verl.utils.checkpoint.fsdp_checkpoint_manager import FSDPCheckpointManager
 
 
 def _make_peft_model():

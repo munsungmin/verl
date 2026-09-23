@@ -18,8 +18,8 @@ from unittest.mock import MagicMock
 import pytest
 from omegaconf import OmegaConf
 
-from RL.verl.verl.trainer.ppo.checkpoint_callback import CheckpointCallback
-from RL.verl.verl.trainer.ppo.v1.trainer_base import PPOTrainer
+from verl.trainer.ppo.checkpoint_callback import CheckpointCallback
+from verl.trainer.ppo.v1.trainer_base import PPOTrainer
 
 
 class _StubTrainer(PPOTrainer):

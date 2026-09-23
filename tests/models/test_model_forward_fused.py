@@ -21,7 +21,7 @@ from megatron.core.distributed.distributed_data_parallel import DistributedDataP
 from megatron.core.models.gpt.gpt_model import GPTModel
 from megatron.core.transformer.module import Float16Module
 
-from RL.verl.verl.models.mcore import model_forward_fused as mff
+from verl.models.mcore import model_forward_fused as mff
 
 
 def _new_uninitialized_model(model_cls=GPTModel):

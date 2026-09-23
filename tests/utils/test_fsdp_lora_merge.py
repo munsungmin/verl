@@ -24,8 +24,8 @@ from torch.distributed.fsdp import FullyShardedDataParallel as FSDP
 from torch.distributed.fsdp import MixedPrecision, ShardingStrategy
 from transformers import AutoModelForCausalLM, GptOssConfig, Qwen2Config
 
-from RL.verl.verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
-from RL.verl.verl.utils.fsdp_utils import (
+from verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
+from verl.utils.fsdp_utils import (
     MixedPrecisionPolicy,
     apply_fsdp2,
     collect_merged_lora_params,

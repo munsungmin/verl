@@ -17,7 +17,7 @@ import os
 
 import pytest
 
-from RL.verl.verl.utils import transferqueue_utils as tqu
+from verl.utils import transferqueue_utils as tqu
 
 
 async def _noop():

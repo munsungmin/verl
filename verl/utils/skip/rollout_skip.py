@@ -18,8 +18,8 @@ from typing import Callable
 import torch
 from omegaconf import OmegaConf
 
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.utils.skip.base_skip import BaseSkip, SkipAction, register_skip
+from verl.protocol import DataProto
+from verl.utils.skip.base_skip import BaseSkip, SkipAction, register_skip
 
 
 @register_skip("rollout")
@@ -377,7 +377,7 @@ class RolloutTqSkip(RolloutSkip):
             old_tags.extend(payload["tags"])
 
         if len(data_list) > 1:
-            from RL.verl.verl.utils.tensordict_utils import concat_tensordict
+            from verl.utils.tensordict_utils import concat_tensordict
 
             data = concat_tensordict(data_list)
         else:
@@ -435,7 +435,7 @@ class RolloutTqSkip(RolloutSkip):
 
         # NestedTensor (jagged prompts/responses) does not support indexing or slicing
         # on dim=0.  Use index_select_tensor_dict which unbinds, selects, and rebuilds.
-        from RL.verl.verl.utils.tensordict_utils import index_select_tensor_dict
+        from verl.utils.tensordict_utils import index_select_tensor_dict
 
         new_fields = index_select_tensor_dict(data, traj_indices)
 

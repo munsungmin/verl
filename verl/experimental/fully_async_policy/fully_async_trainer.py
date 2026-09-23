@@ -23,23 +23,23 @@ import ray
 from omegaconf import OmegaConf, open_dict
 from tqdm import tqdm
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.checkpoint_engine import CheckpointEngineManager
-from RL.verl.verl.experimental.fully_async_policy.detach_utils import (
+from verl import DataProto
+from verl.checkpoint_engine import CheckpointEngineManager
+from verl.experimental.fully_async_policy.detach_utils import (
     MetricsAggregator,
     assemble_batch_from_rollout_samples,
 )
-from RL.verl.verl.experimental.fully_async_policy.dynamic_schedule import DynamicScheduleContext
-from RL.verl.verl.experimental.fully_async_policy.message_queue import MessageQueueClient
-from RL.verl.verl.experimental.separation.ray_trainer import SeparateRayPPOTrainer
-from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
-from RL.verl.verl.trainer.ppo import core_algos
-from RL.verl.verl.trainer.ppo.ray_trainer import ResourcePoolManager
-from RL.verl.verl.trainer.ppo.utils import Role, WorkerType, need_critic, need_reference_policy, need_reward_model
-from RL.verl.verl.utils.checkpoint.checkpoint_manager import find_latest_ckpt_path, should_save_ckpt_esi
-from RL.verl.verl.utils.config import omega_conf_to_dataclass
-from RL.verl.verl.utils.debug import marked_timer
-from RL.verl.verl.utils.tracking import Tracking
+from verl.experimental.fully_async_policy.dynamic_schedule import DynamicScheduleContext
+from verl.experimental.fully_async_policy.message_queue import MessageQueueClient
+from verl.experimental.separation.ray_trainer import SeparateRayPPOTrainer
+from verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
+from verl.trainer.ppo import core_algos
+from verl.trainer.ppo.ray_trainer import ResourcePoolManager
+from verl.trainer.ppo.utils import Role, WorkerType, need_critic, need_reference_policy, need_reward_model
+from verl.utils.checkpoint.checkpoint_manager import find_latest_ckpt_path, should_save_ckpt_esi
+from verl.utils.config import omega_conf_to_dataclass
+from verl.utils.debug import marked_timer
+from verl.utils.tracking import Tracking
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +82,7 @@ class FullyAsyncTrainer(SeparateRayPPOTrainer):
         self.use_rm = need_reward_model(self.config)
 
         # distillation config needed by _update_actor in ray_trainer.py
-        from RL.verl.verl.trainer.distillation.losses import is_distillation_enabled
+        from verl.trainer.distillation.losses import is_distillation_enabled
 
         if is_distillation_enabled(self.config.get("distillation")):
             self.distillation_config = omega_conf_to_dataclass(self.config.distillation)
@@ -311,7 +311,7 @@ class FullyAsyncTrainer(SeparateRayPPOTrainer):
           - ``self.hybrid_checkpoint_manager`` already set up.
           - ``self.rollouter`` is set.
         """
-        from RL.verl.verl.experimental.fully_async_policy.dynamic_schedule import (
+        from verl.experimental.fully_async_policy.dynamic_schedule import (
             DynamicResourceController,
             build_policy,
         )

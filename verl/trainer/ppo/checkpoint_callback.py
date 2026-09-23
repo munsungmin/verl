@@ -27,7 +27,7 @@ a model version), and silently swallowing a failure could lose checkpoints witho
 any signal. Wrap the hook body in ``try/except`` for best-effort semantics.
 """
 
-from RL.verl.verl.utils.import_utils import load_class_from_fqn
+from verl.utils.import_utils import load_class_from_fqn
 
 
 class CheckpointCallback:

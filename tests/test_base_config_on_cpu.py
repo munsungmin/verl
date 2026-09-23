@@ -14,7 +14,7 @@
 
 import pytest
 
-from RL.verl.verl.base_config import BaseConfig
+from verl.base_config import BaseConfig
 
 
 @pytest.fixture

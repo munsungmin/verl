@@ -27,23 +27,23 @@ from omegaconf import DictConfig, open_dict
 from tensordict import NonTensorData, TensorDict
 from torch.distributed.device_mesh import init_device_mesh
 
-from RL.verl.verl.checkpoint_engine import CheckpointEngineRegistry
-from RL.verl.verl.single_controller.base import Worker
-from RL.verl.verl.single_controller.base.decorator import Dispatch, make_nd_compute_dataproto_dispatch_fn, register
-from RL.verl.verl.trainer.distillation import distillation_ppo_loss, is_distillation_enabled
-from RL.verl.verl.utils import tensordict_utils as tu
-from RL.verl.verl.utils.config import omega_conf_to_dataclass
-from RL.verl.verl.utils.device import get_device_name, get_torch_device, set_expandable_segments
-from RL.verl.verl.utils.distributed import initialize_global_process_group_ray, set_numa_affinity
-from RL.verl.verl.utils.flops_counter import FlopsCounter
-from RL.verl.verl.utils.import_utils import import_external_libs
-from RL.verl.verl.utils.memory_utils import aggressive_empty_cache
-from RL.verl.verl.utils.metric.utils import Metric
-from RL.verl.verl.utils.profiler import DistProfiler, DistProfilerExtension, ProfilerConfig, log_gpu_memory_usage
-from RL.verl.verl.utils.py_functional import append_to_dict
-from RL.verl.verl.utils.tensordict_utils import maybe_fix_3d_position_ids
-from RL.verl.verl.utils.torch_functional import allgather_dict_into_dict
-from RL.verl.verl.workers.config import (
+from verl.checkpoint_engine import CheckpointEngineRegistry
+from verl.single_controller.base import Worker
+from verl.single_controller.base.decorator import Dispatch, make_nd_compute_dataproto_dispatch_fn, register
+from verl.trainer.distillation import distillation_ppo_loss, is_distillation_enabled
+from verl.utils import tensordict_utils as tu
+from verl.utils.config import omega_conf_to_dataclass
+from verl.utils.device import get_device_name, get_torch_device, set_expandable_segments
+from verl.utils.distributed import initialize_global_process_group_ray, set_numa_affinity
+from verl.utils.flops_counter import FlopsCounter
+from verl.utils.import_utils import import_external_libs
+from verl.utils.memory_utils import aggressive_empty_cache
+from verl.utils.metric.utils import Metric
+from verl.utils.profiler import DistProfiler, DistProfilerExtension, ProfilerConfig, log_gpu_memory_usage
+from verl.utils.py_functional import append_to_dict
+from verl.utils.tensordict_utils import maybe_fix_3d_position_ids
+from verl.utils.torch_functional import allgather_dict_into_dict
+from verl.workers.config import (
     ActorConfig,
     DistillationConfig,
     HFModelConfig,
@@ -51,8 +51,8 @@ from RL.verl.verl.workers.config import (
     RolloutConfig,
     TrainingWorkerConfig,
 )
-from RL.verl.verl.workers.rollout.base import BaseRollout, get_rollout_class
-from RL.verl.verl.workers.utils.losses import ppo_loss
+from verl.workers.rollout.base import BaseRollout, get_rollout_class
+from verl.workers.utils.losses import ppo_loss
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -83,7 +83,7 @@ class TrainingWorker(Worker, DistProfilerExtension):
     def __init__(self, config: TrainingWorkerConfig):
         Worker.__init__(self)
 
-        from RL.verl.verl.workers.engine import BaseEngine, EngineRegistry
+        from verl.workers.engine import BaseEngine, EngineRegistry
 
         initialize_global_process_group_ray(timeout_second=None)
 

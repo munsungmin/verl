@@ -17,10 +17,10 @@ from typing import Optional
 
 from omegaconf import MISSING, DictConfig, OmegaConf
 
-from RL.verl.verl.base_config import BaseConfig
-from RL.verl.verl.utils.profiler import ProfilerConfig
-from RL.verl.verl.workers.config.disaggregation import DisaggregationConfig
-from RL.verl.verl.workers.config.model import MtpConfig
+from verl.base_config import BaseConfig
+from verl.utils.profiler import ProfilerConfig
+from verl.workers.config.disaggregation import DisaggregationConfig
+from verl.workers.config.model import MtpConfig
 
 __all__ = [
     "SamplingConfig",

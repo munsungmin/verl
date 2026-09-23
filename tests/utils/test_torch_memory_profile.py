@@ -22,9 +22,9 @@ from unittest.mock import MagicMock, patch
 
 import torch
 
-from RL.verl.verl.utils.profiler.config import ProfilerConfig, TorchMemoryToolConfig
-from RL.verl.verl.utils.profiler.profile import DistProfiler
-from RL.verl.verl.utils.profiler.torch_memory_profile import TorchMemoryProfiler
+from verl.utils.profiler.config import ProfilerConfig, TorchMemoryToolConfig
+from verl.utils.profiler.profile import DistProfiler
+from verl.utils.profiler.torch_memory_profile import TorchMemoryProfiler
 
 
 class TestTorchMemoryProfiler(unittest.TestCase):

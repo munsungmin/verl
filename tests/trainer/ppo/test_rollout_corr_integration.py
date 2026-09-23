@@ -16,13 +16,13 @@
 import pytest
 import torch
 
-from RL.verl.verl.trainer.config.algorithm import RolloutCorrectionConfig
-from RL.verl.verl.trainer.ppo.core_algos import compute_policy_loss_vanilla
-from RL.verl.verl.trainer.ppo.rollout_corr_helper import (
+from verl.trainer.config.algorithm import RolloutCorrectionConfig
+from verl.trainer.ppo.core_algos import compute_policy_loss_vanilla
+from verl.trainer.ppo.rollout_corr_helper import (
     compute_offpolicy_metrics,
     compute_rollout_correction_and_rejection_mask,
 )
-from RL.verl.verl.workers.config.actor import ActorConfig
+from verl.workers.config.actor import ActorConfig
 
 
 class TestRolloutISIntegration:
@@ -105,7 +105,7 @@ class TestRolloutISIntegration:
         )
 
         # Check weights
-        from RL.verl.verl.protocol import DataProto
+        from verl.protocol import DataProto
 
         assert isinstance(weights_proto, DataProto)
         weights = weights_proto.batch["rollout_is_weights"]

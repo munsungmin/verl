@@ -32,10 +32,10 @@ try:
     import transfer_queue as tq
     from transfer_queue import KVBatchMeta
 except ImportError:
-    from RL.verl.verl.utils.transferqueue_utils import KVBatchMeta, tq
+    from verl.utils.transferqueue_utils import KVBatchMeta, tq
 
-from RL.verl.verl.utils.model import compute_position_id_with_mask
-from RL.verl.verl.utils.tensordict_utils import list_of_dict_to_tensordict
+from verl.utils.model import compute_position_id_with_mask
+from verl.utils.tensordict_utils import list_of_dict_to_tensordict
 
 logger = logging.getLogger(__name__)
 

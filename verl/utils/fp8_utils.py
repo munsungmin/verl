@@ -18,8 +18,8 @@ import os
 
 import torch
 
-from RL.verl.verl.utils.kernel.fp8_kernel import scaled_fp8_blockwise
-from RL.verl.verl.workers.rollout.utils import ensure_async_iterator
+from verl.utils.kernel.fp8_kernel import scaled_fp8_blockwise
+from verl.workers.rollout.utils import ensure_async_iterator
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "INFO"))

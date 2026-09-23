@@ -14,7 +14,7 @@
 import pytest
 from transformers import AutoTokenizer
 
-from RL.verl.verl.experimental.agent_loop.tool_parser import GptOssToolParser
+from verl.experimental.agent_loop.tool_parser import GptOssToolParser
 
 
 @pytest.mark.asyncio

@@ -21,7 +21,7 @@ import ray
 from cachetools import LRUCache
 from omegaconf import OmegaConf
 
-from RL.verl.verl.utils.import_utils import load_class_from_fqn, resolve_config_path
+from verl.utils.import_utils import load_class_from_fqn, resolve_config_path
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

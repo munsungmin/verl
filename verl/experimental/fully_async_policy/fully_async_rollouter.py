@@ -24,28 +24,28 @@ import ray
 import torch
 from omegaconf import DictConfig, open_dict
 
-from RL.verl.verl.experimental.agent_loop.agent_loop import AgentLoopManager
-from RL.verl.verl.experimental.fully_async_policy.detach_utils import (
+from verl.experimental.agent_loop.agent_loop import AgentLoopManager
+from verl.experimental.fully_async_policy.detach_utils import (
     RolloutSample,
     prepare_single_generation_data,
     safe_create_task,
 )
-from RL.verl.verl.experimental.fully_async_policy.message_queue import MessageQueueClient
-from RL.verl.verl.experimental.separation.ray_trainer import SeparateRayPPOTrainer
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.single_controller.ray import RayResourcePool, RayWorkerGroup, ResourcePoolManager
-from RL.verl.verl.trainer.ppo.utils import (
+from verl.experimental.fully_async_policy.message_queue import MessageQueueClient
+from verl.experimental.separation.ray_trainer import SeparateRayPPOTrainer
+from verl.protocol import DataProto
+from verl.single_controller.ray import RayResourcePool, RayWorkerGroup, ResourcePoolManager
+from verl.trainer.ppo.utils import (
     create_rl_dataset,
     create_rl_sampler,
     need_reward_model,
 )
-from RL.verl.verl.utils.checkpoint.checkpoint_manager import find_latest_ckpt_path
-from RL.verl.verl.utils.profiler import marked_timer
-from RL.verl.verl.utils.skip import SkipManager
-from RL.verl.verl.utils.tracking import ValidationGenerationsLogger
-from RL.verl.verl.workers.rollout.llm_server import FullyAsyncLLMServerClient, LLMServerClient, LLMServerManager
-from RL.verl.verl.workers.rollout.replica import RolloutReplica
-from RL.verl.verl.workers.rollout.utils import update_prometheus_config
+from verl.utils.checkpoint.checkpoint_manager import find_latest_ckpt_path
+from verl.utils.profiler import marked_timer
+from verl.utils.skip import SkipManager
+from verl.utils.tracking import ValidationGenerationsLogger
+from verl.workers.rollout.llm_server import FullyAsyncLLMServerClient, LLMServerClient, LLMServerManager
+from verl.workers.rollout.replica import RolloutReplica
+from verl.workers.rollout.utils import update_prometheus_config
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -381,7 +381,7 @@ class FullyAsyncRollouter(SeparateRayPPOTrainer):
         # ==================== fully async config ====================
 
         print("[FullyAsyncRollouter] Creating datasets...")
-        from RL.verl.verl.utils.dataset.rl_dataset import collate_fn
+        from verl.utils.dataset.rl_dataset import collate_fn
 
         train_dataset = create_rl_dataset(
             config.data.train_files,
@@ -658,7 +658,7 @@ class FullyAsyncRollouter(SeparateRayPPOTrainer):
         # Therefore, directly saving the state of the dataloader will result in losing these
         # samples when resuming training.
         # TODO: Implement dataloader recovery without losing in-flight samples.
-        from RL.verl.verl.utils.fs import local_mkdir_safe
+        from verl.utils.fs import local_mkdir_safe
 
         # save dataloader
         local_mkdir_safe(local_global_step_folder)
@@ -755,7 +755,7 @@ class FullyAsyncRollouter(SeparateRayPPOTrainer):
         """
         import asyncio
 
-        from RL.verl.verl.experimental.reward_loop import RewardLoopManager
+        from verl.experimental.reward_loop import RewardLoopManager
 
         loop = asyncio.get_running_loop()
         self.reward_loop_manager = await loop.run_in_executor(
@@ -772,12 +772,12 @@ class FullyAsyncRollouter(SeparateRayPPOTrainer):
         NOTE: MultiTeacherModelManager.__init__ calls _run_all internally which uses
         asyncio.run(), conflicting with the already-running event loop. Run in a thread executor.
         """
-        from RL.verl.verl.trainer.distillation.losses import is_distillation_enabled
-        from RL.verl.verl.trainer.ppo.utils import Role
+        from verl.trainer.distillation.losses import is_distillation_enabled
+        from verl.trainer.ppo.utils import Role
 
         self.teacher_model_manager = None
         if is_distillation_enabled(self.config.get("distillation")):
-            from RL.verl.verl.experimental.teacher_loop import MultiTeacherModelManager
+            from verl.experimental.teacher_loop import MultiTeacherModelManager
 
             resource_pool_spec = {}
             mapping = {}

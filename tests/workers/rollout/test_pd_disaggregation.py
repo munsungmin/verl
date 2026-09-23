@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import pytest
 
-from RL.verl.verl.workers.config import DisaggregationConfig, RolloutConfig
+from verl.workers.config import DisaggregationConfig, RolloutConfig
 
 
 def test_disaggregation_defaults_disabled_and_valid():
@@ -98,7 +98,7 @@ def test_effective_decode_tp_respects_override():
 
 def test_registry_no_pd_aliases():
     """``sglang_pd``/``vllm_pd`` were dropped: PD is selected via the disaggregation flag."""
-    from RL.verl.verl.workers.rollout.replica import RolloutReplicaRegistry
+    from verl.workers.rollout.replica import RolloutReplicaRegistry
 
     assert "sglang" in RolloutReplicaRegistry._registry
     assert "vllm" in RolloutReplicaRegistry._registry
@@ -114,7 +114,7 @@ def _sglang_available() -> bool:
 
 @pytest.mark.skipif(not _sglang_available(), reason="sglang not installed")
 def test_dispatch_sglang_returns_pd_replica_when_flag_set():
-    from RL.verl.verl.workers.rollout.replica import get_rollout_replica_class
+    from verl.workers.rollout.replica import get_rollout_replica_class
 
     plain_cls = get_rollout_replica_class("sglang", disaggregation_enabled=False)
     pd_cls = get_rollout_replica_class("sglang", disaggregation_enabled=True)
@@ -124,7 +124,7 @@ def test_dispatch_sglang_returns_pd_replica_when_flag_set():
 
 
 def test_dispatch_non_pd_backend_with_flag_raises():
-    from RL.verl.verl.workers.rollout.replica import get_rollout_replica_class
+    from verl.workers.rollout.replica import get_rollout_replica_class
 
     with pytest.raises(NotImplementedError, match="PD disaggregation"):
         get_rollout_replica_class("trtllm", disaggregation_enabled=True)

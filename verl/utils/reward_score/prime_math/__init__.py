@@ -27,9 +27,9 @@ import sympy
 from pylatexenc import latex2text
 from sympy.parsing import sympy_parser
 
-from RL.verl.verl.utils.py_functional import timeout_limit
+from verl.utils.py_functional import timeout_limit
 
-from .......verl.verl.utils.reward_score.prime_math import math_normalize
+from . import math_normalize
 from .grader import math_equal
 
 # import math_normalize

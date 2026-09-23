@@ -16,7 +16,7 @@ import os
 
 import torch
 
-from RL.verl.verl.utils.torch_functional import allgather_dict_into_dict
+from verl.utils.torch_functional import allgather_dict_into_dict
 
 if __name__ == "__main__":
     torch.distributed.init_process_group(backend="gloo")

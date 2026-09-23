@@ -33,14 +33,14 @@ import ray
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, Qwen3MoeConfig
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
-from RL.verl.verl.utils import tensordict_utils as tu
-from RL.verl.verl.utils.model import compute_position_id_with_mask, create_random_mask
-from RL.verl.verl.workers.config import ActorConfig, HFModelConfig, McoreEngineConfig, McoreOptimizerConfig
-from RL.verl.verl.workers.engine_workers import TrainingWorker, TrainingWorkerConfig
-from RL.verl.verl.workers.utils.losses import ppo_loss
-from RL.verl.verl.workers.utils.padding import left_right_2_no_padding
+from verl import DataProto
+from verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
+from verl.utils import tensordict_utils as tu
+from verl.utils.model import compute_position_id_with_mask, create_random_mask
+from verl.workers.config import ActorConfig, HFModelConfig, McoreEngineConfig, McoreOptimizerConfig
+from verl.workers.engine_workers import TrainingWorker, TrainingWorkerConfig
+from verl.workers.utils.losses import ppo_loss
+from verl.workers.utils.padding import left_right_2_no_padding
 
 Z_LOSS_COEFF = 1e-3
 # A small local model dir to borrow a tokenizer from (same convention as test_engine.py).

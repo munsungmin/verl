@@ -15,9 +15,9 @@ import inspect
 from functools import partial, wraps
 from types import FunctionType
 
-from RL.verl.verl.protocol import DataProtoFuture, _padding_size_key
-from RL.verl.verl.utils.py_functional import DynamicEnum
-from RL.verl.verl.utils.transferqueue_utils import tqbridge
+from verl.protocol import DataProtoFuture, _padding_size_key
+from verl.utils.py_functional import DynamicEnum
+from verl.utils.transferqueue_utils import tqbridge
 
 # here we add a magic number of avoid user-defined function already have this attribute
 MAGIC_ATTR = "attrs_3141562937"
@@ -69,7 +69,7 @@ init_predefined_execute_mode()
 
 
 def _split_args_kwargs_data_proto(chunks, *args, **kwargs):
-    from RL.verl.verl.protocol import BatchData
+    from verl.protocol import BatchData
 
     splitted_args = []
     for arg in args:
@@ -89,7 +89,7 @@ def _split_args_kwargs_data_proto(chunks, *args, **kwargs):
 
 
 def _split_args_kwargs_data_proto_with_auto_padding(chunks, *args, **kwargs):
-    from RL.verl.verl.protocol import DataProto, DataProtoFuture
+    from verl.protocol import DataProto, DataProtoFuture
 
     data_proto_len = None
     padding_size = None
@@ -136,7 +136,7 @@ def collect_all_to_all(worker_group, output):
 
 
 def _concat_data_proto_or_future(output: list):
-    from RL.verl.verl.protocol import BatchData
+    from verl.protocol import BatchData
 
     # make sure all the elements in output has the same type
     for o in output:
@@ -146,7 +146,7 @@ def _concat_data_proto_or_future(output: list):
 
 
 def dispatch_dp_compute(worker_group, *args, **kwargs):
-    from RL.verl.verl.single_controller.base.worker_group import WorkerGroup
+    from verl.single_controller.base.worker_group import WorkerGroup
 
     assert isinstance(worker_group, WorkerGroup)
     for arg in args:
@@ -157,7 +157,7 @@ def dispatch_dp_compute(worker_group, *args, **kwargs):
 
 
 def collect_dp_compute(worker_group, output):
-    from RL.verl.verl.single_controller.base.worker_group import WorkerGroup
+    from verl.single_controller.base.worker_group import WorkerGroup
 
     assert isinstance(worker_group, WorkerGroup)
     assert len(output) == worker_group.world_size
@@ -165,7 +165,7 @@ def collect_dp_compute(worker_group, output):
 
 
 def dispatch_dp_compute_data_proto(worker_group, *args, **kwargs):
-    from RL.verl.verl.single_controller.base.worker_group import WorkerGroup
+    from verl.single_controller.base.worker_group import WorkerGroup
 
     assert isinstance(worker_group, WorkerGroup)
     # Note: enable auto padding for dp compute DatapProto
@@ -178,7 +178,7 @@ def dispatch_dp_compute_data_proto(worker_group, *args, **kwargs):
 
 
 def dispatch_dp_compute_data_proto_with_func(worker_group, *args, **kwargs):
-    from RL.verl.verl.single_controller.base.worker_group import WorkerGroup
+    from verl.single_controller.base.worker_group import WorkerGroup
 
     assert isinstance(worker_group, WorkerGroup)
     assert isinstance(args[0], FunctionType)  # NOTE: The first one args is a function!
@@ -189,7 +189,7 @@ def dispatch_dp_compute_data_proto_with_func(worker_group, *args, **kwargs):
 
 
 def collect_dp_compute_data_proto(worker_group, output):
-    from RL.verl.verl.protocol import BatchData
+    from verl.protocol import BatchData
 
     assert BatchData(output).is_concatable(), (
         f"expecting concatable output, but got element type {type(output[0]) if output else 'empty'}"
@@ -202,8 +202,8 @@ def collect_dp_compute_data_proto(worker_group, output):
 def dispatch_nd_compute(dp_rank_mapping: list[int], dp_size, worker_group, *args, **kwargs):
     import os
 
-    from RL.verl.verl.single_controller.base.worker_group import WorkerGroup
-    from RL.verl.verl.utils.ray_utils import parallel_put
+    from verl.single_controller.base.worker_group import WorkerGroup
+    from verl.utils.ray_utils import parallel_put
 
     assert isinstance(worker_group, WorkerGroup)
 
@@ -234,7 +234,7 @@ def dispatch_nd_compute(dp_rank_mapping: list[int], dp_size, worker_group, *args
 
 
 def collect_nd_compute(collect_mask: list[bool], worker_group, output):
-    from RL.verl.verl.single_controller.base.worker_group import WorkerGroup
+    from verl.single_controller.base.worker_group import WorkerGroup
 
     assert isinstance(worker_group, WorkerGroup)
     assert len(output) == worker_group.world_size
@@ -255,7 +255,7 @@ def dispatch_nd_compute_dataproto(dp_rank_mapping: list[int], dp_size, worker_gr
 def collect_nd_compute_dataproto(collect_mask: list[bool], worker_group, output):
     output = collect_nd_compute(collect_mask, worker_group, output)
 
-    from RL.verl.verl.protocol import BatchData
+    from verl.protocol import BatchData
 
     assert BatchData(output).is_concatable(), (
         f"expecting concatable output, but got element type {type(output[0]) if output else 'empty'}"
@@ -264,7 +264,7 @@ def collect_nd_compute_dataproto(collect_mask: list[bool], worker_group, output)
 
 
 def dispatch_lazy_compute_data_proto(mesh_name, worker_group, *args, **kwargs):
-    from RL.verl.verl.single_controller.base.worker_group import WorkerGroup
+    from verl.single_controller.base.worker_group import WorkerGroup
 
     assert isinstance(worker_group, WorkerGroup)
 
@@ -280,7 +280,7 @@ def dispatch_lazy_compute_data_proto(mesh_name, worker_group, *args, **kwargs):
 
 
 def collect_lazy_compute_data_proto(mesh_name, worker_group, *args, **kwargs):
-    from RL.verl.verl.single_controller.base.worker_group import WorkerGroup
+    from verl.single_controller.base.worker_group import WorkerGroup
 
     assert isinstance(worker_group, WorkerGroup)
 

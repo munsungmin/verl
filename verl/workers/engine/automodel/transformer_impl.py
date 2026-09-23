@@ -38,15 +38,15 @@ from nemo_automodel.components.training.utils import (
 from tensordict import TensorDict
 from torch.distributed.tensor import DTensor
 
-import RL.verl.verl.utils.torch_functional as verl_F
-from RL.verl.verl.trainer.config import CheckpointConfig
-from RL.verl.verl.utils import tensordict_utils as tu
-from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode
-from RL.verl.verl.utils.debug import log_gpu_memory_usage
-from RL.verl.verl.utils.device import get_device_id, get_device_name
-from RL.verl.verl.utils.model import convert_weight_keys, extract_multi_modal_inputs
-from RL.verl.verl.utils.torch_functional import logprobs_from_logits
-from RL.verl.verl.workers.config import AutomodelEngineConfig, AutomodelOptimizerConfig, HFModelConfig
+import verl.utils.torch_functional as verl_F
+from verl.trainer.config import CheckpointConfig
+from verl.utils import tensordict_utils as tu
+from verl.utils.dataset.dataset_utils import DatasetPadMode
+from verl.utils.debug import log_gpu_memory_usage
+from verl.utils.device import get_device_id, get_device_name
+from verl.utils.model import convert_weight_keys, extract_multi_modal_inputs
+from verl.utils.torch_functional import logprobs_from_logits
+from verl.workers.config import AutomodelEngineConfig, AutomodelOptimizerConfig, HFModelConfig
 
 from ..base import BaseEngine, BaseEngineCtx, EngineRegistry
 from ..utils import enable_full_determinism, postprocess_batch_func, prepare_micro_batches

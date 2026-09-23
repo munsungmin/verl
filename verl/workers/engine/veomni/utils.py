@@ -16,8 +16,8 @@ import os
 
 import torch
 
-from RL.verl.verl.utils.device import get_device_id, get_torch_device
-from RL.verl.verl.workers.engine.utils import _prodshape
+from verl.utils.device import get_device_id, get_torch_device
+from verl.workers.engine.utils import _prodshape
 
 VL_TYPE2INDEX = {
     "qwen2_5_vl": {
@@ -266,7 +266,7 @@ def hf_entry_converter(name, spec, place, lidx, lval):
     entry ``(slots, dtype_str, counts, idx_concat, val_concat)``: only the touched
     dim-0 rows go through the NaN probe; every rank enumerates the same slot list
     (zero counts when untouched) so the engine's batched gather stays aligned."""
-    from RL.verl.verl.workers.engine.spec import translate_flat_indices
+    from verl.workers.engine.spec import translate_flat_indices
 
     row_numel = max(_prodshape(spec.full_shape[1:]), 1)
     n_slots = len(spec.hf_slots)
@@ -321,7 +321,7 @@ def veomni_shard_export(module):
     import torch.distributed as dist
     from veomni.distributed import parallel_state
 
-    from RL.verl.verl.utils.model import convert_weight_keys
+    from verl.utils.model import convert_weight_keys
 
     params = module.state_dict()
     params = convert_weight_keys(params, getattr(module, "_fsdp_wrapped_module", module))

@@ -30,13 +30,13 @@ import time
 
 import ray
 
-from RL.verl.verl.experimental.fully_async_policy.dynamic_schedule.base import (
+from verl.experimental.fully_async_policy.dynamic_schedule.base import (
     DynamicSchedulePolicyBase,
     build_policy,
     register_policy,
 )
-from RL.verl.verl.experimental.fully_async_policy.dynamic_schedule.default_policy import DefaultDynamicSchedulePolicy
-from RL.verl.verl.experimental.fully_async_policy.dynamic_schedule.static_fully_async_policy import StaticFullyAsyncPolicy
+from verl.experimental.fully_async_policy.dynamic_schedule.default_policy import DefaultDynamicSchedulePolicy
+from verl.experimental.fully_async_policy.dynamic_schedule.static_fully_async_policy import StaticFullyAsyncPolicy
 
 __all__ = [
     "DynamicResourceController",

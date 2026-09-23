@@ -17,9 +17,9 @@ import pytest
 import torch
 from omegaconf import OmegaConf
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.experimental.reward_loop.reward_manager.dapo import DAPORewardManager as RewardLoopDAPORewardManager
-from RL.verl.verl.workers.reward_manager.dapo import DAPORewardManager
+from verl import DataProto
+from verl.experimental.reward_loop.reward_manager.dapo import DAPORewardManager as RewardLoopDAPORewardManager
+from verl.workers.reward_manager.dapo import DAPORewardManager
 
 
 class _DummyTokenizer:

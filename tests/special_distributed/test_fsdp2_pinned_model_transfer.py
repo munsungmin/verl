@@ -30,9 +30,9 @@ import torch.distributed
 from torch.distributed import init_device_mesh
 from transformers import AutoModelForCausalLM, Qwen2Config
 
-from RL.verl.verl.utils.device import get_device_name, get_torch_device
-from RL.verl.verl.utils.distributed import initialize_global_process_group
-from RL.verl.verl.utils.fsdp_utils import (
+from verl.utils.device import get_device_name, get_torch_device
+from verl.utils.distributed import initialize_global_process_group
+from verl.utils.fsdp_utils import (
     MixedPrecisionPolicy,
     apply_fsdp2,
     load_fsdp2_model_to_gpu,

@@ -45,7 +45,7 @@ import pytest
 import torch
 import torch.nn as nn
 
-from RL.verl.verl.utils.veomni.router_replay import RouterReplayAction, VeOmniRouterReplay
+from verl.utils.veomni.router_replay import RouterReplayAction, VeOmniRouterReplay
 
 # ----------------------------------------------------------------- fixtures
 

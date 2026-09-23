@@ -87,7 +87,7 @@ class BaseModelInitializer(ABC):
         )
 
         if post_process and value:
-            from RL.verl.verl.models.mcore.bridge import LinearForLastLayer
+            from verl.models.mcore.bridge import LinearForLastLayer
 
             model.output_layer = LinearForLastLayer(
                 input_size=self.tfconfig.hidden_size, output_size=1, sequence_parallel=self.tfconfig.sequence_parallel

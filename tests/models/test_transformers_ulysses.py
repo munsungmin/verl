@@ -23,12 +23,12 @@ from packaging import version
 from torch.distributed import init_device_mesh
 from transformers import AutoModelForCausalLM, LlamaConfig, PretrainedConfig, Qwen2Config
 
-from RL.verl.verl.models.transformers.monkey_patch import apply_monkey_patch
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.utils.device import get_device_name, get_torch_device
-from RL.verl.verl.utils.distributed import initialize_global_process_group
-from RL.verl.verl.utils.model import compute_position_id_with_mask, create_random_mask
-from RL.verl.verl.utils.ulysses import (
+from verl.models.transformers.monkey_patch import apply_monkey_patch
+from verl.protocol import DataProto
+from verl.utils.device import get_device_name, get_torch_device
+from verl.utils.distributed import initialize_global_process_group
+from verl.utils.model import compute_position_id_with_mask, create_random_mask
+from verl.utils.ulysses import (
     FSDPUlyssesShardingManager,
     gather_outputs_and_unpad,
     get_ulysses_sequence_parallel_world_size,
@@ -39,7 +39,7 @@ from RL.verl.verl.utils.ulysses import (
 if get_device_name() == "cuda":
     from flash_attn.bert_padding import index_first_axis, rearrange, unpad_input
 elif get_device_name() == "npu":
-    from RL.verl.verl.utils.attention_utils import index_first_axis, rearrange, unpad_input
+    from verl.utils.attention_utils import index_first_axis, rearrange, unpad_input
 
 # TODO(sgm): add more models for test
 # we only need one scale for each model

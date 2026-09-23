@@ -38,10 +38,10 @@ import torch
 from hydra import compose, initialize_config_dir
 from transformers import AutoTokenizer
 
-from RL.verl.tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.utils.tokenizer import normalize_token_ids
-from RL.verl.verl.workers.rollout.replica import get_rollout_replica_class
+from tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
+from verl.protocol import DataProto
+from verl.utils.tokenizer import normalize_token_ids
+from verl.workers.rollout.replica import get_rollout_replica_class
 
 SEED = 42
 DENSE_MODEL_PATH = os.path.expanduser(

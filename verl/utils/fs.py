@@ -22,7 +22,7 @@ import shutil
 import tempfile
 
 try:
-    from RL.verl.verl.utils.hdfs_io import copy, exists, makedirs  # for internal use only
+    from hdfs_io import copy, exists, makedirs  # for internal use only
 except ImportError:
     from .hdfs_io import copy, exists, makedirs
 

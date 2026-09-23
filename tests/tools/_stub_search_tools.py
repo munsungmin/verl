@@ -19,8 +19,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from RL.verl.verl.tools.base_tool import BaseTool
-from RL.verl.verl.tools.schemas import OpenAIFunctionToolSchema, ToolResponse
+from verl.tools.base_tool import BaseTool
+from verl.tools.schemas import OpenAIFunctionToolSchema, ToolResponse
 
 
 class StubSearchTool(BaseTool):

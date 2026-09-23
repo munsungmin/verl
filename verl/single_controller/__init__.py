@@ -13,7 +13,7 @@
 # limitations under the License.
 import os
 
-from .....verl.verl.single_controller import base
+from . import base
 from .base import *
 
 version_folder = os.path.dirname(os.path.join(os.path.abspath(__file__)))

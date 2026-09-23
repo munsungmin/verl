@@ -16,11 +16,11 @@ from typing import TypedDict
 from codetiming import Timer
 from tensordict import TensorDict
 
-from RL.verl.verl.single_controller.base.decorator import Dispatch, make_nd_compute_dataproto_dispatch_fn, register
-from RL.verl.verl.utils import tensordict_utils as tu
-from RL.verl.verl.utils.profiler import DistProfiler
-from RL.verl.verl.utils.tensordict_utils import maybe_fix_3d_position_ids
-from RL.verl.verl.workers.engine_workers import ActorRolloutRefWorker, TrainingWorker
+from verl.single_controller.base.decorator import Dispatch, make_nd_compute_dataproto_dispatch_fn, register
+from verl.utils import tensordict_utils as tu
+from verl.utils.profiler import DistProfiler
+from verl.utils.tensordict_utils import maybe_fix_3d_position_ids
+from verl.workers.engine_workers import ActorRolloutRefWorker, TrainingWorker
 
 
 class OptimStepParams(TypedDict, total=False):

@@ -25,11 +25,11 @@ import torch
 from omegaconf import DictConfig, OmegaConf
 from transformers import AutoConfig
 
-import RL.verl.verl.utils.torch_functional as verl_F
-from ext.verl.verl import DataProto
-from RL.verl.verl.utils.fs import copy_to_local
-from RL.verl.verl.utils.import_utils import deprecated
-from RL.verl.verl.utils.model import update_model_config
+import verl.utils.torch_functional as verl_F
+from verl import DataProto
+from verl.utils.fs import copy_to_local
+from verl.utils.import_utils import deprecated
+from verl.utils.model import update_model_config
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +52,7 @@ def reduce_metrics(metrics: dict[str, list[Any]]) -> dict[str, Any]:
         >>> reduce_metrics(metrics)
         {"loss": 2.0, "accuracy": 0.8}
     """
-    from RL.verl.verl.utils.metric import reduce_metrics
+    from verl.utils.metric import reduce_metrics
 
     return reduce_metrics(metrics)
 

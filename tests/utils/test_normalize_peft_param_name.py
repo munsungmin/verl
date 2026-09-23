@@ -24,14 +24,14 @@ from torch.distributed.fsdp import FullyShardedDataParallel as FSDP
 from torch.distributed.fsdp import MixedPrecision, ShardingStrategy, StateDictType
 from transformers import AutoModelForCausalLM, Qwen3Config
 
-from RL.verl.verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
-from RL.verl.verl.utils.fsdp_utils import (
+from verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
+from verl.utils.fsdp_utils import (
     MixedPrecisionPolicy,
     apply_fsdp2,
     get_fsdp_wrap_policy,
     normalize_peft_param_name,
 )
-from RL.verl.verl.utils.model import convert_weight_keys
+from verl.utils.model import convert_weight_keys
 
 
 def _test_normalize_peft_with_fsdp_worker(rank, world_size, rendezvous_file, strategy):

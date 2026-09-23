@@ -24,9 +24,9 @@ import ray
 import yaml
 from omegaconf import OmegaConf
 
-from RL.verl.verl.utils.import_utils import resolve_config_path
-from RL.verl.verl.workers.rollout.llm_server import LLMServerClient, LLMServerManager
-from RL.verl.verl.workers.rollout.router import GlobalRequestLoadBalancer, get_router_handle
+from verl.utils.import_utils import resolve_config_path
+from verl.workers.rollout.llm_server import LLMServerClient, LLMServerManager
+from verl.workers.rollout.router import GlobalRequestLoadBalancer, get_router_handle
 
 MOCK_PLUGIN_FQN = __name__ + "._MockPluginLoadBalancer"
 

@@ -17,11 +17,11 @@ from typing import Optional
 
 import torch
 
-from RL.verl.verl.models.mcore.util import (
+from verl.models.mcore.util import (
     preprocess_bshd_engine,
     preprocess_thd_engine,
 )
-from RL.verl.verl.workers.config import DistillationConfig, DistillationLossConfig
+from verl.workers.config import DistillationConfig, DistillationLossConfig
 
 
 def vocab_parallel_log_softmax(

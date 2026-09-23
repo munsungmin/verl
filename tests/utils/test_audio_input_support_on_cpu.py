@@ -17,13 +17,13 @@ import types
 import pytest
 import torch
 
-from RL.verl.verl.utils.model import extract_multi_modal_inputs
-from RL.verl.verl.utils.tokenizer import build_multimodal_processor_inputs
+from verl.utils.model import extract_multi_modal_inputs
+from verl.utils.tokenizer import build_multimodal_processor_inputs
 
 
 def test_build_messages_replaces_audio_placeholder() -> None:
     pytest.importorskip("datasets")
-    from RL.verl.verl.utils.dataset.rl_dataset import RLHFDataset
+    from verl.utils.dataset.rl_dataset import RLHFDataset
 
     dataset = RLHFDataset.__new__(RLHFDataset)
     dataset.prompt_key = "prompt"

@@ -108,7 +108,7 @@ def main():
     # Handle HDFS if specified
     if args.hdfs_dir is not None:
         try:
-            from RL.verl.verl.utils.hdfs_io import copy, makedirs
+            from verl.utils.hdfs_io import copy, makedirs
 
             makedirs(args.hdfs_dir)
             copy(src=local_dir, dst=args.hdfs_dir)

@@ -29,8 +29,8 @@ from unittest.mock import MagicMock
 import torch
 from tensordict import TensorDict
 
-from RL.verl.verl.utils import tensordict_utils as tu
-from RL.verl.verl.workers.engine_workers import TrainingWorker
+from verl.utils import tensordict_utils as tu
+from verl.workers.engine_workers import TrainingWorker
 
 
 def _engine(**overrides):

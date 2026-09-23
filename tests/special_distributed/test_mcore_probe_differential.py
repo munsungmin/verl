@@ -178,7 +178,7 @@ def _pp_differential(bridge, model, rank: int, world: int) -> None:
     ``bridge.export_hf_weights`` -- the bridge's own PP-broadcast full export,
     an independent chain. Bitwise, per HF tensor, with directory-lockstep and
     placeholder-row checks on the way."""
-    from RL.verl.verl.workers.engine.megatron.delta_export import build_export_index, mcore_hf_delta_entry
+    from verl.workers.engine.megatron.delta_export import build_export_index, mcore_hf_delta_entry
 
     slot_cache: dict = {}
     index = build_export_index(bridge, model, slot_cache)
@@ -330,7 +330,7 @@ def main():
         _pp_differential(bridge, model, rank, world)
         return
 
-    from RL.verl.verl.workers.engine.megatron.delta_export import make_probe
+    from verl.workers.engine.megatron.delta_export import make_probe
 
     tasks = bridge.get_conversion_tasks(model)
     n_checked = n_pass = 0

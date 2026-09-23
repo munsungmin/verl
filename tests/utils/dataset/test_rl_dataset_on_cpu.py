@@ -24,9 +24,9 @@ from omegaconf import OmegaConf
 from PIL import Image
 from torch.utils.data import DataLoader
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.utils import hf_processor, hf_tokenizer
-from RL.verl.verl.utils.dataset.rl_dataset import RLHFDataset, collate_fn
+from verl import DataProto
+from verl.utils import hf_processor, hf_tokenizer
+from verl.utils.dataset.rl_dataset import RLHFDataset, collate_fn
 
 
 def _mock_rlhf_dataset():

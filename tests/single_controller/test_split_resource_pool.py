@@ -17,16 +17,16 @@ import os
 import ray
 import torch
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.single_controller.base import Worker
-from RL.verl.verl.single_controller.base.decorator import Dispatch, register
-from RL.verl.verl.single_controller.ray.base import (
+from verl import DataProto
+from verl.single_controller.base import Worker
+from verl.single_controller.base.decorator import Dispatch, register
+from verl.single_controller.ray.base import (
     RayClassWithInitArgs,
     RayResourcePool,
     RayWorkerGroup,
     split_resource_pool,
 )
-from RL.verl.verl.utils.device import get_device_name, get_nccl_backend
+from verl.utils.device import get_device_name, get_nccl_backend
 
 
 def get_local_gpus_num(division=1):

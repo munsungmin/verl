@@ -174,7 +174,7 @@ class Tracking:
             self.logger["tensorboard"] = _TensorboardAdapter(project_name, experiment_name)
 
         if "console" in default_backend:
-            from RL.verl.verl.utils.logger import LocalLogger
+            from verl.utils.logger import LocalLogger
 
             self.console_logger = LocalLogger(print_to_console=True)
             self.logger["console"] = self.console_logger
@@ -368,7 +368,7 @@ class RLInsightLogger:
         session_id: Any = None,
     ):
         """Return the shared agent-loop session trace state."""
-        from RL.verl.verl.utils.rollout_trace import RolloutTraceConfig
+        from verl.utils.rollout_trace import RolloutTraceConfig
 
         rollout_config = RolloutTraceConfig.get_instance()
         project_name = rollout_config.project_name

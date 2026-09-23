@@ -28,7 +28,7 @@ from transformers.models.qwen3_5.modeling_qwen3_5 import (
     Qwen3_5ForConditionalGeneration,
 )
 
-from RL.verl.verl.utils.ulysses import (
+from verl.utils.ulysses import (
     get_ulysses_sequence_parallel_group,
     get_ulysses_sequence_parallel_world_size,
     ulysses_pad_and_slice_inputs,
@@ -563,7 +563,7 @@ def forward_with_torch_backend(
     cu_seqlens_cpu: Optional[torch.LongTensor] = None,
     **kwargs,
 ) -> "Qwen3_5CausalLMOutputForPPO":
-    from RL.verl.verl.utils.experimental.torch_functional import FusedLinearForPPO
+    from verl.utils.experimental.torch_functional import FusedLinearForPPO
 
     if cu_seqlens is not None:
         kwargs["cu_seqlens"] = cu_seqlens
@@ -617,7 +617,7 @@ def forward_with_triton_backend(
     cu_seqlens_cpu: Optional[torch.LongTensor] = None,
     **kwargs,
 ) -> "Qwen3_5CausalLMOutputForPPO":
-    from RL.verl.verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
+    from verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
 
     if cu_seqlens is not None:
         kwargs["cu_seqlens"] = cu_seqlens

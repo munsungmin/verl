@@ -23,11 +23,11 @@ import socket
 import hydra
 import ray
 
-from RL.verl.verl.experimental.one_step_off_policy.ray_trainer import OneStepOffRayTrainer
-from RL.verl.verl.experimental.separation.utils import create_resource_pool_manager, create_role_worker_mapping
-from RL.verl.verl.trainer.ppo.utils import create_rl_dataset, create_rl_sampler, need_critic, need_reference_policy
-from RL.verl.verl.utils.config import validate_config
-from RL.verl.verl.utils.device import auto_set_device
+from verl.experimental.one_step_off_policy.ray_trainer import OneStepOffRayTrainer
+from verl.experimental.separation.utils import create_resource_pool_manager, create_role_worker_mapping
+from verl.trainer.ppo.utils import create_rl_dataset, create_rl_sampler, need_critic, need_reference_policy
+from verl.utils.config import validate_config
+from verl.utils.device import auto_set_device
 
 
 @ray.remote(num_cpus=10, max_concurrency=100)  # please make sure main_task is not scheduled on head
@@ -38,7 +38,7 @@ class OneStepTaskRunner:
 
         from omegaconf import OmegaConf
 
-        from RL.verl.verl.utils.fs import copy_to_local
+        from verl.utils.fs import copy_to_local
 
         print(f"TaskRunner hostname: {socket.gethostname()}, PID: {os.getpid()}")
 
@@ -62,7 +62,7 @@ class OneStepTaskRunner:
         )
 
         # Instantiate the tokenizer and processor.
-        from RL.verl.verl.utils import hf_processor, hf_tokenizer
+        from verl.utils import hf_processor, hf_tokenizer
 
         trust_remote_code = config.data.get("trust_remote_code", False)
         tokenizer = hf_tokenizer(local_path, trust_remote_code=trust_remote_code)
@@ -71,7 +71,7 @@ class OneStepTaskRunner:
 
         resource_pool_manager = create_resource_pool_manager(config, role_worker_mapping.keys())
 
-        from RL.verl.verl.utils.dataset.rl_dataset import collate_fn
+        from verl.utils.dataset.rl_dataset import collate_fn
 
         # Create training and validation datasets.
         train_dataset = create_rl_dataset(
@@ -110,7 +110,7 @@ class OneStepTaskRunner:
 def main(config):
     from time import time
 
-    from RL.verl.verl.trainer.main_ppo import run_ppo
+    from verl.trainer.main_ppo import run_ppo
 
     start_time = time()
 

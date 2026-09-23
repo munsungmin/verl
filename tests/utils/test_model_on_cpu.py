@@ -16,7 +16,7 @@ from types import SimpleNamespace  # Or use a mock object library
 
 import pytest
 
-from RL.verl.verl.utils.model import update_model_config
+from verl.utils.model import update_model_config
 
 
 # Parametrize with different override scenarios

@@ -21,7 +21,7 @@ import os
 from contextvars import ContextVar
 from functools import wraps
 
-from RL.verl.verl.utils.device import is_torch_npu_available
+from verl.utils.device import is_torch_npu_available
 
 logger = logging.getLogger(__name__)
 

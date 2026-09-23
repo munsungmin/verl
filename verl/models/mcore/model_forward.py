@@ -18,8 +18,8 @@ from typing import Optional
 import torch
 from torch.nested._internal.nested_tensor import NestedTensor
 
-from RL.verl.verl.utils.megatron_utils import unwrap_model
-from RL.verl.verl.workers.config import MtpConfig
+from verl.utils.megatron_utils import unwrap_model
+from verl.workers.config import MtpConfig
 
 from .util import (
     build_vlm_attn_mask_bshd,

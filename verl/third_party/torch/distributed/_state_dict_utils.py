@@ -96,13 +96,13 @@ import weakref
 from collections.abc import Mapping, MutableMapping
 from typing import TYPE_CHECKING, Any, Callable, NamedTuple, Optional, Union, cast
 
-import RL.verl.verl.third_party.torch as torch
-import RL.verl.verl.third_party.torch.distributed as dist
+import torch
+import torch.distributed as dist
 import torch.nn.functional as F
 from torch.distributed._functional_collectives import AsyncCollectiveTensor
 
 if dist.is_available() or TYPE_CHECKING:
-    from RL.verl.verl.third_party.torch.distributed import distributed_c10d
+    from torch.distributed import distributed_c10d
     from torch.distributed._shard.sharded_tensor import ShardedTensor
     from torch.distributed.tensor import DTensor, Replicate, distribute_tensor
     from torch.distributed.tensor._utils import compute_local_shape_and_global_offset

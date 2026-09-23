@@ -29,7 +29,7 @@ from typing import Any, Callable, Optional
 
 from transformers.utils import get_json_schema
 
-from RL.verl.verl.tools.schemas import OpenAIFunctionToolSchema, ToolResponse
+from verl.tools.schemas import OpenAIFunctionToolSchema, ToolResponse
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

@@ -19,15 +19,15 @@ import ray
 from omegaconf import DictConfig
 from transformers import PreTrainedTokenizer
 
-from RL.verl.tests.checkpoint_engine.test_utils import create_trainer_worker_group
-from RL.verl.verl.checkpoint_engine import CheckpointEngineManager
-from RL.verl.verl.single_controller.ray import (
+from tests.checkpoint_engine.test_utils import create_trainer_worker_group
+from verl.checkpoint_engine import CheckpointEngineManager
+from verl.single_controller.ray import (
     RayResourcePool,
 )
-from RL.verl.verl.utils.config import omega_conf_to_dataclass
-from RL.verl.verl.utils.tokenizer import normalize_token_ids
-from RL.verl.verl.workers.config import CheckpointEngineConfig, HFModelConfig
-from RL.verl.verl.workers.rollout.llm_server import FullyAsyncLLMServerClient, LLMServerClient, LLMServerManager
+from verl.utils.config import omega_conf_to_dataclass
+from verl.utils.tokenizer import normalize_token_ids
+from verl.workers.config import CheckpointEngineConfig, HFModelConfig
+from verl.workers.rollout.llm_server import FullyAsyncLLMServerClient, LLMServerClient, LLMServerManager
 
 
 @pytest.fixture

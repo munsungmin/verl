@@ -28,10 +28,10 @@ from torch.utils.data import DistributedSampler
 from torchdata.stateful_dataloader import StatefulDataLoader
 from transformers.utils import get_json_schema
 
-from RL.verl.verl.utils import hf_processor, hf_tokenizer
-from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode, SFTTensorCollator
-from RL.verl.verl.utils.dataset.multiturn_sft_dataset import MultiTurnSFTDataset
-from RL.verl.verl.utils.model import extract_multi_modal_inputs
+from verl.utils import hf_processor, hf_tokenizer
+from verl.utils.dataset.dataset_utils import DatasetPadMode, SFTTensorCollator
+from verl.utils.dataset.multiturn_sft_dataset import MultiTurnSFTDataset
+from verl.utils.model import extract_multi_modal_inputs
 
 custom_model_prefix = Path("~/models").expanduser().resolve()
 

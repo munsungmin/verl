@@ -24,7 +24,7 @@ import types
 import pytest
 import torch.nn as nn
 
-from RL.verl.verl.utils.megatron_utils import McoreModuleWrapperConfig, make_megatron_module
+from verl.utils.megatron_utils import McoreModuleWrapperConfig, make_megatron_module
 
 
 class _DummyConfig:

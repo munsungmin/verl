@@ -14,7 +14,7 @@
 
 from unittest.mock import Mock
 
-from RL.verl.verl.utils import fsdp_utils
+from verl.utils import fsdp_utils
 
 
 def test_offload_fsdp2_model_to_cpu_uses_non_blocking_copy():

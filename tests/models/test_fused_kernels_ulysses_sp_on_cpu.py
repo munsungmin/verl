@@ -43,11 +43,10 @@ import contextlib
 from typing import Any
 from unittest import mock
 
-from RL.verl.verl.models.transformers import dense_common, glm4v, qwen2_vl, qwen3_5
 import pytest
 import torch
 
-from RL.verl.verl.models.transformers import qwen3_vl
+from verl.models.transformers import dense_common, glm4v, qwen2_vl, qwen3_5, qwen3_vl
 
 # ---------------------------------------------------------------------------
 # 1. Root-cause demonstration: slice-then-local-roll != global-roll-then-slice.

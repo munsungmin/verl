@@ -21,13 +21,13 @@ import ray
 from omegaconf import DictConfig, OmegaConf
 from transformers.utils import get_json_schema
 
-from RL.verl.tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
-from RL.verl.verl.experimental.agent_loop import get_trajectory_info
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.tools.base_tool import BaseTool, OpenAIFunctionToolSchema
-from RL.verl.verl.tools.schemas import ToolResponse
-from RL.verl.verl.utils import hf_tokenizer
-from RL.verl.verl.workers.rollout.router import GlobalRequestLoadBalancer
+from tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
+from verl.experimental.agent_loop import get_trajectory_info
+from verl.protocol import DataProto
+from verl.tools.base_tool import BaseTool, OpenAIFunctionToolSchema
+from verl.tools.schemas import ToolResponse
+from verl.utils import hf_tokenizer
+from verl.workers.rollout.router import GlobalRequestLoadBalancer
 
 
 @pytest.fixture

@@ -24,7 +24,7 @@ from types import SimpleNamespace
 import pytest
 import torch
 
-from RL.verl.verl.trainer.ppo.core_algos import compute_reinforce_plus_plus_outcome_advantage
+from verl.trainer.ppo.core_algos import compute_reinforce_plus_plus_outcome_advantage
 
 
 def _config(gamma=1.0):

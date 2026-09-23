@@ -16,7 +16,7 @@ import random
 import torch
 from tensordict import TensorDict
 
-from RL.verl.verl.workers.utils.padding import (
+from verl.workers.utils.padding import (
     build_attention_mask_from_nested,
     embeds_padding_2_no_padding,
     left_right_2_no_padding,

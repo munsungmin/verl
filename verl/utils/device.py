@@ -24,7 +24,7 @@ from enum import IntEnum, unique
 import torch
 from packaging import version
 
-from RL.verl.verl.plugin.platform import get_platform
+from verl.plugin.platform import get_platform
 
 logger = logging.getLogger(__name__)
 

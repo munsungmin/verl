@@ -29,24 +29,24 @@ from omegaconf import OmegaConf
 from torch.utils.data import Dataset, Sampler
 from tqdm import tqdm
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup, ResourcePoolManager
-from RL.verl.verl.single_controller.ray.base import create_colocated_worker_cls
-from RL.verl.verl.trainer.ppo.core_algos import AdvantageEstimator, agg_loss
-from RL.verl.verl.trainer.ppo.metric_utils import (
+from verl import DataProto
+from verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup, ResourcePoolManager
+from verl.single_controller.ray.base import create_colocated_worker_cls
+from verl.trainer.ppo.core_algos import AdvantageEstimator, agg_loss
+from verl.trainer.ppo.metric_utils import (
     compute_data_metrics,
     compute_throughout_metrics,
     compute_timing_metrics,
     compute_variance_proxy_metrics,
 )
-from RL.verl.verl.trainer.ppo.ray_trainer import RayPPOTrainer, apply_kl_penalty, compute_advantage, compute_response_mask
-from RL.verl.verl.trainer.ppo.reward import extract_reward
-from RL.verl.verl.trainer.ppo.utils import Role, WorkerType
-from RL.verl.verl.utils.checkpoint.checkpoint_manager import should_save_ckpt_esi
-from RL.verl.verl.utils.config import omega_conf_to_dataclass
-from RL.verl.verl.utils.debug import marked_timer
-from RL.verl.verl.utils.import_utils import load_class_from_fqn
-from RL.verl.verl.utils.metric import reduce_metrics
+from verl.trainer.ppo.ray_trainer import RayPPOTrainer, apply_kl_penalty, compute_advantage, compute_response_mask
+from verl.trainer.ppo.reward import extract_reward
+from verl.trainer.ppo.utils import Role, WorkerType
+from verl.utils.checkpoint.checkpoint_manager import should_save_ckpt_esi
+from verl.utils.config import omega_conf_to_dataclass
+from verl.utils.debug import marked_timer
+from verl.utils.import_utils import load_class_from_fqn
+from verl.utils.metric import reduce_metrics
 
 
 class SeparateRayPPOTrainer(RayPPOTrainer):
@@ -121,7 +121,7 @@ class SeparateRayPPOTrainer(RayPPOTrainer):
         if checkpoint_manager_class_fqn:
             CheckpointEngineManager = load_class_from_fqn(checkpoint_manager_class_fqn, "CheckpointEngineManager")
         else:
-            from RL.verl.verl.checkpoint_engine import CheckpointEngineManager
+            from verl.checkpoint_engine import CheckpointEngineManager
 
         self.checkpoint_manager = CheckpointEngineManager(
             config=omega_conf_to_dataclass(self.config.actor_rollout_ref.rollout.checkpoint_engine),
@@ -149,8 +149,8 @@ class SeparateRayPPOTrainer(RayPPOTrainer):
             critic_cfg = omega_conf_to_dataclass(self.config.critic)
 
             # convert critic_cfg into TrainingWorkerConfig for the unified model engine worker
-            from RL.verl.verl.workers.config import FSDPEngineConfig
-            from RL.verl.verl.workers.engine_workers import TrainingWorkerConfig
+            from verl.workers.config import FSDPEngineConfig
+            from verl.workers.engine_workers import TrainingWorkerConfig
 
             self.orig_critic_cfg = critic_cfg
             if self.orig_critic_cfg.strategy == "fsdp":
@@ -243,7 +243,7 @@ class SeparateRayPPOTrainer(RayPPOTrainer):
             # assign critic loss
             from functools import partial
 
-            from RL.verl.verl.workers.utils.losses import value_loss
+            from verl.workers.utils.losses import value_loss
 
             value_loss_ = partial(value_loss, config=self.orig_critic_cfg)
             self.critic_wg.set_loss_fn(value_loss_)
@@ -261,7 +261,7 @@ class SeparateRayPPOTrainer(RayPPOTrainer):
         self.actor_rollout_wg.init_model()
 
     def _init_reward_loop(self):
-        from RL.verl.verl.experimental.reward_loop import RewardLoopManager
+        from verl.experimental.reward_loop import RewardLoopManager
 
         # initalize reward loop manager
         # reward model (colocate or standalone): get resource_pool
@@ -288,7 +288,7 @@ class SeparateRayPPOTrainer(RayPPOTrainer):
         """
         from omegaconf import OmegaConf
 
-        from RL.verl.verl.utils.tracking import Tracking
+        from verl.utils.tracking import Tracking
 
         self.logger = Tracking(
             project_name=self.config.trainer.project_name,
@@ -509,7 +509,7 @@ class SeparateRayPPOTrainer(RayPPOTrainer):
         rollout_corr_config = self.config.algorithm.get("rollout_correction", None)
         bypass_recomputing_logprobs = rollout_corr_config and rollout_corr_config.get("bypass_mode", False)
         if bypass_recomputing_logprobs:  # Use `rollout_log_probs`
-            from RL.verl.verl.trainer.ppo.rollout_corr_helper import apply_bypass_mode
+            from verl.trainer.ppo.rollout_corr_helper import apply_bypass_mode
 
             apply_bypass_mode(
                 batch=batch,
@@ -550,7 +550,7 @@ class SeparateRayPPOTrainer(RayPPOTrainer):
                 batch = batch.union(old_log_prob)
                 if "rollout_log_probs" in batch.batch.keys():
                     # TODO: we may want to add diff of probs too.
-                    from RL.verl.verl.utils.debug.metrics import calculate_debug_metrics
+                    from verl.utils.debug.metrics import calculate_debug_metrics
 
                     metrics.update(calculate_debug_metrics(batch))
 
@@ -606,7 +606,7 @@ class SeparateRayPPOTrainer(RayPPOTrainer):
                 and "rollout_log_probs" in batch.batch
                 and not bypass_recomputing_logprobs  # Only in decoupled mode
             ):
-                from RL.verl.verl.trainer.ppo.rollout_corr_helper import compute_rollout_correction_and_add_to_batch
+                from verl.trainer.ppo.rollout_corr_helper import compute_rollout_correction_and_add_to_batch
 
                 # Compute IS weights, apply rejection sampling, compute metrics
                 batch, is_metrics = compute_rollout_correction_and_add_to_batch(batch, rollout_corr_config)

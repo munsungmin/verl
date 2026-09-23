@@ -21,7 +21,7 @@ import transfer_queue as tq
 from omegaconf import DictConfig
 from transfer_queue import KVBatchMeta
 
-from RL.verl.verl.utils.skip import SkipManager
+from verl.utils.skip import SkipManager
 
 logger = logging.getLogger(__name__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "INFO"))

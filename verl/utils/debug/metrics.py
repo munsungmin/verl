@@ -15,7 +15,7 @@ import logging
 
 import torch
 
-from RL.verl.verl.protocol import DataProto
+from verl.protocol import DataProto
 
 logger = logging.getLogger(__file__)
 

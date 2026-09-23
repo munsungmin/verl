@@ -16,7 +16,7 @@ import os
 
 import pytest
 
-from RL.verl.verl.utils.import_utils import load_extern_object
+from verl.utils.import_utils import load_extern_object
 
 # Path to the test module
 TEST_MODULE_PATH = os.path.join(os.path.dirname(__file__), "_test_module.py")

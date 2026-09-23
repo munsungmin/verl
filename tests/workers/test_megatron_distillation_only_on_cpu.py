@@ -33,7 +33,7 @@ import pytest
 import torch
 from tensordict import TensorDict
 
-from RL.verl.verl.workers.engine.megatron.transformer_impl import MegatronEngineWithLMHead
+from verl.workers.engine.megatron.transformer_impl import MegatronEngineWithLMHead
 
 _VOCAB_SIZE = 8
 _DISTILLATION_KEYS = ("distillation_losses", "student_mass", "teacher_mass")

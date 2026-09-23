@@ -17,7 +17,7 @@ import pytest
 
 pytest.importorskip("ray")
 
-from RL.verl.verl.trainer.ppo.ray_trainer import compute_spec_decode_metrics
+from verl.trainer.ppo.ray_trainer import compute_spec_decode_metrics
 
 
 def test_spec_decode_metrics_detect_drafts_with_zero_acceptance():

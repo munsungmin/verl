@@ -18,7 +18,7 @@ from unittest.mock import patch
 import torch
 from tensordict import TensorDict
 
-from RL.verl.verl.workers.engine.megatron.transformer_impl import MegatronEngineWithValueHead
+from verl.workers.engine.megatron.transformer_impl import MegatronEngineWithValueHead
 
 
 def test_dsv4_value_head_forwards_contiguous_cp_layout():

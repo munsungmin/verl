@@ -18,10 +18,10 @@ from hydra import compose, initialize_config_dir
 from torchdata.stateful_dataloader import StatefulDataLoader
 from transformers import AutoTokenizer
 
-from RL.verl.tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.trainer.ppo.utils import create_rl_sampler
-from RL.verl.verl.utils.dataset.rl_dataset import RLHFDataset, collate_fn
+from tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
+from verl.protocol import DataProto
+from verl.trainer.ppo.utils import create_rl_sampler
+from verl.utils.dataset.rl_dataset import RLHFDataset, collate_fn
 
 
 def test_agent_reward_loop_standalone():

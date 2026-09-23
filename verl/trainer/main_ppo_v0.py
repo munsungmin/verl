@@ -21,10 +21,10 @@ import socket
 import ray
 from omegaconf import OmegaConf
 
-from RL.verl.verl.trainer.distillation import is_distillation_enabled
-from RL.verl.verl.trainer.ppo.ray_trainer import RayPPOTrainer
-from RL.verl.verl.trainer.ppo.utils import create_rl_dataset, create_rl_sampler, need_critic, need_reference_policy
-from RL.verl.verl.utils.config import validate_config
+from verl.trainer.distillation import is_distillation_enabled
+from verl.trainer.ppo.ray_trainer import RayPPOTrainer
+from verl.trainer.ppo.utils import create_rl_dataset, create_rl_sampler, need_critic, need_reference_policy
+from verl.utils.config import validate_config
 
 
 class BaseTaskRunner:
@@ -34,9 +34,9 @@ class BaseTaskRunner:
 
     def add_actor_rollout_worker(self, config):
         """Add actor rollout worker using the unified model engine implementation."""
-        from RL.verl.verl.single_controller.ray import RayWorkerGroup
-        from RL.verl.verl.trainer.ppo.ray_trainer import Role
-        from RL.verl.verl.workers.engine_workers import ActorRolloutRefWorker
+        from verl.single_controller.ray import RayWorkerGroup
+        from verl.trainer.ppo.ray_trainer import Role
+        from verl.workers.engine_workers import ActorRolloutRefWorker
 
         actor_rollout_cls = ActorRolloutRefWorker
         ray_worker_group_cls = RayWorkerGroup
@@ -56,8 +56,8 @@ class BaseTaskRunner:
 
     def add_critic_worker(self, config):
         """Add critic worker to role mapping using the unified model engine implementation."""
-        from RL.verl.verl.trainer.ppo.ray_trainer import Role
-        from RL.verl.verl.workers.engine_workers import TrainingWorker
+        from verl.trainer.ppo.ray_trainer import Role
+        from verl.workers.engine_workers import TrainingWorker
 
         # The model-engine TrainingWorker handles all critic backends (fsdp/fsdp2/megatron/...)
         # internally based on ``config.critic.strategy``.
@@ -94,14 +94,14 @@ class BaseTaskRunner:
             teacher_pool = [distillation_config.n_gpus_per_node] * distillation_config.nnodes
             resource_pool_spec["teacher_pool"] = teacher_pool
 
-        from RL.verl.verl.trainer.ppo.ray_trainer import ResourcePoolManager
+        from verl.trainer.ppo.ray_trainer import ResourcePoolManager
 
         resource_pool_manager = ResourcePoolManager(resource_pool_spec=resource_pool_spec, mapping=self.mapping)
         return resource_pool_manager
 
     def add_reward_model_resource_pool(self, config):
         """Add reward model worker if enabled."""
-        from RL.verl.verl.trainer.ppo.ray_trainer import Role
+        from verl.trainer.ppo.ray_trainer import Role
 
         if config.reward.reward_model.enable:
             # we do not use reward model workers, so we only register reward model in resource pool
@@ -113,7 +113,7 @@ class BaseTaskRunner:
 
     def add_teacher_model_resource_pool(self, config):
         """Add teacher model worker if enabled."""
-        from RL.verl.verl.trainer.ppo.ray_trainer import Role
+        from verl.trainer.ppo.ray_trainer import Role
 
         if is_distillation_enabled(config.get("distillation")):
             # we do not use teacher model workers, so we only register teacher model in resource pool
@@ -183,8 +183,8 @@ class TaskRunner(BaseTaskRunner):
         )
 
         # Instantiate the tokenizer and processor from the model config.
-        from RL.verl.verl.utils.config import omega_conf_to_dataclass
-        from RL.verl.verl.workers.config import HFModelConfig
+        from verl.utils.config import omega_conf_to_dataclass
+        from verl.workers.config import HFModelConfig
 
         model_config: HFModelConfig = omega_conf_to_dataclass(config.actor_rollout_ref.model)
         tokenizer = model_config.tokenizer
@@ -193,7 +193,7 @@ class TaskRunner(BaseTaskRunner):
 
         resource_pool_manager = self.init_resource_pool_mgr(config)
 
-        from RL.verl.verl.utils.dataset.rl_dataset import collate_fn
+        from verl.utils.dataset.rl_dataset import collate_fn
 
         # Create training and validation datasets.
         train_dataset = create_rl_dataset(

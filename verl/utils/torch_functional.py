@@ -29,7 +29,7 @@ from torch.optim import Optimizer
 from torch.optim.lr_scheduler import LambdaLR
 from transformers import PreTrainedTokenizer
 
-from RL.verl.verl.utils.device import get_device_name, get_torch_device
+from verl.utils.device import get_device_name, get_torch_device
 
 try:
     from flash_attn.ops.triton.cross_entropy import cross_entropy_loss
@@ -663,7 +663,7 @@ def log_probs_from_logits_all_rmpad(input_ids_rmpad, logits_rmpad, indices, batc
     if get_device_name() == "cuda":
         from flash_attn.bert_padding import pad_input
     elif get_device_name() == "npu":
-        from RL.verl.verl.utils.attention_utils import pad_input
+        from verl.utils.attention_utils import pad_input
 
     input_ids_rmpad = input_ids_rmpad.transpose(0, 1)  # transpose back to [total_nnz, 1]
     input_ids_rmpad = input_ids_rmpad.squeeze(-1)

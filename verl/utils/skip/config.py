@@ -14,7 +14,7 @@
 
 from dataclasses import dataclass, field
 
-from RL.verl.verl.base_config import BaseConfig
+from verl.base_config import BaseConfig
 
 
 @dataclass

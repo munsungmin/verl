@@ -18,11 +18,11 @@ import ray
 import torch
 from tensordict import TensorDict
 
-import RL.verl.verl.utils.tensordict_utils as tu
-from ext.verl.verl import DataProto
-from RL.verl.verl.single_controller.base import Worker
-from RL.verl.verl.single_controller.base.decorator import make_nd_compute_dataproto_dispatch_fn, register
-from RL.verl.verl.utils.device import get_device_name, get_nccl_backend
+import verl.utils.tensordict_utils as tu
+from verl import DataProto
+from verl.single_controller.base import Worker
+from verl.single_controller.base.decorator import make_nd_compute_dataproto_dispatch_fn, register
+from verl.utils.device import get_device_name, get_nccl_backend
 
 
 @ray.remote
@@ -103,7 +103,7 @@ def test_dist_global_info_wg():
     # register a infer dist info with tp=4, dp=2
     # register a train dist info with tp=2, dp=2, pp=2
     # test the correctness of data dispatch and computation
-    from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
+    from verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
 
     ray.init()
     ngpus = torch.cuda.device_count()

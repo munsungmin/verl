@@ -26,15 +26,15 @@ from megatron.core.pipeline_parallel import get_forward_backward_func
 from omegaconf import OmegaConf
 from tensordict import TensorDict
 
-import RL.verl.verl.utils.torch_functional as verl_F
-from RL.verl.verl.models.mcore import get_mcore_weight_converter
-from RL.verl.verl.trainer.config import CheckpointConfig
-from RL.verl.verl.utils import tensordict_utils as tu
-from RL.verl.verl.utils.checkpoint.megatron_checkpoint_manager import MegatronCheckpointManager
-from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode
-from RL.verl.verl.utils.debug import log_gpu_memory_usage
-from RL.verl.verl.utils.device import get_device_id, get_device_name, get_torch_device
-from RL.verl.verl.utils.dynamic_cp_scheduler import (
+import verl.utils.torch_functional as verl_F
+from verl.models.mcore import get_mcore_weight_converter
+from verl.trainer.config import CheckpointConfig
+from verl.utils import tensordict_utils as tu
+from verl.utils.checkpoint.megatron_checkpoint_manager import MegatronCheckpointManager
+from verl.utils.dataset.dataset_utils import DatasetPadMode
+from verl.utils.debug import log_gpu_memory_usage
+from verl.utils.device import get_device_id, get_device_name, get_torch_device
+from verl.utils.dynamic_cp_scheduler import (
     DCP_GROUP_LEADER,
     DCP_LOCAL_NUM_TOKENS,
     DCP_PADDING_MASK,
@@ -43,9 +43,9 @@ from RL.verl.verl.utils.dynamic_cp_scheduler import (
     get_megatron_dynamic_cp_scheduler_cls,
     postprocess_dynamic_cp_batch,
 )
-from RL.verl.verl.utils.megatron.pipeline_parallel import make_batch_generator
-from RL.verl.verl.utils.megatron.router_replay_patch import RouterReplay, RouterReplayAction, apply_router_replay_patch
-from RL.verl.verl.utils.megatron.router_replay_utils import (
+from verl.utils.megatron.pipeline_parallel import make_batch_generator
+from verl.utils.megatron.router_replay_patch import RouterReplay, RouterReplayAction, apply_router_replay_patch
+from verl.utils.megatron.router_replay_utils import (
     RouterReplayHelper,
     align_r3_router_replay_data,
     build_r3_replay_mask,
@@ -56,14 +56,14 @@ from RL.verl.verl.utils.megatron.router_replay_utils import (
     set_model_router_replay_action,
     set_router_replay_data,
 )
-from RL.verl.verl.utils.megatron.tensor_parallel import (
+from verl.utils.megatron.tensor_parallel import (
     vocab_parallel_entropy,
     vocab_parallel_entropy_with_chunking,
     vocab_parallel_log_probs_from_logits,
     vocab_parallel_sum_pi_squared,
 )
-from RL.verl.verl.utils.megatron_peft_utils import build_peft_config_for_vllm
-from RL.verl.verl.utils.megatron_utils import (
+from verl.utils.megatron_peft_utils import build_peft_config_for_vllm
+from verl.utils.megatron_utils import (
     check_mtp_config,
     get_megatron_module_device,
     get_megatron_mtp_loss,
@@ -75,9 +75,9 @@ from RL.verl.verl.utils.megatron_utils import (
     register_megatron_training_hooks,
     unwrap_model,
 )
-from RL.verl.verl.utils.model import extract_multi_modal_inputs, load_mcore_dist_weights
-from RL.verl.verl.utils.seqlen_balancing import restore_dynamic_batch
-from RL.verl.verl.workers.config import HFModelConfig, McoreEngineConfig, McoreOptimizerConfig
+from verl.utils.model import extract_multi_modal_inputs, load_mcore_dist_weights
+from verl.utils.seqlen_balancing import restore_dynamic_batch
+from verl.workers.config import HFModelConfig, McoreEngineConfig, McoreOptimizerConfig
 
 from ..base import BaseEngine, BaseEngineCtx, EngineRegistry
 from ..utils import postprocess_batch_func, prepare_micro_batches
@@ -224,15 +224,15 @@ class MegatronEngine(BaseEngine):
             apply_router_replay_patch()
             self.mini_layer_topk_idx_list = []
         # Apply checkpoint patch for MoE models
-        from RL.verl.verl.utils.device import is_cuda_available, is_npu_available
+        from verl.utils.device import is_cuda_available, is_npu_available
 
         if is_npu_available and __version__ >= "0.16.0":
-            from RL.verl.verl.models.mcore.patch import apply_mtp_inference_patch
+            from verl.models.mcore.patch import apply_mtp_inference_patch
 
             apply_mtp_inference_patch()
 
         if is_cuda_available:
-            from RL.verl.verl.models.mcore.patch import apply_patch_megatron_recomputation_backward
+            from verl.models.mcore.patch import apply_patch_megatron_recomputation_backward
 
             apply_patch_megatron_recomputation_backward()
 
@@ -281,8 +281,8 @@ class MegatronEngine(BaseEngine):
         )
 
     def _build_tf_config(self):
-        from RL.verl.verl.utils.megatron_utils import mapping_string_to_attn_backend
-        from RL.verl.verl.utils.torch_dtypes import PrecisionType
+        from verl.utils.megatron_utils import mapping_string_to_attn_backend
+        from verl.utils.torch_dtypes import PrecisionType
 
         self.is_value_model = self.model_config.model_type == "value_model"
         self.share_embeddings_and_output_weights = self.model_config.share_embeddings_and_output_weights
@@ -326,7 +326,7 @@ class MegatronEngine(BaseEngine):
         self.vanilla_bridge = self.engine_config.vanilla_mbridge
 
         if self.vanilla_bridge:
-            from RL.verl.verl.models.mcore.mbridge import AutoBridge
+            from verl.models.mcore.mbridge import AutoBridge
 
             bridge = AutoBridge.from_config(self.model_config.hf_config, dtype=self.param_dtype)
             bridge.set_extra_args(**override_transformer_config)
@@ -338,7 +338,7 @@ class MegatronEngine(BaseEngine):
             if self.is_value_model and hasattr(tf_config, "share_embeddings_and_output_weights"):
                 tf_config.share_embeddings_and_output_weights = False
         else:
-            from RL.verl.verl.models.mcore.bridge import AutoBridge
+            from verl.models.mcore.bridge import AutoBridge
 
             # Use Megatron-Bridge to convert HF config to Megatron config
             bridge = AutoBridge.from_hf_pretrained(
@@ -430,7 +430,7 @@ class MegatronEngine(BaseEngine):
                 print(f"TF config: {tf_config}")
         self.tf_config = tf_config
 
-        from RL.verl.verl.workers.config.megatron_peft import get_peft_cls
+        from verl.workers.config.megatron_peft import get_peft_cls
 
         self.peft_cls = get_peft_cls(
             model_config=self.model_config, bridge=self.bridge, provider=self.provider, dtype=self.param_dtype
@@ -447,8 +447,8 @@ class MegatronEngine(BaseEngine):
         For Muon + LayerWise, also enable ``use_layer_wise_param_layout`` on the
         DDP config so master weights live in the param buffer (not fp32 clones).
         """
-        from RL.verl.verl.utils.megatron.optimizer import is_muon_layer_wise_config
-        from RL.verl.verl.utils.torch_dtypes import PrecisionType
+        from verl.utils.megatron.optimizer import is_muon_layer_wise_config
+        from verl.utils.torch_dtypes import PrecisionType
 
         override_ddp_config = dict(self.engine_config.override_ddp_config or {})
         opt_cfg = self.optimizer_config
@@ -463,9 +463,9 @@ class MegatronEngine(BaseEngine):
         return override_ddp_config
 
     def _build_megatron_module(self):
-        from RL.verl.verl.utils.megatron.optimizer import is_muon_layer_wise_config
-        from RL.verl.verl.utils.megatron_utils import McoreModuleWrapperConfig, make_megatron_module
-        from RL.verl.verl.utils.model import print_model_size
+        from verl.utils.megatron.optimizer import is_muon_layer_wise_config
+        from verl.utils.megatron_utils import McoreModuleWrapperConfig, make_megatron_module
+        from verl.utils.model import print_model_size
 
         if self.engine_config.forward_only:
             wrap_with_ddp = False
@@ -531,13 +531,13 @@ class MegatronEngine(BaseEngine):
             self.engine_config.use_fused_kernels = False
             return
 
-        from RL.verl.verl.models.mcore.model_forward_fused import patch_fused_forward
+        from verl.models.mcore.model_forward_fused import patch_fused_forward
 
         for model in self.module:
             patch_fused_forward(model)
 
     def _build_optimizer(self):
-        from RL.verl.verl.utils.megatron.optimizer import get_megatron_optimizer, init_megatron_optim_config
+        from verl.utils.megatron.optimizer import get_megatron_optimizer, init_megatron_optim_config
 
         optim_config_megatron = init_megatron_optim_config(
             self.optimizer_config,
@@ -550,7 +550,7 @@ class MegatronEngine(BaseEngine):
         return optimizer
 
     def _build_lr_scheduler(self):
-        from RL.verl.verl.utils.megatron.optimizer import get_megatron_optimizer_param_scheduler
+        from verl.utils.megatron.optimizer import get_megatron_optimizer_param_scheduler
 
         optimizer_scheduler = get_megatron_optimizer_param_scheduler(
             optimizer=self.optimizer, config=self.optimizer_config
@@ -581,7 +581,7 @@ class MegatronEngine(BaseEngine):
         self.module = self._build_megatron_module()
 
         if self._qat_enabled and not self.engine_config.forward_only:
-            from RL.verl.verl.utils.modelopt import apply_qat_to_modules
+            from verl.utils.modelopt import apply_qat_to_modules
 
             self.module = apply_qat_to_modules(self.module, self._qat_config)
 
@@ -593,7 +593,7 @@ class MegatronEngine(BaseEngine):
             self.engine_config.forward_only
             and self.engine_config.override_transformer_config.get("mtp_num_layers") == 0
         ):
-            from RL.verl.verl.models.mcore.mtp_patch import patch_postprocess
+            from verl.models.mcore.mtp_patch import patch_postprocess
 
             for model in self.module:
                 patch_postprocess(model)
@@ -714,7 +714,7 @@ class MegatronEngine(BaseEngine):
         Returns:
             current_lr (float or list[float]): Updated learning rate(s).
         """
-        from RL.verl.verl.utils.megatron.optimizer import get_megatron_last_lr
+        from verl.utils.megatron.optimizer import get_megatron_last_lr
 
         self.lr_scheduler.step(1)
         return get_megatron_last_lr(self.optimizer)
@@ -1047,7 +1047,7 @@ class MegatronEngine(BaseEngine):
 
         # QAT: process weights through QATWeightExporter for quantized weight sync to vLLM
         if self._qat_enabled:
-            from RL.verl.verl.utils.modelopt import export_qat_weights
+            from verl.utils.modelopt import export_qat_weights
 
             per_tensor_param = export_qat_weights(per_tensor_param, self.module, self._qat_config.mode, self.bridge)
 
@@ -1320,7 +1320,7 @@ class MegatronEngineWithLMHead(MegatronEngine):
             temperature_value = _resolve_fused_temperature(temperature)
 
         if use_fused_kernels:
-            from RL.verl.verl.models.mcore import get_mcore_forward_fused_model_engine_fn
+            from verl.models.mcore import get_mcore_forward_fused_model_engine_fn
 
             fused_forward_fn = get_mcore_forward_fused_model_engine_fn(self.model_config.hf_config)
             output = fused_forward_fn(
@@ -1343,7 +1343,7 @@ class MegatronEngineWithLMHead(MegatronEngine):
             temperature = temperature.to(torch.float32)
             assert temperature.shape[0] == input_ids.shape[0]
             temperature = verl_F.expand_as_nested(temperature, input_ids)  # (bsz, j1)
-            from RL.verl.verl.models.mcore import get_mcore_engine_forward_fn
+            from verl.models.mcore import get_mcore_engine_forward_fn
 
             forward_fn = get_mcore_engine_forward_fn(self.model_config.hf_config)
             data_format = "thd" if self.engine_config.use_remove_padding else "bshd"
@@ -1504,7 +1504,7 @@ class MegatronEngineWithValueHead(MegatronEngineWithLMHead):
         multi_modal_inputs = model_inputs["multi_modal_inputs"]
         cp_layout = self._get_context_parallel_layout(unwrap_model(model))
 
-        from RL.verl.verl.models.mcore import get_mcore_engine_forward_fn
+        from verl.models.mcore import get_mcore_engine_forward_fn
 
         forward_fn = get_mcore_engine_forward_fn(self.model_config.hf_config)
 

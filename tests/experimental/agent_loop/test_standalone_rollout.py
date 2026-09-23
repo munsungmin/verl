@@ -18,10 +18,10 @@ import ray
 from omegaconf import DictConfig
 from openai import AsyncOpenAI, OpenAI
 
-from RL.verl.tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
-from RL.verl.verl.checkpoint_engine import CheckpointEngineManager
-from RL.verl.verl.utils import omega_conf_to_dataclass
-from RL.verl.verl.workers.rollout.llm_server import LLMServerManager
+from tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
+from verl.checkpoint_engine import CheckpointEngineManager
+from verl.utils import omega_conf_to_dataclass
+from verl.workers.rollout.llm_server import LLMServerManager
 
 
 @pytest.fixture

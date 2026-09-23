@@ -33,11 +33,11 @@ import os
 
 import torch
 
-import RL.verl.verl.utils.torch_functional as verl_F
-from RL.verl.verl.utils.device import is_torch_npu_available
-from RL.verl.verl.utils.experimental.torch_functional import FusedLinearForPPO
-from RL.verl.verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
-from RL.verl.verl.utils.torch_functional import logprobs_from_logits
+import verl.utils.torch_functional as verl_F
+from verl.utils.device import is_torch_npu_available
+from verl.utils.experimental.torch_functional import FusedLinearForPPO
+from verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
+from verl.utils.torch_functional import logprobs_from_logits
 
 compute_entropy_from_logits = torch.compile(verl_F.entropy_from_logits, dynamic=True)
 fused_linear_for_ppo = FusedLinearForPPO()

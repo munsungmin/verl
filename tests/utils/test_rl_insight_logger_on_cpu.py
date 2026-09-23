@@ -20,7 +20,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from RL.verl.verl.utils.tracking import RLInsightLogger
+from verl.utils.tracking import RLInsightLogger
 
 
 @pytest.fixture(autouse=True)
@@ -147,7 +147,7 @@ def test_trace_span_warns_and_noops_with_old_rl_insight(monkeypatch, mock_rl_ins
 
 
 def test_agent_loop_session_falls_back_with_old_rl_insight(monkeypatch, mock_rl_insight, caplog):
-    from RL.verl.verl.utils.rollout_trace import RolloutTraceConfig
+    from verl.utils.rollout_trace import RolloutTraceConfig
 
     monkeypatch.setenv(RLInsightLogger.ENABLE_ENV, "1")
     mock_rl_insight.__version__ = "0.2.1"

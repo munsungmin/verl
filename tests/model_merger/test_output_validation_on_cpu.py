@@ -19,9 +19,9 @@ import pytest
 import torch
 from transformers import AutoModelForCausalLM, GenerationConfig, Qwen2Config
 
-from RL.verl.verl.model_merger import base_model_merger
-from RL.verl.verl.model_merger.base_model_merger import BaseModelMerger
-from RL.verl.verl.model_merger.output_validation import validate_hf_model_output
+from verl.model_merger import base_model_merger
+from verl.model_merger.base_model_merger import BaseModelMerger
+from verl.model_merger.output_validation import validate_hf_model_output
 
 
 class _TestModelMerger(BaseModelMerger):

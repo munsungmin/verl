@@ -37,7 +37,7 @@ import pytest
 import torch
 import torch.nn.functional as F
 
-from RL.verl.verl.trainer.distillation.fsdp.losses import _chunked_topk_log_probs
+from verl.trainer.distillation.fsdp.losses import _chunked_topk_log_probs
 
 
 def _reference_topk_log_probs(logits: torch.Tensor, topk_ids: torch.Tensor) -> torch.Tensor:

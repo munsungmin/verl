@@ -73,7 +73,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from RL.verl.scripts.chat_template_mock_trajectories import (  # noqa: E402
+from scripts.chat_template_mock_trajectories import (  # noqa: E402
     TRAJECTORIES,
     MockTrajectory,
     SingleTurnTrajectory,
@@ -83,9 +83,9 @@ from RL.verl.scripts.chat_template_mock_trajectories import (  # noqa: E402
     VLToolTrajectory,
     build_vl_trajectories,
 )
-from RL.verl.verl.utils.tokenizer import build_multimodal_processor_inputs, normalize_token_ids  # noqa: E402
-from RL.verl.verl.utils.tokenizer.chat_template import apply_chat_template  # noqa: E402
-from RL.verl.verl.utils.tokenizer.continuous_token_wiring import (  # noqa: E402
+from verl.utils.tokenizer import build_multimodal_processor_inputs, normalize_token_ids  # noqa: E402
+from verl.utils.tokenizer.chat_template import apply_chat_template  # noqa: E402
+from verl.utils.tokenizer.continuous_token_wiring import (  # noqa: E402
     CONTINUOUS_TOKEN_BUILDER_FAMILIES,
     create_continuous_token_builder,
     get_continuous_token_builder_class,

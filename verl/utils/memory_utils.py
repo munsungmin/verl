@@ -23,7 +23,7 @@ from pathlib import Path
 
 import torch
 
-from RL.verl.verl.utils.device import get_device_name, get_torch_device
+from verl.utils.device import get_device_name, get_torch_device
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

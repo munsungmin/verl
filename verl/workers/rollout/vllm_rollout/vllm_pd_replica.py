@@ -24,10 +24,10 @@ from typing import Optional
 import ray
 from ray.actor import ActorHandle
 
-from RL.verl.verl.utils.device import get_device_name, get_resource_name, is_torch_npu_available
-from RL.verl.verl.utils.net_utils import get_free_port, is_valid_ipv6_address
-from RL.verl.verl.workers.config import HFModelConfig, RolloutConfig
-from RL.verl.verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMReplica
+from verl.utils.device import get_device_name, get_resource_name, is_torch_npu_available
+from verl.utils.net_utils import get_free_port, is_valid_ipv6_address
+from verl.workers.config import HFModelConfig, RolloutConfig
+from verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMReplica
 
 logger = logging.getLogger(__file__)
 logger.setLevel(logging.INFO)

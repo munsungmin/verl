@@ -333,7 +333,7 @@ class DeltaShardedCheckpointEngine(NCCLCheckpointEngine):
         ``held`` is what the pool would have kept from the device without this
         release, and the device-free delta shows the memory actually coming
         back (warning level so the default worker log level records it)."""
-        from RL.verl.verl.utils.device import get_torch_device
+        from verl.utils.device import get_torch_device
 
         pool = cp.get_default_memory_pool()
         held = pool.total_bytes()

@@ -19,8 +19,8 @@ import json
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any
 
-from RL.verl.verl.tools.function_tool import FunctionTool
-from RL.verl.verl.tools.schemas import (
+from verl.tools.function_tool import FunctionTool
+from verl.tools.schemas import (
     OpenAIFunctionParametersSchema,
     OpenAIFunctionPropertySchema,
     OpenAIFunctionSchema,

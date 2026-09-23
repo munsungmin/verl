@@ -18,18 +18,18 @@ from hydra import compose, initialize_config_dir
 from torchdata.stateful_dataloader import StatefulDataLoader
 from transformers import AutoTokenizer
 
-from RL.verl.verl.checkpoint_engine import CheckpointEngineManager
-from RL.verl.verl.experimental.agent_loop import AgentLoopManager
-from RL.verl.verl.experimental.reward_loop import RewardLoopManager
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
-from RL.verl.verl.trainer.ppo.ray_trainer import ResourcePoolManager
-from RL.verl.verl.trainer.ppo.utils import create_rl_sampler
-from RL.verl.verl.utils import omega_conf_to_dataclass
-from RL.verl.verl.utils.dataset.rl_dataset import RLHFDataset, collate_fn
-from RL.verl.verl.utils.device import get_device_name
-from RL.verl.verl.workers.engine_workers import ActorRolloutRefWorker
-from RL.verl.verl.workers.rollout.llm_server import LLMServerManager
+from verl.checkpoint_engine import CheckpointEngineManager
+from verl.experimental.agent_loop import AgentLoopManager
+from verl.experimental.reward_loop import RewardLoopManager
+from verl.protocol import DataProto
+from verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
+from verl.trainer.ppo.ray_trainer import ResourcePoolManager
+from verl.trainer.ppo.utils import create_rl_sampler
+from verl.utils import omega_conf_to_dataclass
+from verl.utils.dataset.rl_dataset import RLHFDataset, collate_fn
+from verl.utils.device import get_device_name
+from verl.workers.engine_workers import ActorRolloutRefWorker
+from verl.workers.rollout.llm_server import LLMServerManager
 
 
 def test_agent_reward_loop_standalone():

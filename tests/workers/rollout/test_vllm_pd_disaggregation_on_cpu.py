@@ -31,7 +31,7 @@ from unittest.mock import patch
 
 import pytest
 
-from RL.verl.verl.workers.config import DisaggregationConfig, RolloutConfig
+from verl.workers.config import DisaggregationConfig, RolloutConfig
 
 # ---------------------------------------------------------------------------
 # DisaggregationConfig validation
@@ -165,7 +165,7 @@ def test_dispatcher_vllm_with_flag_returns_pd_replica():
     # verl.third_party.vllm raises (not ImportError) when neither vllm nor
     # sglang is installed, as in the CPU-only CI env.
     pytest.importorskip("vllm")
-    from RL.verl.verl.workers.rollout.replica import get_rollout_replica_class
+    from verl.workers.rollout.replica import get_rollout_replica_class
 
     plain_cls = get_rollout_replica_class("vllm", disaggregation_enabled=False)
     pd_cls = get_rollout_replica_class("vllm", disaggregation_enabled=True)
@@ -188,7 +188,7 @@ def _build_kv_cfg(
 ):
     # Lazy import: only meaningful when vllm-rollout deps are importable.
     pytest.importorskip("vllm")
-    from RL.verl.verl.workers.rollout.vllm_rollout.vllm_pd_replica import vLLMPDReplica
+    from verl.workers.rollout.vllm_rollout.vllm_pd_replica import vLLMPDReplica
 
     return vLLMPDReplica._build_kv_transfer_config(
         role=role,
@@ -296,12 +296,12 @@ def patched_replica_cls():
     """Patch parent ``vLLMReplica.__init__`` so we can exercise the PD validation
     in isolation (no Ray, no vLLMHttpServer remote-class construction)."""
     pytest.importorskip("vllm")
-    from RL.verl.verl.workers.rollout.vllm_rollout import vllm_pd_replica as mod
+    from verl.workers.rollout.vllm_rollout import vllm_pd_replica as mod
 
     def _stub_super_init(self, replica_rank, config, model_config, gpus_per_node, *_a, **_kw):
         # Faithful subset of RolloutReplica + vLLMReplica state needed by
         # vLLMPDReplica.__init__ to run its validation block.
-        from RL.verl.verl.utils.config import omega_conf_to_dataclass
+        from verl.utils.config import omega_conf_to_dataclass
 
         self.replica_rank = replica_rank
         self.config = omega_conf_to_dataclass(config)
@@ -437,14 +437,14 @@ class _DispatchStub:
         # Borrow the real implementation to keep the stub aligned with
         # production rotation semantics — _pd_dispatch's behavior must not
         # depend on the test's peer-selection policy.
-        from RL.verl.verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
+        from verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
 
         return vLLMHttpServer._select_decode_peer(self)
 
 
 def _import_http_server():
     pytest.importorskip("vllm")
-    from RL.verl.verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
+    from verl.workers.rollout.vllm_rollout.vllm_async_server import vLLMHttpServer
 
     return vLLMHttpServer
 
@@ -507,7 +507,7 @@ async def test_pd_dispatch_routes_prefill_leg_then_decode_peer():
 
     async def fake_generate(prompt_ids, sampling_params, request_id, **kw):
         captured_prefill_calls.append({"sampling_params": dict(sampling_params), "request_id": request_id, **kw})
-        from RL.verl.verl.workers.rollout.replica import TokenOutput
+        from verl.workers.rollout.replica import TokenOutput
 
         return TokenOutput(
             token_ids=[42],
@@ -565,7 +565,7 @@ async def test_pd_dispatch_mooncake_constructs_decode_kv_params_locally():
 
     async def fake_generate(prompt_ids, sampling_params, request_id, **kw):
         captured_prefill.append(kw["kv_transfer_params"])
-        from RL.verl.verl.workers.rollout.replica import TokenOutput
+        from verl.workers.rollout.replica import TokenOutput
 
         # Mooncake's prefill response carries no kv_transfer_params.
         return TokenOutput(token_ids=[42], stop_reason="completed", extra_fields={})
@@ -601,7 +601,7 @@ async def test_pd_dispatch_raises_when_prefill_returns_no_kv_params():
     """Sanity: if NixlConnector silently produced no kv_transfer_params, fail
     fast rather than handing an empty dict to the decode peer."""
     server_cls = _import_http_server()
-    from RL.verl.verl.workers.rollout.replica import TokenOutput
+    from verl.workers.rollout.replica import TokenOutput
 
     async def empty_prefill(prompt_ids, sampling_params, request_id, **kw):
         return TokenOutput(token_ids=[0], stop_reason="completed", extra_fields={})
@@ -621,7 +621,7 @@ async def test_pd_dispatch_raises_when_prefill_returns_no_kv_params():
 def _make_awaitable_token_output(token_ids):
     """Wrap a TokenOutput in an awaitable so the test can ``await`` the
     decode_peer.generate.remote(...) MagicMock return value."""
-    from RL.verl.verl.workers.rollout.replica import TokenOutput
+    from verl.workers.rollout.replica import TokenOutput
 
     out = TokenOutput(token_ids=token_ids, stop_reason="completed")
 

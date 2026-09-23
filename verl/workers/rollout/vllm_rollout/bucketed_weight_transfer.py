@@ -27,7 +27,7 @@ import torch
 import zmq
 from torch.multiprocessing.reductions import reduce_tensor
 
-from RL.verl.verl.utils.device import get_device_id, get_device_name, get_torch_device, is_support_ipc
+from verl.utils.device import get_device_id, get_device_name, get_torch_device, is_support_ipc
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "INFO"))
@@ -107,7 +107,7 @@ class BucketedWeightSender:
         Args:
             weights: Generator or async iterator yielding (name, tensor) pairs
         """
-        from RL.verl.verl.workers.rollout.utils import ensure_async_iterator
+        from verl.workers.rollout.utils import ensure_async_iterator
 
         try:
             self._init_socket()

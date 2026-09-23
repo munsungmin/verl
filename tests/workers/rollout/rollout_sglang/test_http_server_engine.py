@@ -52,7 +52,7 @@ from sglang.srt.managers.io_struct import (
 from sglang.srt.utils import MultiprocessingSerializer
 
 # Import the module under test
-from RL.verl.verl.workers.rollout.sglang_rollout.http_server_engine import (
+from verl.workers.rollout.sglang_rollout.http_server_engine import (
     AsyncHttpServerAdapter,
     HttpServerAdapter,
     launch_server_process,
@@ -441,7 +441,7 @@ class TestHttpServerEngineAdapter:
 
         from sglang.srt.managers.io_struct import UpdateWeightsFromTensorReqInput
 
-        from RL.verl.verl.workers.rollout.sglang_rollout.http_server_engine import HttpServerAdapter
+        from verl.workers.rollout.sglang_rollout.http_server_engine import HttpServerAdapter
 
         basic_adapter_kwargs.setdefault("node_rank", 0)
         adapter = HttpServerAdapter(**basic_adapter_kwargs)
@@ -473,7 +473,7 @@ class TestHttpServerEngineAdapter:
     def test_update_weights_from_tensor_empty(self, mock_launch_server_process, basic_adapter_kwargs):
         from sglang.srt.managers.io_struct import UpdateWeightsFromTensorReqInput
 
-        from RL.verl.verl.workers.rollout.sglang_rollout.http_server_engine import HttpServerAdapter
+        from verl.workers.rollout.sglang_rollout.http_server_engine import HttpServerAdapter
 
         basic_adapter_kwargs.setdefault("node_rank", 0)
         adapter = HttpServerAdapter(**basic_adapter_kwargs)
@@ -502,7 +502,7 @@ class TestHttpServerEngineAdapter:
     def test_update_weights_from_tensor_none(self, mock_launch_server_process, basic_adapter_kwargs):
         from sglang.srt.managers.io_struct import UpdateWeightsFromTensorReqInput
 
-        from RL.verl.verl.workers.rollout.sglang_rollout.http_server_engine import HttpServerAdapter
+        from verl.workers.rollout.sglang_rollout.http_server_engine import HttpServerAdapter
 
         basic_adapter_kwargs.setdefault("node_rank", 0)
         adapter = HttpServerAdapter(**basic_adapter_kwargs)

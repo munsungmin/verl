@@ -40,8 +40,8 @@ def _nested(rows: list[list[int]], device: str) -> torch.Tensor:
 def _make_micro_batch(device: str):
     from tensordict import TensorDict
 
-    from RL.verl.verl.utils import tensordict_utils as tu
-    from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode
+    from verl.utils import tensordict_utils as tu
+    from verl.utils.dataset.dataset_utils import DatasetPadMode
 
     input_ids = _nested([[11, 12, 13, 14, 15], [21, 22, 23]], device)
     position_ids = _nested([[0, 1, 2, 3, 4], [0, 1, 2]], device)
@@ -84,7 +84,7 @@ def _make_micro_batch(device: str):
 def _fsdp_engine_with_lm_head_cls():
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", message="NPU not support router replay for now.", category=UserWarning)
-        from RL.verl.verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead
+        from verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead
 
     return FSDPEngineWithLMHead
 
@@ -138,8 +138,8 @@ def test_prepare_model_inputs_uses_full_sequence_attention_mask_on_gpu():
 
 
 def test_prepare_model_inputs_passes_declared_packed_sequence_boundaries_on_gpu():
-    from RL.verl.verl.utils import tensordict_utils as tu
-    from RL.verl.verl.utils.dataset.dataset_utils import DatasetPadMode
+    from verl.utils import tensordict_utils as tu
+    from verl.utils.dataset.dataset_utils import DatasetPadMode
 
     device = "cuda"
     FSDPEngineWithLMHead = _fsdp_engine_with_lm_head_cls()
@@ -168,8 +168,8 @@ def test_prepare_model_inputs_passes_declared_packed_sequence_boundaries_on_gpu(
 
 
 def test_prepare_model_outputs_can_be_sliced_back_to_response_shape_on_gpu():
-    from RL.verl.verl.utils.torch_functional import logprobs_from_logits
-    from RL.verl.verl.workers.utils.padding import no_padding_2_padding
+    from verl.utils.torch_functional import logprobs_from_logits
+    from verl.workers.utils.padding import no_padding_2_padding
 
     device = "cuda"
     FSDPEngineWithLMHead = _fsdp_engine_with_lm_head_cls()

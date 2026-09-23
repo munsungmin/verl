@@ -30,14 +30,14 @@ Usage:
     model = apply_qat(model, config)  # Before FSDP wrapping
 """
 
-from RL.verl.verl.utils.qat.core import (
+from verl.utils.qat.core import (
     QATConfig,
     apply_qat,
     enable_qat_fuse,
     invalidate_all_scales,
     load_quantization_config,
 )
-from RL.verl.verl.utils.qat.vllm_patch import (
+from verl.utils.qat.vllm_patch import (
     apply_qat_patches,
     manual_process_weights_after_loading,
     prepare_qat_for_load_weights,

@@ -14,7 +14,7 @@
 
 import pytest
 
-from RL.verl.verl.workers.config.engine import FSDPEngineConfig, McoreEngineConfig
+from verl.workers.config.engine import FSDPEngineConfig, McoreEngineConfig
 
 
 class TestMcoreEngineConfig:

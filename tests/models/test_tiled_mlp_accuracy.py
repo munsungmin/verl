@@ -174,7 +174,7 @@ def main():
     if rank == 0:
         print("Applying TiledMLP monkey patch before FSDP2...")
 
-    from RL.verl.verl.models.transformers.tiled_mlp import apply_tiled_mlp_monkey_patch
+    from verl.models.transformers.tiled_mlp import apply_tiled_mlp_monkey_patch
 
     apply_tiled_mlp_monkey_patch(num_shards=4, model_type="qwen3")
 

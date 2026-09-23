@@ -29,8 +29,8 @@ import torch
 # cpu_unit_tests skips this module; vllm.yml runs it in the vllm venv.
 pytest.importorskip("vllm")
 
-from RL.verl.verl.workers.rollout.utils import get_vision_placeholder_token_ids
-from RL.verl.verl.workers.rollout.vllm_rollout.utils import monkey_patch_compute_logits
+from verl.workers.rollout.utils import get_vision_placeholder_token_ids
+from verl.workers.rollout.vllm_rollout.utils import monkey_patch_compute_logits
 
 TOKENS = {151655: "<|image_pad|>", 151656: "<|video_pad|>"}
 

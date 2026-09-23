@@ -20,9 +20,9 @@ import numpy as np
 import torch
 import torch.distributed
 
-from RL.verl.verl.protocol import DataProto, all_gather_data_proto
-from RL.verl.verl.utils.device import get_device_name
-from RL.verl.verl.utils.distributed import initialize_global_process_group
+from verl.protocol import DataProto, all_gather_data_proto
+from verl.utils.device import get_device_name
+from verl.utils.distributed import initialize_global_process_group
 
 
 def test_all_gather_data_proto():
@@ -61,9 +61,9 @@ def test_all_gather_data_proto():
 def test_vocab_parallel_entropy():
     from megatron.core import parallel_state as mpu
 
-    from RL.verl.verl.utils.megatron.tensor_parallel import vocab_parallel_entropy
-    from RL.verl.verl.utils.profiler import log_gpu_memory_usage
-    from RL.verl.verl.utils.torch_functional import entropy_from_logits
+    from verl.utils.megatron.tensor_parallel import vocab_parallel_entropy
+    from verl.utils.profiler import log_gpu_memory_usage
+    from verl.utils.torch_functional import entropy_from_logits
 
     mpu.initialize_model_parallel(
         tensor_model_parallel_size=2, pipeline_model_parallel_size=1, virtual_pipeline_model_parallel_size=None
@@ -123,8 +123,8 @@ def test_vocab_parallel_entropy():
 def test_vocab_parallel_sum_pi_squared():
     from megatron.core import parallel_state as mpu
 
-    from RL.verl.verl.utils.megatron.tensor_parallel import vocab_parallel_sum_pi_squared
-    from RL.verl.verl.utils.torch_functional import calculate_sum_pi_squared_from_logits
+    from verl.utils.megatron.tensor_parallel import vocab_parallel_sum_pi_squared
+    from verl.utils.torch_functional import calculate_sum_pi_squared_from_logits
 
     if not mpu.model_parallel_is_initialized():
         mpu.initialize_model_parallel(

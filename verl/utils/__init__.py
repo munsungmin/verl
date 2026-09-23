@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .....verl.verl.utils import config, tokenizer
+from . import config, tokenizer
 from .config import omega_conf_to_dataclass, validate_config
 from .groupwise import as_torch_index, group_mean_std
 from .tokenizer import (

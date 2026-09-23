@@ -21,11 +21,11 @@ from torch.distributed.fsdp import FullyShardedDataParallel as FSDP
 from torch.distributed.fsdp.api import ShardedStateDictConfig, ShardingStrategy, StateDictType
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.utils.distributed import initialize_global_process_group
-from RL.verl.verl.utils.fs import copy_to_local
-from RL.verl.verl.utils.model import compute_position_id_with_mask
-from RL.verl.verl.workers.rollout.hf_rollout import HFRollout
+from verl import DataProto
+from verl.utils.distributed import initialize_global_process_group
+from verl.utils.fs import copy_to_local
+from verl.utils.model import compute_position_id_with_mask
+from verl.workers.rollout.hf_rollout import HFRollout
 
 BASE_HF_ROLLOUT_CONFIG = {
     "temperature": 1.0,

@@ -25,7 +25,7 @@ from transformers.models.qwen3_vl.modeling_qwen3_vl import (
     Qwen3VLForConditionalGeneration,
 )
 
-from RL.verl.verl.utils.transformers_compat import unpack_visual_output
+from verl.utils.transformers_compat import unpack_visual_output
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -349,7 +349,7 @@ def forward_with_torch_backend(
     shift_labels: Optional[torch.LongTensor] = None,
     **kwargs,
 ) -> "Qwen3VLCausalLMOutputForPPO":
-    from RL.verl.verl.utils.experimental.torch_functional import FusedLinearForPPO
+    from verl.utils.experimental.torch_functional import FusedLinearForPPO
 
     outputs = self.model(input_ids, **kwargs)
     hidden_states = outputs[0]
@@ -392,7 +392,7 @@ def forward_with_triton_backend(
     shift_labels: Optional[torch.LongTensor] = None,
     **kwargs,
 ) -> "Qwen3VLCausalLMOutputForPPO":
-    from RL.verl.verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
+    from verl.utils.kernel.linear_cross_entropy import linear_cross_entropy
 
     outputs = self.model(input_ids, **kwargs)
     hidden_states = outputs[0]

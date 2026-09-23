@@ -16,7 +16,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from RL.verl.verl.workers.engine.megatron.transformer_impl import MegatronEngine
+from verl.workers.engine.megatron.transformer_impl import MegatronEngine
 
 
 class _Config(SimpleNamespace):

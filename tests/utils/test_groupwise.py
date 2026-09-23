@@ -21,7 +21,7 @@ import numpy as np
 import pytest
 import torch
 
-from RL.verl.verl.utils import as_torch_index, group_mean_std
+from verl.utils import as_torch_index, group_mean_std
 
 
 def test_as_torch_index_basic_integers():
@@ -97,7 +97,7 @@ def test_group_mean_std_default_device_no_force_env(monkeypatch):
 
     # Force device selection to CPU even if CUDA is available on the test machine.
     # Must patch the reference in groupwise module directly (it uses `from ... import get_device_name`).
-    import RL.verl.verl.utils.groupwise as groupwise_mod
+    import verl.utils.groupwise as groupwise_mod
 
     monkeypatch.setattr(groupwise_mod, "get_device_name", lambda: "cpu")
 

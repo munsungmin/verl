@@ -26,9 +26,9 @@ No GPU/model needed.
 import pytest
 import torch
 
-from RL.verl.verl.trainer.ppo.core_algos import compute_value_loss
-from RL.verl.verl.utils.metric import AggregationType, Metric, reduce_metrics
-from RL.verl.verl.utils.py_functional import append_to_dict
+from verl.trainer.ppo.core_algos import compute_value_loss
+from verl.utils.metric import AggregationType, Metric, reduce_metrics
+from verl.utils.py_functional import append_to_dict
 
 _CLIP = 0.5
 _MODES = ["token-mean", "seq-mean-token-sum", "seq-mean-token-sum-norm", "seq-mean-token-mean"]

@@ -97,8 +97,8 @@ from dataclasses import asdict, dataclass, field
 from itertools import chain
 from typing import Any, Callable, Optional, Union, cast, no_type_check
 
-import RL.verl.verl.third_party.torch as torch
-import RL.verl.verl.third_party.torch.distributed as dist
+import torch
+import torch.distributed as dist
 import torch.nn as nn
 from torch.distributed._shard.sharded_tensor import ShardedTensor
 from torch.distributed.algorithms._checkpoint.checkpoint_wrapper import (
@@ -125,7 +125,7 @@ from torch.nn.modules.module import _IncompatibleKeys
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils._pytree import tree_map_only
 
-from RL.verl.verl.third_party.torch.distributed._state_dict_utils import (
+from verl.third_party.torch.distributed._state_dict_utils import (
     _broadcast_state_dict,
     _distribute_state_dict,
     _flatten_state_dict,

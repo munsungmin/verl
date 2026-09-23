@@ -36,8 +36,8 @@ from types import SimpleNamespace
 import torch
 from tensordict import TensorDict
 
-from RL.verl.verl.workers.engine.fsdp import transformer_impl
-from RL.verl.verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead
+from verl.workers.engine.fsdp import transformer_impl
+from verl.workers.engine.fsdp.transformer_impl import FSDPEngineWithLMHead
 
 VOCAB, HIDDEN, SEQ = 16, 8, 6
 

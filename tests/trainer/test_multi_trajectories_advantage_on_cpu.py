@@ -15,9 +15,9 @@ import numpy as np
 import pytest
 import torch
 
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.trainer.ppo.core_algos import AdvantageEstimator
-from RL.verl.verl.trainer.ppo.v1.utils import compute_advantage, compute_advantage_for_multi_trajectories
+from verl.protocol import DataProto
+from verl.trainer.ppo.core_algos import AdvantageEstimator
+from verl.trainer.ppo.v1.utils import compute_advantage, compute_advantage_for_multi_trajectories
 
 
 @pytest.fixture

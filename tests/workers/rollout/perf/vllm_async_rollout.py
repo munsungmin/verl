@@ -38,11 +38,11 @@ from omegaconf import DictConfig
 from torch.utils.data import SequentialSampler
 from torchdata.stateful_dataloader import StatefulDataLoader
 
-from RL.verl.tests.experimental.agent_loop.agent_utils import AgentLoopManager, RayWorkerGroup, init_agent_loop_manager
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.utils import hf_tokenizer
-from RL.verl.verl.utils.dataset import RLHFDataset
-from RL.verl.verl.utils.dataset.rl_dataset import collate_fn as default_collate_fn
+from tests.experimental.agent_loop.agent_utils import AgentLoopManager, RayWorkerGroup, init_agent_loop_manager
+from verl.protocol import DataProto
+from verl.utils import hf_tokenizer
+from verl.utils.dataset import RLHFDataset
+from verl.utils.dataset.rl_dataset import collate_fn as default_collate_fn
 
 
 def init_config(n_gpus_per_node) -> DictConfig:

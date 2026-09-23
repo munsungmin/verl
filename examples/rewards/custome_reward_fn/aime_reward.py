@@ -21,7 +21,7 @@ tags and delegate to verl's default router, which already scores both AIME and
 dapo-math through the ``math_dapo`` verifier.
 """
 
-from RL.verl.verl.utils.reward_score import default_compute_score
+from verl.utils.reward_score import default_compute_score
 
 
 def compute_score(data_source, solution_str, ground_truth, extra_info=None, **kwargs):

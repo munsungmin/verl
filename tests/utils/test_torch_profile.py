@@ -20,14 +20,14 @@ from unittest.mock import MagicMock, patch
 import torch
 from omegaconf import OmegaConf
 
-from RL.verl.verl.utils.config import omega_conf_to_dataclass
-from RL.verl.verl.utils.profiler.config import (
+from verl.utils.config import omega_conf_to_dataclass
+from verl.utils.profiler.config import (
     ProfilerConfig,
     TorchProfilerScheduleConfig,
     TorchProfilerToolConfig,
 )
-from RL.verl.verl.utils.profiler.profile import DistProfiler, _NoOpProfiler
-from RL.verl.verl.utils.profiler.torch_profile import (
+from verl.utils.profiler.profile import DistProfiler, _NoOpProfiler
+from verl.utils.profiler.torch_profile import (
     Profiler,
     build_trace_basename,
     get_torch_profiler,

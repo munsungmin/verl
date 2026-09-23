@@ -31,7 +31,7 @@ This tests:
 import pytest
 import torch
 
-from RL.verl.verl.trainer.ppo.rollout_corr_helper import (
+from verl.trainer.ppo.rollout_corr_helper import (
     SUPPORTED_ROLLOUT_RS_OPTIONS,
     compute_is_metrics,
     compute_offpolicy_metrics,

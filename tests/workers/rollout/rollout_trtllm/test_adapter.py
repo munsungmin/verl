@@ -20,8 +20,8 @@ import aiohttp
 import pytest
 import ray
 
-from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
-from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_rollout import AsyncTRTLLMHttpAdapter
+from verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMReplica
+from verl.workers.rollout.trtllm_rollout.trtllm_rollout import AsyncTRTLLMHttpAdapter
 
 
 class TestAsyncTRTLLMHttpAdapter:

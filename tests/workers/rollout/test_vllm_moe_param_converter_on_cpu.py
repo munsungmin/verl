@@ -15,7 +15,7 @@
 
 import torch
 
-from RL.verl.verl.workers.engine.fsdp.utils import unfuse_moe_params
+from verl.workers.engine.fsdp.utils import unfuse_moe_params
 
 
 def _collect(weights, model_type):

@@ -15,16 +15,16 @@
 import ray
 from omegaconf import DictConfig
 
-from RL.verl.verl.checkpoint_engine import CheckpointEngineManager
-from RL.verl.verl.experimental.agent_loop import AgentLoopManager
-from RL.verl.verl.experimental.reward_loop import RewardLoopManager
-from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
-from RL.verl.verl.single_controller.ray.base import create_colocated_worker_cls
-from RL.verl.verl.trainer.ppo.ray_trainer import ResourcePoolManager, Role
-from RL.verl.verl.utils import omega_conf_to_dataclass
-from RL.verl.verl.utils.device import get_device_name
-from RL.verl.verl.workers.engine_workers import ActorRolloutRefWorker
-from RL.verl.verl.workers.rollout.llm_server import LLMServerManager
+from verl.checkpoint_engine import CheckpointEngineManager
+from verl.experimental.agent_loop import AgentLoopManager
+from verl.experimental.reward_loop import RewardLoopManager
+from verl.single_controller.ray import RayClassWithInitArgs, RayWorkerGroup
+from verl.single_controller.ray.base import create_colocated_worker_cls
+from verl.trainer.ppo.ray_trainer import ResourcePoolManager, Role
+from verl.utils import omega_conf_to_dataclass
+from verl.utils.device import get_device_name
+from verl.workers.engine_workers import ActorRolloutRefWorker
+from verl.workers.rollout.llm_server import LLMServerManager
 
 
 def init_agent_loop_manager(config: DictConfig) -> AgentLoopManager | RayWorkerGroup:

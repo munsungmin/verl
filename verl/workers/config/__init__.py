@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from ......verl.verl.workers.config import actor, checkpoint, critic, disaggregation, engine, model, optimizer, reward, rollout
+from . import actor, checkpoint, critic, disaggregation, engine, model, optimizer, reward, rollout
 from .actor import *  # noqa: F401
 from .checkpoint import *  # noqa: F401
 from .critic import *  # noqa: F401

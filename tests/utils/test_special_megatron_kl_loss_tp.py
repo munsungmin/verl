@@ -21,10 +21,10 @@ import torch
 import torch.distributed as dist
 import torch.nn.functional as F
 
-from RL.verl.verl.trainer.distillation.fsdp.losses import compute_forward_kl_topk as compute_forward_kl_topk_ref
-from RL.verl.verl.trainer.distillation.megatron.losses import compute_forward_kl_topk as compute_forward_kl_topk_vp
-from RL.verl.verl.utils.distributed import destroy_global_process_group, initialize_global_process_group
-from RL.verl.verl.workers.config import DistillationConfig, DistillationLossConfig
+from verl.trainer.distillation.fsdp.losses import compute_forward_kl_topk as compute_forward_kl_topk_ref
+from verl.trainer.distillation.megatron.losses import compute_forward_kl_topk as compute_forward_kl_topk_vp
+from verl.utils.distributed import destroy_global_process_group, initialize_global_process_group
+from verl.workers.config import DistillationConfig, DistillationLossConfig
 
 MAX_TEST_CASES = int(os.environ.get("MAX_TEST_CASES", 4))
 

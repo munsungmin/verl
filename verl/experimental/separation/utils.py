@@ -15,8 +15,8 @@
 
 import ray
 
-from RL.verl.verl.trainer.ppo.ray_trainer import ResourcePoolManager
-from RL.verl.verl.trainer.ppo.utils import Role, need_reference_policy
+from verl.trainer.ppo.ray_trainer import ResourcePoolManager
+from verl.trainer.ppo.utils import Role, need_reference_policy
 
 
 def create_resource_pool_manager(config, roles: list) -> ResourcePoolManager:
@@ -70,9 +70,9 @@ def create_role_worker_mapping(config):
         dict: Mapping from roles to worker classes
     """
     # Always use the unified model engine worker implementation.
-    from RL.verl.verl.experimental.separation.engine_workers import DetachActorWorker
-    from RL.verl.verl.single_controller.ray import RayWorkerGroup
-    from RL.verl.verl.workers.engine_workers import TrainingWorker
+    from verl.experimental.separation.engine_workers import DetachActorWorker
+    from verl.single_controller.ray import RayWorkerGroup
+    from verl.workers.engine_workers import TrainingWorker
 
     ray_worker_group_cls = RayWorkerGroup
 

@@ -28,8 +28,8 @@ import pytest
 import torch
 from omegaconf import OmegaConf
 
-from RL.verl.verl.utils.megatron import optimizer as opt_mod
-from RL.verl.verl.utils.megatron.optimizer import init_megatron_optim_config
+from verl.utils.megatron import optimizer as opt_mod
+from verl.utils.megatron.optimizer import init_megatron_optim_config
 
 
 def _base_optim_config(**overrides):

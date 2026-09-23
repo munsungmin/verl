@@ -14,7 +14,7 @@
 # limitations under the License.
 from types import SimpleNamespace
 
-from RL.verl.verl.utils.sglang.sglang_fp8_utils import SGLangFP8QuantizerHelper, build_sglang_fp8_quant_config
+from verl.utils.sglang.sglang_fp8_utils import SGLangFP8QuantizerHelper, build_sglang_fp8_quant_config
 
 
 class MappingLikeConfig:

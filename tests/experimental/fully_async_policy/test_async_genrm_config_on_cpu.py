@@ -23,7 +23,7 @@ import unittest
 import pytest
 from omegaconf import OmegaConf
 
-from RL.verl.verl.trainer.ppo.utils import need_reward_model
+from verl.trainer.ppo.utils import need_reward_model
 
 
 def _make_config(reward_model_enable=False, enable_resource_pool=False):

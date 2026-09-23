@@ -18,14 +18,14 @@ import ray
 import torch
 from transformers import AutoModelForCausalLM
 
-from RL.verl.verl.checkpoint_engine import CheckpointEngineRegistry, CheckpointEngineWorker
-from RL.verl.verl.single_controller.base.decorator import Dispatch, register
-from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
-from RL.verl.verl.utils.device import get_device_name
-from RL.verl.verl.utils.fs import copy_to_local
-from RL.verl.verl.workers.config import CheckpointEngineConfig, FSDPEngineConfig, HFModelConfig, RolloutConfig
-from RL.verl.verl.workers.engine_workers import TrainingWorker, TrainingWorkerConfig
-from RL.verl.verl.workers.rollout import BaseRollout, RolloutReplica
+from verl.checkpoint_engine import CheckpointEngineRegistry, CheckpointEngineWorker
+from verl.single_controller.base.decorator import Dispatch, register
+from verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
+from verl.utils.device import get_device_name
+from verl.utils.fs import copy_to_local
+from verl.workers.config import CheckpointEngineConfig, FSDPEngineConfig, HFModelConfig, RolloutConfig
+from verl.workers.engine_workers import TrainingWorker, TrainingWorkerConfig
+from verl.workers.rollout import BaseRollout, RolloutReplica
 
 
 class TrainingWorkerTest(TrainingWorker):

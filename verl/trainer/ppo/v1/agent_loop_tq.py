@@ -25,14 +25,14 @@ import torch
 import transfer_queue as tq
 from tensordict import NonTensorData, NonTensorStack, TensorDict
 
-from RL.verl.verl.experimental.agent_loop import (
+from verl.experimental.agent_loop import (
     AgentLoopManager,
     AgentLoopOutput,
     AgentLoopWorker,
     get_trajectory_info,
 )
-from RL.verl.verl.utils.ray_utils import auto_await
-from RL.verl.verl.utils.tensordict_utils import list_of_dict_to_tensordict
+from verl.utils.ray_utils import auto_await
+from verl.utils.tensordict_utils import list_of_dict_to_tensordict
 
 logger = logging.getLogger(__name__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "INFO"))

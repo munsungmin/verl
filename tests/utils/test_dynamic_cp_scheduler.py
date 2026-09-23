@@ -18,9 +18,9 @@ import pytest
 import torch
 from tensordict import TensorDict
 
-import RL.verl.verl.utils.dynamic_cp_scheduler as dcp_module
-from RL.verl.verl.utils import tensordict_utils as tu
-from RL.verl.verl.utils.dynamic_cp_scheduler import (
+import verl.utils.dynamic_cp_scheduler as dcp_module
+from verl.utils import tensordict_utils as tu
+from verl.utils.dynamic_cp_scheduler import (
     DCP_GROUP_LEADER,
     DCP_LOCAL_NUM_TOKENS,
     DCP_PADDING_MASK,
@@ -118,7 +118,7 @@ def test_scheduler_rejects_invalid_capacity_and_group(monkeypatch):
 
 def test_engine_dcp_contracts():
     pytest.importorskip("megatron")
-    from RL.verl.verl.workers.engine.megatron.transformer_impl import (
+    from verl.workers.engine.megatron.transformer_impl import (
         _check_dcp_unsupported_features,
         _resolve_fused_temperature,
         _validate_dcp_world_size,
@@ -151,7 +151,7 @@ def test_engine_dcp_contracts():
 
 def test_fused_forward_threads_dynamic_cp_arguments(monkeypatch):
     pytest.importorskip("megatron")
-    import RL.verl.verl.models.mcore.model_forward_fused as fused_module
+    import verl.models.mcore.model_forward_fused as fused_module
 
     captured = {}
 

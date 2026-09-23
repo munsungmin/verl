@@ -41,14 +41,14 @@ except ImportError:
     revert_weight_conversion = None
     pass
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
-from RL.verl.verl.trainer.config import CheckpointConfig
-from RL.verl.verl.utils import tensordict_utils as tu
-from RL.verl.verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
-from RL.verl.verl.utils.model import compute_position_id_with_mask, create_random_mask
-from RL.verl.verl.utils.torch_functional import logprobs_from_logits_naive
-from RL.verl.verl.workers.config import (
+from verl import DataProto
+from verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
+from verl.trainer.config import CheckpointConfig
+from verl.utils import tensordict_utils as tu
+from verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
+from verl.utils.model import compute_position_id_with_mask, create_random_mask
+from verl.utils.torch_functional import logprobs_from_logits_naive
+from verl.workers.config import (
     ActorConfig,
     CriticConfig,
     FSDPEngineConfig,
@@ -57,15 +57,15 @@ from RL.verl.verl.workers.config import (
     McoreEngineConfig,
     McoreOptimizerConfig,
 )
-from RL.verl.verl.workers.engine_workers import ActorRolloutRefWorker, TrainingWorker, TrainingWorkerConfig
-from RL.verl.verl.workers.engine_workers_tinker import (
+from verl.workers.engine_workers import ActorRolloutRefWorker, TrainingWorker, TrainingWorkerConfig
+from verl.workers.engine_workers_tinker import (
     OptimStepParams,
     TinkerActorRolloutRefWorker,
     TinkerTrainingWorker,
     _apply_optim_step_params,
 )
-from RL.verl.verl.workers.utils.losses import ppo_loss, sft_loss, value_loss
-from RL.verl.verl.workers.utils.padding import left_right_2_no_padding, no_padding_2_padding
+from verl.workers.utils.losses import ppo_loss, sft_loss, value_loss
+from verl.workers.utils.padding import left_right_2_no_padding, no_padding_2_padding
 
 device_name = get_device_name()
 
@@ -399,7 +399,7 @@ def _worker(rank: int, world_size: int, rendezvous_file: str, strategy: str, mod
     with torch.device("meta"):
         ref_model = AutoModelForCausalLM.from_config(ref_model_config)
 
-    from RL.verl.verl.workers.engine import BaseEngine, EngineRegistry
+    from verl.workers.engine import BaseEngine, EngineRegistry
 
     # construct configs
     model_config = HFModelConfig(path=model_path, load_tokenizer=False)
@@ -483,7 +483,7 @@ def _autocast_dtype_worker(rank: int, world_size: int, rendezvous_file: str, mod
         world_size=world_size,
     )
 
-    from RL.verl.verl.workers.engine import BaseEngine, EngineRegistry
+    from verl.workers.engine import BaseEngine, EngineRegistry
 
     model_config = HFModelConfig(
         path=model_path,
@@ -620,7 +620,7 @@ def _split_training_primitives_fsdp_worker(
         world_size=world_size,
     )
 
-    from RL.verl.verl.workers.engine import BaseEngine, EngineRegistry
+    from verl.workers.engine import BaseEngine, EngineRegistry
 
     model_config = HFModelConfig(
         path=model_path,

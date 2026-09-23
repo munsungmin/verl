@@ -18,7 +18,7 @@ import re
 from collections.abc import Iterable
 from typing import Any
 
-from RL.verl.verl.utils.fp8_utils import FP8QuantizerHelper
+from verl.utils.fp8_utils import FP8QuantizerHelper
 
 
 def _get_config_value(config: Any, key: str, default: Any = None) -> Any:

@@ -18,11 +18,11 @@ import ray
 import torch
 from hydra import compose, initialize_config_dir
 
-from RL.verl.verl.experimental.reward_loop import RewardLoopManager
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.utils import hf_tokenizer
-from RL.verl.verl.utils.model import compute_position_id_with_mask
-from RL.verl.verl.utils.tokenizer import normalize_token_ids
+from verl.experimental.reward_loop import RewardLoopManager
+from verl.protocol import DataProto
+from verl.utils import hf_tokenizer
+from verl.utils.model import compute_position_id_with_mask
+from verl.utils.tokenizer import normalize_token_ids
 
 
 def create_data_samples(tokenizer) -> DataProto:

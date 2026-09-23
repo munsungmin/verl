@@ -48,8 +48,8 @@ def test_verl_wiring_builds_real_megatron_muon_config():
     OptimizerConfig = _real_megatron_optimizer_config()
     supported_fields = {f.name for f in dataclasses.fields(OptimizerConfig)}
 
-    from RL.verl.verl.utils.megatron.optimizer import _MUON_ALGORITHMS, init_megatron_optim_config
-    from RL.verl.verl.workers.config.optimizer import McoreOptimizerConfig
+    from verl.utils.megatron.optimizer import _MUON_ALGORITHMS, init_megatron_optim_config
+    from verl.workers.config.optimizer import McoreOptimizerConfig
 
     vcfg = McoreOptimizerConfig(
         lr=0.01,
@@ -87,8 +87,8 @@ def test_verl_adam_path_leaves_real_megatron_config_standard():
     OptimizerConfig = _real_megatron_optimizer_config()
     supported_fields = {f.name for f in dataclasses.fields(OptimizerConfig)}
 
-    from RL.verl.verl.utils.megatron.optimizer import init_megatron_optim_config
-    from RL.verl.verl.workers.config.optimizer import McoreOptimizerConfig
+    from verl.utils.megatron.optimizer import init_megatron_optim_config
+    from verl.workers.config.optimizer import McoreOptimizerConfig
 
     adam_cfg = init_megatron_optim_config(
         McoreOptimizerConfig(lr=0.01, optimizer="adam", muon_momentum=0.42),

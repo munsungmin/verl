@@ -45,30 +45,30 @@ from pydantic import BaseModel, ConfigDict
 from tensordict import TensorDict
 from transformers import AutoProcessor, AutoTokenizer
 
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.tools.tool_registry import load_all_tools
-from RL.verl.verl.trainer.distillation import is_distillation_enabled
-from RL.verl.verl.utils.config import omega_conf_to_dataclass
-from RL.verl.verl.utils.dataset.rl_dataset import RLHFDataset, get_dataset_class
-from RL.verl.verl.utils.import_utils import resolve_config_path
-from RL.verl.verl.utils.model import compute_position_id_with_mask
-from RL.verl.verl.utils.profiler import simple_timer
-from RL.verl.verl.utils.ray_utils import auto_await, get_event_loop
-from RL.verl.verl.utils.rollout_trace import (
+from verl.protocol import DataProto
+from verl.tools.tool_registry import load_all_tools
+from verl.trainer.distillation import is_distillation_enabled
+from verl.utils.config import omega_conf_to_dataclass
+from verl.utils.dataset.rl_dataset import RLHFDataset, get_dataset_class
+from verl.utils.import_utils import resolve_config_path
+from verl.utils.model import compute_position_id_with_mask
+from verl.utils.profiler import simple_timer
+from verl.utils.ray_utils import auto_await, get_event_loop
+from verl.utils.rollout_trace import (
     RolloutTraceConfig,
     rollout_trace_attr,
 )
-from RL.verl.verl.utils.skip import SkipManager
-from RL.verl.verl.utils.tokenizer import (
+from verl.utils.skip import SkipManager
+from verl.utils.tokenizer import (
     build_multimodal_processor_inputs,
     get_processor_token_id,
 )
-from RL.verl.verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
-from RL.verl.verl.workers.config import (
+from verl.utils.tokenizer.continuous_token_wiring import create_continuous_token_builder
+from verl.workers.config import (
     HFModelConfig,
     RolloutConfig,
 )
-from RL.verl.verl.workers.rollout.llm_server import LLMServerClient
+from verl.workers.rollout.llm_server import LLMServerClient
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -484,7 +484,7 @@ class AgentLoopWorker:
         # Online policy distillation
         self.distillation_enabled = is_distillation_enabled(config.distillation)
         if self.distillation_enabled:
-            from RL.verl.verl.experimental.teacher_loop.teacher_manager import AsyncTeacherLLMServerManager
+            from verl.experimental.teacher_loop.teacher_manager import AsyncTeacherLLMServerManager
 
             self.teacher_key: str = config.distillation.teacher_key
             self.teacher_server_manager = AsyncTeacherLLMServerManager(
@@ -803,7 +803,7 @@ class AgentLoopWorker:
         )
         if teacher_ids is not None and teacher_logprobs is not None:
             # TODO(wuxibin): remove padding and use tensordict.
-            from RL.verl.verl.experimental.teacher_loop.teacher_manager import _pad_teacher_outputs
+            from verl.experimental.teacher_loop.teacher_manager import _pad_teacher_outputs
 
             teacher_ids, teacher_logprobs = _pad_teacher_outputs(
                 teacher_ids,

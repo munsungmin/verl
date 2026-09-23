@@ -22,11 +22,11 @@ from omegaconf import DictConfig
 from PIL import Image
 from transformers.utils import get_json_schema
 
-from RL.verl.tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
-from RL.verl.verl.protocol import DataProto
-from RL.verl.verl.tools.base_tool import BaseTool, OpenAIFunctionToolSchema
-from RL.verl.verl.tools.schemas import ToolResponse
-from RL.verl.verl.utils import hf_tokenizer
+from tests.experimental.agent_loop.agent_utils import init_agent_loop_manager
+from verl.protocol import DataProto
+from verl.tools.base_tool import BaseTool, OpenAIFunctionToolSchema
+from verl.tools.schemas import ToolResponse
+from verl.utils import hf_tokenizer
 
 VIDEO_PATH = os.path.expanduser("~/models/hf_data/test-videos/space_woaudio.mp4")
 

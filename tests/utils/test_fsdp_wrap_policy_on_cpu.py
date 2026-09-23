@@ -24,7 +24,7 @@ one name resolves and only fail when none do.
 import pytest
 import torch.nn as nn
 
-from RL.verl.verl.utils.fsdp_utils import get_fsdp_wrap_policy
+from verl.utils.fsdp_utils import get_fsdp_wrap_policy
 
 
 class _RealLayer(nn.Module):

@@ -19,12 +19,12 @@ import hydra
 import ray
 from omegaconf import DictConfig, OmegaConf
 
-from RL.verl.verl.trainer.constants_ppo import get_ppo_ray_runtime_env
-from RL.verl.verl.trainer.ppo.utils import need_critic, need_reference_policy
-from RL.verl.verl.utils.config import validate_config
-from RL.verl.verl.utils.device import auto_set_device, is_cuda_available
-from RL.verl.verl.utils.import_utils import load_class_from_fqn
-from RL.verl.verl.utils.logging_utils import configure_verl_logging
+from verl.trainer.constants_ppo import get_ppo_ray_runtime_env
+from verl.trainer.ppo.utils import need_critic, need_reference_policy
+from verl.utils.config import validate_config
+from verl.utils.device import auto_set_device, is_cuda_available
+from verl.utils.import_utils import load_class_from_fqn
+from verl.utils.logging_utils import configure_verl_logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "INFO"))
@@ -81,7 +81,7 @@ def run_ppo(config, task_runner_class) -> None:
         and config.global_profiler.get("steps") is not None
         and len(config.global_profiler.get("steps", [])) > 0
     ):
-        from RL.verl.verl.utils.import_utils import is_nvtx_available
+        from verl.utils.import_utils import is_nvtx_available
 
         assert is_nvtx_available(), "nvtx is not available in CUDA platform. Please 'pip3 install nvtx'"
         nsight_options = OmegaConf.to_container(
@@ -115,7 +115,7 @@ class TaskRunnerV1:
         1. implement `generate_sequences` method
         2. put agent loop outputs into TransferQueue
         """
-        from RL.verl.verl.trainer.ppo.v1 import AgentLoopManagerTQ
+        from verl.trainer.ppo.v1 import AgentLoopManagerTQ
 
         manager_class_fqn = self.config.actor_rollout_ref.rollout.get("agent", {}).get("agent_loop_manager_class")
         if manager_class_fqn:
@@ -136,7 +136,7 @@ class TaskRunnerV1:
 
         import transfer_queue as tq
 
-        from RL.verl.verl.trainer.ppo.v1 import get_trainer_cls
+        from verl.trainer.ppo.v1 import get_trainer_cls
 
         trainer_cls = get_trainer_cls(config.trainer.v1.trainer_mode)
 
@@ -183,7 +183,7 @@ def main(config):
     if config.trainer.use_v1:
         run_ppo(config, task_runner_class=TaskRunnerV1)
     else:
-        from RL.verl.verl.trainer.main_ppo_v0 import TaskRunner
+        from verl.trainer.main_ppo_v0 import TaskRunner
 
         logger.warning(
             "Legacy trainer `main_ppo_v0.py` is deprecated, and wil be removed in v0.9.0."

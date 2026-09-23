@@ -21,8 +21,8 @@ from megatron.core.optimizer import OptimizerConfig
 from megatron.core.optimizer import get_megatron_optimizer as get_megatron_optimizer_native
 from megatron.core.optimizer_param_scheduler import OptimizerParamScheduler
 
-from RL.verl.verl.utils.logger import print_rank_0
-from RL.verl.verl.utils.torch_dtypes import PrecisionType
+from verl.utils.logger import print_rank_0
+from verl.utils.torch_dtypes import PrecisionType
 
 # Names of the Muon (emerging optimizer) algorithms recognized by Megatron-Core's
 # ``get_megatron_optimizer`` (anything other than "adam"/"sgd" routes to the emerging path).

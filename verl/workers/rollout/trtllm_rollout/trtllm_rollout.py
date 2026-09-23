@@ -38,11 +38,11 @@ except (ImportError, RuntimeError):
 from torch.distributed.device_mesh import DeviceMesh, init_device_mesh
 from torch.multiprocessing.reductions import reduce_tensor
 
-from RL.verl.verl.utils.device import get_torch_device
-from RL.verl.verl.utils.net_utils import is_valid_ipv6_address
-from RL.verl.verl.workers.config import HFModelConfig, RolloutConfig
-from RL.verl.verl.workers.rollout.base import BaseRollout
-from RL.verl.verl.workers.rollout.utils import ensure_async_iterator
+from verl.utils.device import get_torch_device
+from verl.utils.net_utils import is_valid_ipv6_address
+from verl.workers.config import HFModelConfig, RolloutConfig
+from verl.workers.rollout.base import BaseRollout
+from verl.workers.rollout.utils import ensure_async_iterator
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -468,7 +468,7 @@ class ServerAdapter(BaseRollout):
         total_available_bytes = int(self.config.checkpoint_engine.update_weights_bucket_megabytes) * 1024 * 1024
 
         if self.config.get("quantization", None) == "fp8":
-            from RL.verl.verl.utils.trtllm.trtllm_fp8_utils import TRTLLMFP8QuantizerHelper
+            from verl.utils.trtllm.trtllm_fp8_utils import TRTLLMFP8QuantizerHelper
 
             fp8_quantizer_helper = TRTLLMFP8QuantizerHelper(self.model_config.hf_config.quantization_config)
             weights = fp8_quantizer_helper.quant_weights_by_name(

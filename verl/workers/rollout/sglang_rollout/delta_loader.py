@@ -60,7 +60,7 @@ LOADER_FQN = "verl.workers.rollout.sglang_rollout.delta_loader.apply_delta"
 
 def apply_delta(model: torch.nn.Module, named_tensors: Iterable[tuple[str, torch.Tensor]]) -> None:
     """Decode one sparse delta flush and masked-apply it onto ``model`` in place."""
-    from RL.verl.verl.checkpoint_engine.delta_sync.encode import checksum as _checksum
+    from verl.checkpoint_engine.delta_sync.encode import checksum as _checksum
 
     tensors = dict(named_tensors)
     spec = json.loads(bytes(tensors["__delta_spec__"].cpu().numpy().tobytes()).decode())

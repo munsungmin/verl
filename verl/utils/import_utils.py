@@ -119,7 +119,7 @@ def resolve_config_path(config_path: str) -> str:
 
     # Try relative to verl project root (where verl package is installed)
     try:
-        import ext.verl.verl as verl
+        import verl
 
         verl_package_dir = os.path.abspath(os.path.dirname(verl.__file__))
 

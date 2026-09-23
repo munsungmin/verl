@@ -16,7 +16,7 @@ import os
 
 import pytest
 
-from RL.verl.verl.utils.py_functional import temp_env_var
+from verl.utils.py_functional import temp_env_var
 
 
 @pytest.fixture(autouse=True)

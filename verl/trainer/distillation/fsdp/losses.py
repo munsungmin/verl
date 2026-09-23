@@ -16,11 +16,11 @@
 import torch
 import torch.nn.functional as F
 
-from RL.verl.verl.utils.ulysses import (
+from verl.utils.ulysses import (
     get_ulysses_sequence_parallel_world_size,
     slice_input_tensor,
 )
-from RL.verl.verl.workers.config import DistillationConfig, DistillationLossConfig
+from verl.workers.config import DistillationConfig, DistillationLossConfig
 
 
 def _chunked_topk_log_probs(

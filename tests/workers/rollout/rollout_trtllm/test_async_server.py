@@ -22,9 +22,9 @@ import torch
 from ray.util import placement_group_table
 from ray.util.scheduling_strategies import NodeAffinitySchedulingStrategy
 
-from RL.verl.verl.single_controller.ray import RayResourcePool, SubRayResourcePool
-from RL.verl.verl.workers.rollout.replica import RolloutMode
-from RL.verl.verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMHttpServer, TRTLLMReplica
+from verl.single_controller.ray import RayResourcePool, SubRayResourcePool
+from verl.workers.rollout.replica import RolloutMode
+from verl.workers.rollout.trtllm_rollout.trtllm_async_server import TRTLLMHttpServer, TRTLLMReplica
 
 
 class TestTRTLLMReplica:

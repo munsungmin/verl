@@ -24,7 +24,7 @@ import pytest
 import torch
 from tensordict.tensorclass import NonTensorData, NonTensorStack
 
-from RL.verl.verl.utils import tensordict_utils as tu
+from verl.utils import tensordict_utils as tu
 
 
 def test_union_tensor_dict():

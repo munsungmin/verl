@@ -23,17 +23,17 @@ import pytest
 import torch
 from omegaconf import OmegaConf
 
-import RL.verl.verl.experimental.agent_loop.agent_loop as agent_loop_module
-from RL.verl.verl.experimental.agent_loop.agent_loop import (
+import verl.experimental.agent_loop.agent_loop as agent_loop_module
+from verl.experimental.agent_loop.agent_loop import (
     AgentLoopMetrics,
     AgentLoopOutput,
     AgentLoopWorker,
     DictConfigWrap,
     _InternalAgentLoopOutput,
 )
-from RL.verl.verl.experimental.agent_loop.single_turn_agent_loop import SingleTurnAgentLoop
-from RL.verl.verl.utils.dataset.rl_dataset import RLHFDataset
-from RL.verl.verl.workers.rollout.replica import TokenOutput
+from verl.experimental.agent_loop.single_turn_agent_loop import SingleTurnAgentLoop
+from verl.utils.dataset.rl_dataset import RLHFDataset
+from verl.workers.rollout.replica import TokenOutput
 
 
 class _FakeServerManager:

@@ -16,7 +16,7 @@ import asyncio
 import pytest
 import torch
 
-from RL.verl.verl.workers.rollout.sglang_rollout.utils import DEEPSEEK_V4_FUSION_GROUPS, get_named_tensor_buckets
+from verl.workers.rollout.sglang_rollout.utils import DEEPSEEK_V4_FUSION_GROUPS, get_named_tensor_buckets
 
 
 def _tensor(nbytes):

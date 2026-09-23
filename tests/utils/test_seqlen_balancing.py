@@ -16,10 +16,10 @@ import torch
 import torch.distributed as dist
 import torch.multiprocessing as mp
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
-from RL.verl.verl.utils.model import create_random_mask
-from RL.verl.verl.utils.seqlen_balancing import (
+from verl import DataProto
+from verl.utils.device import get_device_name, get_nccl_backend, get_torch_device
+from verl.utils.model import create_random_mask
+from verl.utils.seqlen_balancing import (
     ceildiv,
     get_reverse_idx,
     prepare_dynamic_batch,
@@ -134,7 +134,7 @@ def _worker(rank, world_size, init_method, max_token_len, use_same_dp, min_mb):
 
 
 def _constraint_error_worker(rank, world_size, init_method, scenario):
-    import RL.verl.verl.utils.seqlen_balancing as seqlen_balancing
+    import verl.utils.seqlen_balancing as seqlen_balancing
 
     dist.init_process_group(backend="gloo", init_method=init_method, world_size=world_size, rank=rank)
     seqlen_balancing.get_device_name = lambda: "cpu"
@@ -265,7 +265,7 @@ def test_seqlen_balancing_distributed_constraint_errors(tmp_path):
 
 def test_group_balanced_partitions():
     """Test group-level balancing keeps same-uid samples together."""
-    from RL.verl.verl.utils.seqlen_balancing import get_group_balanced_partitions
+    from verl.utils.seqlen_balancing import get_group_balanced_partitions
 
     # Create test data: 4 groups with different sizes
     # Group 0 (uid=0): indices 0,1,2,3 with seqlens [100, 100, 100, 100]
@@ -297,7 +297,7 @@ def test_group_balanced_partitions():
 
 def test_group_balanced_partitions_single_sample_groups():
     """Test group balancing with single-sample groups (n=1)."""
-    from RL.verl.verl.utils.seqlen_balancing import get_group_balanced_partitions
+    from verl.utils.seqlen_balancing import get_group_balanced_partitions
 
     # Each sample is its own group
     seqlen_list = [100, 200, 150, 50, 300, 250]
@@ -314,7 +314,7 @@ def test_group_balanced_partitions_single_sample_groups():
 
 def test_group_balanced_partitions_equal_size():
     """Test group balancing with equal_size constraint simulation."""
-    from RL.verl.verl.utils.seqlen_balancing import get_group_balanced_partitions
+    from verl.utils.seqlen_balancing import get_group_balanced_partitions
 
     # 8 groups, partition into 4 (simulating world_size=4)
     # Each group has 2 samples

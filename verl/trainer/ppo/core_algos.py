@@ -28,11 +28,11 @@ import numpy as np
 import torch
 from omegaconf import DictConfig
 
-import RL.verl.verl.utils.torch_functional as verl_F
-from RL.verl.verl.trainer.config import AlgoConfig
-from RL.verl.verl.utils import as_torch_index, group_mean_std
-from RL.verl.verl.utils.import_utils import deprecated
-from RL.verl.verl.workers.config import ActorConfig
+import verl.utils.torch_functional as verl_F
+from verl.trainer.config import AlgoConfig
+from verl.utils import as_torch_index, group_mean_std
+from verl.utils.import_utils import deprecated
+from verl.workers.config import ActorConfig
 
 PolicyLossFn = Callable[
     [
@@ -2467,7 +2467,7 @@ def compute_policy_loss_bypass_mode(
             loss: Scalar policy loss
             metrics: Dictionary with rollout correction metrics and actor/ppo_kl
     """
-    from RL.verl.verl.trainer.ppo.rollout_corr_helper import compute_rollout_correction_and_rejection_mask
+    from verl.trainer.ppo.rollout_corr_helper import compute_rollout_correction_and_rejection_mask
 
     assert config is not None, "config is required for bypass_mode loss"
 

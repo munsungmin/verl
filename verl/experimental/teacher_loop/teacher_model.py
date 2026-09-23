@@ -18,12 +18,12 @@ import os
 
 from omegaconf import DictConfig, OmegaConf
 
-from RL.verl.verl.single_controller.ray.base import RayResourcePool, split_resource_pool
-from RL.verl.verl.utils.config import omega_conf_to_dataclass
-from RL.verl.verl.utils.ray_utils import auto_await
-from RL.verl.verl.workers.config import DistillationConfig, DistillationTeacherModelConfig
-from RL.verl.verl.workers.rollout.llm_server import LLMServerClient
-from RL.verl.verl.workers.rollout.replica import get_rollout_replica_class
+from verl.single_controller.ray.base import RayResourcePool, split_resource_pool
+from verl.utils.config import omega_conf_to_dataclass
+from verl.utils.ray_utils import auto_await
+from verl.workers.config import DistillationConfig, DistillationTeacherModelConfig
+from verl.workers.rollout.llm_server import LLMServerClient
+from verl.workers.rollout.replica import get_rollout_replica_class
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -153,7 +153,7 @@ class TeacherModelManager:
                 )
 
     def _initialize_load_balancer_handle(self):
-        from RL.verl.verl.workers.rollout.router import get_router_handle
+        from verl.workers.rollout.router import get_router_handle
 
         self.load_balancer_handle = get_router_handle(
             servers=dict(zip(self.server_addresses, self.server_handles, strict=True)),

@@ -63,7 +63,7 @@ def test_vllm_abort():
         print("\n[2] Creating config...")
         from hydra import compose, initialize_config_dir
 
-        from RL.verl.verl.utils.tokenizer import normalize_token_ids
+        from verl.utils.tokenizer import normalize_token_ids
 
         config_dir = os.path.abspath("verl/verl/trainer/config")
         if not os.path.exists(config_dir):
@@ -85,7 +85,7 @@ def test_vllm_abort():
 
         # ==================== Create Rollout Server ====================
         print("\n[3] Creating rollout server (this may take a while)...")
-        from RL.verl.verl.workers.rollout.replica import get_rollout_replica_class
+        from verl.workers.rollout.replica import get_rollout_replica_class
 
         rollout_config = config.actor_rollout_ref.rollout
         model_config = config.actor_rollout_ref.model

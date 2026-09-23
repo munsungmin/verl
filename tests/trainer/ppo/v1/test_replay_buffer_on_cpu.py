@@ -29,7 +29,7 @@ import torch
 import transfer_queue as tq
 from transfer_queue import KVBatchMeta
 
-from RL.verl.verl.trainer.ppo.v1.replay_buffer import ReplayBuffer, ReplayBufferAsync
+from verl.trainer.ppo.v1.replay_buffer import ReplayBuffer, ReplayBufferAsync
 
 # Small poll interval so the blocking consumer reacts to producer writes quickly.
 POLL_INTERVAL = 0.05
@@ -986,7 +986,7 @@ def test_terminal_eviction_reasons_has_no_cross_call_hidden_state(tq_init, parti
         _evicted, _stale_count, dapo_count, metrics = rb._evict_terminal_groups(
             global_steps=0, partition_id=partition_id, eviction_reasons=train_reasons
         )
-        from RL.verl.verl.trainer.ppo.v1.replay_buffer import DAPO_FILTERED_REWARD_COUNTS_KEY
+        from verl.trainer.ppo.v1.replay_buffer import DAPO_FILTERED_REWARD_COUNTS_KEY
 
         assert dapo_count == 2
         assert metrics[DAPO_FILTERED_REWARD_COUNTS_KEY] == {0.0: 1, 1.0: 1}
@@ -996,7 +996,7 @@ def test_terminal_eviction_reasons_has_no_cross_call_hidden_state(tq_init, parti
 
 def test_accumulate_eviction_metrics_merges_filtered_reward_counts():
     """The dict-valued DAPO diagnostic accumulates additively across poll iterations."""
-    from RL.verl.verl.trainer.ppo.v1.replay_buffer import (
+    from verl.trainer.ppo.v1.replay_buffer import (
         DAPO_FILTERED_REWARD_COUNTS_KEY,
         _accumulate_eviction_metrics,
     )
@@ -1019,7 +1019,7 @@ def test_accumulate_eviction_metrics_merges_filtered_reward_counts():
 
 def test_dapo_reports_filtered_reward_value_breakdown(tq_init, partition_id):
     """The DAPO diagnostic maps each no-signal group's shared metric value to a count."""
-    from RL.verl.verl.trainer.ppo.v1.replay_buffer import DAPO_FILTERED_REWARD_COUNTS_KEY
+    from verl.trainer.ppo.v1.replay_buffer import DAPO_FILTERED_REWARD_COUNTS_KEY
 
     # Two groups collapse to acc=0.0, one to acc=1.0; one mixed group survives filtering.
     all_zero_a = PromptSpec(uid=_uid(), status="finished", sessions=2, rewards=[0.0, 0.0])

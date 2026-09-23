@@ -17,7 +17,7 @@ from typing import Optional
 
 from omegaconf import MISSING
 
-from RL.verl.verl.base_config import BaseConfig
+from verl.base_config import BaseConfig
 
 __all__ = [
     "OptimizerConfig",

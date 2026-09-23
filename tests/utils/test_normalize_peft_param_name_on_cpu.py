@@ -17,7 +17,7 @@ import torch
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, Qwen3Config
 
-from RL.verl.verl.utils.fsdp_utils import normalize_peft_param_name
+from verl.utils.fsdp_utils import normalize_peft_param_name
 
 
 def create_base_model():

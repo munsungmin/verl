@@ -27,7 +27,7 @@ from typing import Any, Callable, Iterator, Optional
 
 import numpy as np
 
-from RL.verl.verl.utils.metric import Metric
+from verl.utils.metric import Metric
 
 
 # --- Top-level helper for multiprocessing timeout ---

@@ -20,17 +20,17 @@ from dataclasses import dataclass, field
 from typing import Any, Optional
 
 import numpy as np
-import RL.verl.verl.single_controller.ray as ray
+import ray
 from ray.experimental.state.api import get_actor
 from ray.util.placement_group import PlacementGroup, placement_group
 from ray.util.scheduling_strategies import NodeAffinitySchedulingStrategy, PlacementGroupSchedulingStrategy
 
-from RL.verl.verl.plugin.platform import get_platform
-from RL.verl.verl.protocol import DataProto, _padding_size_key
-from RL.verl.verl.single_controller.base import ClassWithInitArgs, ResourcePool, Worker, WorkerGroup
-from RL.verl.verl.single_controller.base.decorator import MAGIC_ATTR, Dispatch
-from RL.verl.verl.utils.device import get_device_name
-from RL.verl.verl.utils.py_functional import temp_env_var
+from verl.plugin.platform import get_platform
+from verl.protocol import DataProto, _padding_size_key
+from verl.single_controller.base import ClassWithInitArgs, ResourcePool, Worker, WorkerGroup
+from verl.single_controller.base.decorator import MAGIC_ATTR, Dispatch
+from verl.utils.device import get_device_name
+from verl.utils.py_functional import temp_env_var
 
 __all__ = ["Worker"]
 

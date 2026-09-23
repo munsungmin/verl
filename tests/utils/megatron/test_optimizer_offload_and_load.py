@@ -25,7 +25,7 @@ from megatron.core.optimizer.optimizer import ChainedOptimizer
 from megatron.core.tensor_parallel.random import model_parallel_cuda_manual_seed
 from megatron.core.transformer.transformer_config import TransformerConfig
 
-from RL.verl.verl.utils.megatron_utils import load_megatron_optimizer, offload_megatron_optimizer
+from verl.utils.megatron_utils import load_megatron_optimizer, offload_megatron_optimizer
 
 # ==== Helper functions ==== #
 

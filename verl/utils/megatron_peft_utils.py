@@ -23,7 +23,7 @@ def count_adapter_parameters(model):
     Returns:
         Tuple of (adapter_params, total_params, percentage)
     """
-    from RL.verl.verl.utils.megatron_utils import unwrap_model
+    from verl.utils.megatron_utils import unwrap_model
 
     unwrapped = unwrap_model(model)
     if isinstance(unwrapped, list):

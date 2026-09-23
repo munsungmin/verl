@@ -15,8 +15,8 @@
 import os
 import unittest
 
-from RL.verl.verl.utils.config import omega_conf_to_dataclass
-from RL.verl.verl.workers.config import (
+from verl.utils.config import omega_conf_to_dataclass
+from verl.workers.config import (
     ActorConfig,
     FSDPActorConfig,
     McoreActorConfig,

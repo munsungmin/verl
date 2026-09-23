@@ -23,12 +23,12 @@ from omegaconf import DictConfig, open_dict
 from ray.actor import ActorHandle
 from tensordict import TensorDict
 
-from RL.verl.verl.protocol import DataProto, pad_dataproto_to_divisor
-from RL.verl.verl.single_controller.ray.base import RayResourcePool
-from RL.verl.verl.trainer.ppo.reward import load_reward_manager, resolve_reward_manager_cls
-from RL.verl.verl.utils import hf_tokenizer
-from RL.verl.verl.utils.fs import copy_to_local
-from RL.verl.verl.utils.ray_utils import get_event_loop
+from verl.protocol import DataProto, pad_dataproto_to_divisor
+from verl.single_controller.ray.base import RayResourcePool
+from verl.trainer.ppo.reward import load_reward_manager, resolve_reward_manager_cls
+from verl.utils import hf_tokenizer
+from verl.utils.fs import copy_to_local
+from verl.utils.ray_utils import get_event_loop
 
 from .reward_model import RewardModelManager
 

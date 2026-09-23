@@ -18,8 +18,8 @@ import os
 from dataclasses import asdict
 from typing import Optional
 
-from RL.verl.verl.utils.import_utils import is_msprobe_available
-from RL.verl.verl.utils.profiler.config import PrecisionDebuggerToolConfig
+from verl.utils.import_utils import is_msprobe_available
+from verl.utils.profiler.config import PrecisionDebuggerToolConfig
 
 logger = logging.getLogger(__name__)
 

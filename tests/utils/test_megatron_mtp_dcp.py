@@ -19,8 +19,8 @@ import torch
 
 pytest.importorskip("megatron")
 
-import RL.verl.verl.models.mcore.mtp_patch as mtp_patch
-import RL.verl.verl.utils.megatron_utils as megatron_utils
+import verl.models.mcore.mtp_patch as mtp_patch
+import verl.utils.megatron_utils as megatron_utils
 
 
 class _OutputLayer(torch.nn.Module):

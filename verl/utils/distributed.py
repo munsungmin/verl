@@ -23,8 +23,8 @@ import ray
 import torch.distributed
 from torch.distributed import TCPStore
 
-from RL.verl.verl.utils.device import get_device_name, get_nccl_backend, get_resource_name, get_torch_device, is_npu_available
-from RL.verl.verl.utils.net_utils import is_ipv6
+from verl.utils.device import get_device_name, get_nccl_backend, get_resource_name, get_torch_device, is_npu_available
+from verl.utils.net_utils import is_ipv6
 
 
 def set_numa_affinity():
@@ -138,7 +138,7 @@ def stateless_init_process_group(master_address, master_port, rank, world_size, 
     from torch.distributed import TCPStore
     from vllm.distributed.utils import StatelessProcessGroup
 
-    from RL.verl.verl.utils.device import is_npu_available
+    from verl.utils.device import is_npu_available
 
     if is_npu_available:
         from vllm_ascend.distributed.device_communicators.pyhccl import PyHcclCommunicator as PyNcclCommunicator
@@ -171,7 +171,7 @@ def stateless_init_process_group(master_address, master_port, rank, world_size, 
             listen_socket = None
             listen_fd = None
 
-        import RL.verl.verl.utils.vllm as vllm
+        import vllm
         from packaging import version
 
         _VLLM_VERSION = version.parse(vllm.__version__)

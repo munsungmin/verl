@@ -17,8 +17,8 @@ import os
 from dataclasses import dataclass, field
 from typing import Optional
 
-from RL.verl.verl.base_config import BaseConfig
-from RL.verl.verl.utils.config import omega_conf_to_dataclass
+from verl.base_config import BaseConfig
+from verl.utils.config import omega_conf_to_dataclass
 
 from .rollout import RolloutConfig
 
@@ -99,7 +99,7 @@ class DistillationLossConfig(BaseConfig):
 
     def __post_init__(self):
         self._mutable_fields.add("loss_settings")
-        from RL.verl.verl.trainer.distillation.losses import DistillationLossSettings, get_distillation_loss_settings
+        from verl.trainer.distillation.losses import DistillationLossSettings, get_distillation_loss_settings
 
         self.loss_settings: DistillationLossSettings = get_distillation_loss_settings(self.loss_mode)
 

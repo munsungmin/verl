@@ -17,7 +17,7 @@ import os
 import pytest
 from omegaconf import OmegaConf
 
-from RL.verl.verl.workers.config.model import HFModelConfig
+from verl.workers.config.model import HFModelConfig
 
 
 class TestHFModelConfigCPU:

@@ -18,10 +18,10 @@ import os
 
 import pytest
 
-from RL.verl.verl.tools.schemas import ToolResponse
-from RL.verl.verl.utils.dataset.vision_utils import process_image
-from RL.verl.verl.utils.tokenizer import hf_processor
-from RL.verl.verl.workers.rollout.schemas import (
+from verl.tools.schemas import ToolResponse
+from verl.utils.dataset.vision_utils import process_image
+from verl.utils.tokenizer import hf_processor
+from verl.workers.rollout.schemas import (
     AsyncRolloutRequest,
     AsyncRolloutRequestStateEnum,
     TokenizationSanityCheckModeEnum,

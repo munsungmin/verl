@@ -16,8 +16,8 @@ from unittest.mock import patch
 
 from omegaconf import OmegaConf
 
-from RL.verl.verl.trainer.ppo.v1.replay_buffer import ReplayBuffer, ReplayBufferAsync
-from RL.verl.verl.trainer.ppo.v1.trainer_base import PPOTrainer
+from verl.trainer.ppo.v1.replay_buffer import ReplayBuffer, ReplayBufferAsync
+from verl.trainer.ppo.v1.trainer_base import PPOTrainer
 
 
 class _StubTrainer(PPOTrainer):

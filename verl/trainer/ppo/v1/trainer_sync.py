@@ -14,8 +14,8 @@
 import logging
 import os
 
-from RL.verl.verl.trainer.ppo.v1.trainer_base import PPOTrainer, register_trainer
-from RL.verl.verl.utils.debug import marked_timer
+from verl.trainer.ppo.v1.trainer_base import PPOTrainer, register_trainer
+from verl.utils.debug import marked_timer
 
 logger = logging.getLogger(__name__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "INFO"))

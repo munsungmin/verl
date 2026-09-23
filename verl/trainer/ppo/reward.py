@@ -18,15 +18,15 @@ import multiprocessing
 from functools import partial
 from typing import TYPE_CHECKING, Any, Optional, cast
 
-from ext.verl.verl import DataProto
-from RL.verl.verl.utils.reward_score import get_default_compute_score
+from verl import DataProto
+from verl.utils.reward_score import get_default_compute_score
 
 if TYPE_CHECKING:
     from omegaconf import DictConfig
 
-    from RL.verl.verl.experimental.reward_loop.reward_manager.base import RawRewardFn, RewardManagerBase
-    from RL.verl.verl.trainer.config.config import ModuleConfig
-    from RL.verl.verl.workers.config.reward import RewardManagerConfig
+    from verl.experimental.reward_loop.reward_manager.base import RawRewardFn, RewardManagerBase
+    from verl.trainer.config.config import ModuleConfig
+    from verl.workers.config.reward import RewardManagerConfig
 
 
 def _call_with_kwargs(raw_fn, extra_kwargs, *args, **kwargs):
@@ -75,7 +75,7 @@ def get_custom_reward_fn(config: DictConfig) -> Optional[RawRewardFn]:
     fn_name = reward_fn_config.get("name")
     assert fn_name is not None
 
-    from RL.verl.verl.utils.import_utils import load_extern_object
+    from verl.utils.import_utils import load_extern_object
 
     raw_fn = load_extern_object(module_path=module_path, object_name=fn_name)
 
@@ -90,11 +90,11 @@ def resolve_reward_manager_cls(config: DictConfig) -> type[RewardManagerBase]:
     """Resolve the reward manager class from ``config`` without instantiating it."""
     reward_manager_cfg: RewardManagerConfig = config.reward.reward_manager
     if reward_manager_cfg.source == "register":
-        from RL.verl.verl.experimental.reward_loop.reward_manager import get_reward_manager_cls
+        from verl.experimental.reward_loop.reward_manager import get_reward_manager_cls
 
         return get_reward_manager_cls(reward_manager_cfg.name)
     elif reward_manager_cfg.source == "importlib":
-        from RL.verl.verl.utils.import_utils import load_extern_object
+        from verl.utils.import_utils import load_extern_object
 
         module_cfg: ModuleConfig | None = reward_manager_cfg.module
         assert module_cfg is not None and module_cfg.path is not None, (

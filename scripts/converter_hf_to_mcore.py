@@ -42,10 +42,10 @@ from megatron.core.tensor_parallel.random import model_parallel_cuda_manual_seed
 from packaging.version import Version
 from transformers import AutoConfig
 
-from RL.verl.verl.model_merger.megatron_model_merger import get_dynamic_pipeline_shards
-from RL.verl.verl.models.mcore import hf_to_mcore_config
-from RL.verl.verl.utils.device import get_device_name, get_torch_device
-from RL.verl.verl.utils.megatron_utils import get_model
+from verl.model_merger.megatron_model_merger import get_dynamic_pipeline_shards
+from verl.models.mcore import hf_to_mcore_config
+from verl.utils.device import get_device_name, get_torch_device
+from verl.utils.megatron_utils import get_model
 
 
 def _init_args():
@@ -529,7 +529,7 @@ def convert_hf_to_mcore(
 
     # init megatron model
     def megatron_model_provider(pre_process, post_process):
-        from RL.verl.verl.models.mcore import init_mcore_model
+        from verl.models.mcore import init_mcore_model
 
         parallel_model = init_mcore_model(
             tfconfig,
@@ -605,7 +605,7 @@ def convert_hf_to_mcore(
         convert_checkpoint_from_transformers_to_megatron(hf_model, model[0].module, hf_config)
     else:
         assert not use_cpu_initialization, "use_cpu_initialization is only supported for MoE model"
-        from RL.verl.verl.models.mcore.loader import load_state_dict_to_megatron_gptmodel
+        from verl.models.mcore.loader import load_state_dict_to_megatron_gptmodel
 
         load_state_dict_to_megatron_gptmodel(
             state_dict=hf_state_dict,

@@ -17,7 +17,7 @@ import sys
 import unittest
 from unittest.mock import MagicMock, Mock, mock_open, patch
 
-from RL.verl.verl.utils.device import AscendHardwareVersion, check_ipc_version_support, get_npu_versions
+from verl.utils.device import AscendHardwareVersion, check_ipc_version_support, get_npu_versions
 
 
 def _fake_torch_npu(device_name):
@@ -335,7 +335,7 @@ class TestIsIPCSupported(unittest.TestCase):
     @patch("verl.utils.device.get_npu_versions")
     def test_a5_short_circuit_returns_true(self, mock_get_versions, mock_check):
         mock_get_versions.return_value = (AscendHardwareVersion.A5, "24.0.0", "7.0.0")
-        from RL.verl.verl.plugin.platform.platform_npu import PlatformNPU
+        from verl.plugin.platform.platform_npu import PlatformNPU
 
         platform = PlatformNPU()
         self.assertTrue(platform.is_ipc_supported())
@@ -345,7 +345,7 @@ class TestIsIPCSupported(unittest.TestCase):
     @patch("verl.utils.device.get_npu_versions")
     def test_non_a5_delegates_to_version_check_true(self, mock_get_versions, mock_check):
         mock_get_versions.return_value = (AscendHardwareVersion.A3, "25.5.0", "8.3.0")
-        from RL.verl.verl.plugin.platform.platform_npu import PlatformNPU
+        from verl.plugin.platform.platform_npu import PlatformNPU
 
         platform = PlatformNPU()
         self.assertTrue(platform.is_ipc_supported())
@@ -355,7 +355,7 @@ class TestIsIPCSupported(unittest.TestCase):
     @patch("verl.utils.device.get_npu_versions")
     def test_non_a5_delegates_to_version_check_false(self, mock_get_versions, mock_check):
         mock_get_versions.return_value = (AscendHardwareVersion.A3, "24.0.0", "7.0.0")
-        from RL.verl.verl.plugin.platform.platform_npu import PlatformNPU
+        from verl.plugin.platform.platform_npu import PlatformNPU
 
         platform = PlatformNPU()
         self.assertFalse(platform.is_ipc_supported())

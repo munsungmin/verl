@@ -22,18 +22,18 @@ from uuid import uuid4
 import torch
 from PIL import Image
 
-from RL.verl.verl.experimental.agent_loop.agent_loop import (
+from verl.experimental.agent_loop.agent_loop import (
     AgentLoopBase,
     AgentLoopOutput,
     ToolListWrap,
     register,
 )
-from RL.verl.verl.experimental.agent_loop.tool_parser import FunctionCall, ToolParser
-from RL.verl.verl.tools.function_tool import FunctionTool, normalize_function_tool_return
-from RL.verl.verl.tools.schemas import OpenAIFunctionCallSchema, OpenAIFunctionParsedSchema, ToolResponse
-from RL.verl.verl.utils.profiler import simple_timer
-from RL.verl.verl.utils.rollout_trace import rollout_trace_op
-from RL.verl.verl.workers.rollout.replica import TokenOutput
+from verl.experimental.agent_loop.tool_parser import FunctionCall, ToolParser
+from verl.tools.function_tool import FunctionTool, normalize_function_tool_return
+from verl.tools.schemas import OpenAIFunctionCallSchema, OpenAIFunctionParsedSchema, ToolResponse
+from verl.utils.profiler import simple_timer
+from verl.utils.rollout_trace import rollout_trace_op
+from verl.workers.rollout.replica import TokenOutput
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))

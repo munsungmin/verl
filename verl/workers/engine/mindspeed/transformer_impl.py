@@ -20,8 +20,8 @@ try:
 except ImportError:
     repatch = None
 
-from RL.verl.verl.trainer.config import CheckpointConfig
-from RL.verl.verl.workers.config import (
+from verl.trainer.config import CheckpointConfig
+from verl.workers.config import (
     HFModelConfig,
     McoreEngineConfig,
     McoreOptimizerConfig,
@@ -39,7 +39,7 @@ logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
 
 def _mindspeed_repatch(engine_config):
     if repatch is not None:
-        from RL.verl.verl.utils.megatron_utils import mapping_string_to_attn_backend
+        from verl.utils.megatron_utils import mapping_string_to_attn_backend
 
         repatch_config = mapping_string_to_attn_backend(dict(engine_config.get("override_transformer_config", {})))
         # flash-attn-npu batch-invariant replaces DotProductAttention.forward; fusion attention

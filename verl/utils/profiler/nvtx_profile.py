@@ -24,7 +24,7 @@ from typing import Callable, Optional
 
 import nvtx
 
-from RL.verl.verl.plugin.platform import get_platform
+from verl.plugin.platform import get_platform
 
 from .config import NsightToolConfig
 from .profile import DistProfiler, ProfilerConfig

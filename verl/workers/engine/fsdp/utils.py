@@ -16,7 +16,7 @@ import os
 
 from torch.distributed.device_mesh import init_device_mesh
 
-from RL.verl.verl.utils.device import get_device_name, is_npu_available
+from verl.utils.device import get_device_name, is_npu_available
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
@@ -27,7 +27,7 @@ def apply_npu_fsdp_patches(model_config=None):
     if is_npu_available:
         if model_config is not None and model_config.get("use_liger", False):
             return
-        from RL.verl.verl.models.transformers.npu_patch import apply_npu_patches
+        from verl.models.transformers.npu_patch import apply_npu_patches
 
         apply_npu_patches()
 

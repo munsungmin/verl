@@ -27,8 +27,8 @@ import json
 
 import torch
 
-from RL.verl.verl.checkpoint_engine.delta_sync import DeltaParam, checksum
-from RL.verl.verl.workers.rollout.sglang_rollout.delta_loader import apply_delta
+from verl.checkpoint_engine.delta_sync import DeltaParam, checksum
+from verl.workers.rollout.sglang_rollout.delta_loader import apply_delta
 
 
 class _FakeModel:

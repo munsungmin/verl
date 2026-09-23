@@ -15,7 +15,7 @@
 import pytest
 import ray
 
-from RL.verl.verl.utils.ray_utils import parallel_put
+from verl.utils.ray_utils import parallel_put
 
 
 # Initialize Ray for testing if not already done globally

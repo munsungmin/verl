@@ -25,7 +25,7 @@ def _get_qat_field(qat_config, key, default=None):
 
 def apply_qat_to_modules(modules, qat_config):
     """Apply ModelOpt fake quantization to a list of Megatron module chunks."""
-    from RL.verl.verl.utils.modelopt.quantize import apply_qat
+    from verl.utils.modelopt.quantize import apply_qat
 
     qat_mode = _get_qat_field(qat_config, "mode", "w4a16")
     ignore_patterns = _get_qat_field(qat_config, "ignore_patterns", None)
@@ -39,7 +39,7 @@ def apply_qat_to_modules(modules, qat_config):
 
 def export_qat_weights(per_tensor_param, modules, qat_mode, bridge):
     """Process exported weights through QATWeightExporter for quantized weight sync."""
-    from RL.verl.verl.utils.modelopt.qat_weight_exporter import QATWeightExporter
+    from verl.utils.modelopt.qat_weight_exporter import QATWeightExporter
 
     qat_weight_exporter = QATWeightExporter(modules, bridge, qat_mode)
     return qat_weight_exporter.process_weights_iterator(per_tensor_param)
