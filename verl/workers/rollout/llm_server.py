@@ -134,6 +134,14 @@ class LLMServerClient:
                 multimodal_kwargs["audio_data"] = audio_data
             if mm_processor_kwargs:
                 multimodal_kwargs["mm_processor_kwargs"] = mm_processor_kwargs
+            # SGLang cannot take raw frames: its video_data accepts only a path/url/base64 or a
+            # processor_output dict. Always hand it the pre-computed payload (None when the model's
+            # processor produced no pixel_values_videos, e.g. a non-Qwen-VL family) and never the raw
+            # frames -- dropping video beats sending SGLang tensors it cannot parse. vLLM keeps the
+            # frames and never enters this branch. Neither server signature accepts **kwargs, so pop.
+            mm_processor_output = kwargs.pop("mm_processor_output", None)
+            if self.config.actor_rollout_ref.rollout.name == "sglang":
+                video_data = mm_processor_output
             # priority is only supported by vLLM rollout server.
             priority = kwargs.pop("priority", 0)
             priority_kwargs = (
@@ -393,6 +401,23 @@ class LLMServerManager:
         """Create the LLMServerManager."""
         instance = cls(*args, **kwargs)
         await instance._initialize_llm_servers()
+        await instance._init_global_load_balancer()
+        return instance
+
+    @classmethod
+    @auto_await
+    async def create_empty(cls, *args, **kwargs):
+        """Create an empty LLMServerManager: no replicas are launched and the
+        load balancer starts empty.
+
+        Used by trainers that serve rollout exclusively from standalone
+        resources (e.g. v1 separate_async with ``actor_rollout_ref.hybrid_engine=False``)
+        so that no inference engine is initialized on the training GPUs.
+        """
+        instance = cls(*args, **kwargs)
+        instance.rollout_replicas = []
+        instance.server_handles = []
+        instance.server_addresses = []
         await instance._init_global_load_balancer()
         return instance
 
